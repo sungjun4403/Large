@@ -1,23 +1,23 @@
-package DTO;
+package com.project.large.post.dto;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.ToString;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Data
+@ToString
 public class PostCreate {
     private String title;
     private String body;
 
-    private Boolean ifads;
+    private Boolean ifAds;
 
     @Builder
-    public PostCreate(String title, String body, Boolean ifads) {
+    public PostCreate(String title, String body, Boolean ifAds) {
         this.title = title;
         this.body = body;
-        this.ifads = ifads;
+        this.ifAds = ifAds;
     }
 }
