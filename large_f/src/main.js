@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import NavBar from './NavBar.vue'
+import footer from './footer.vue'
 
-createApp(App).mount('#app')
+createApp(NavBar).mount('#NavBar')
+createApp(footer).mount('#footer')

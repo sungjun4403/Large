@@ -14,6 +14,9 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
+    @GetMapping("/")
+    public void home() {};
+
     @PostMapping("/post")
     public void post (@RequestBody PostCreate postCreate) {
         postService.write(postCreate);
