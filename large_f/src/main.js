@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import NavBar from './NavBar.vue'
-import footer from './footer.vue'
+import Vue from '../node_modules/vue'
+import router from './router'
 
-createApp(NavBar).mount('#NavBar')
-createApp(footer).mount('#footer')
+Vue.use(router)
+
+createApp(NavBar).use(router).mount('#NavBar')
