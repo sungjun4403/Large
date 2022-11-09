@@ -57,6 +57,28 @@
 - NavBar 디자인 및 기능 구현
 <img width="500" alt="Screenshot 2022-11-10 at 6 19 21" src="https://user-images.githubusercontent.com/96364048/200945217-1500835d-3a63-4feb-954f-d42b9cfff850.png">
 
+<br/>
+
+페이지 최상단에서 일정 수준 이상 스크롤시 NavBar 드러나도록 기능 구현.
+
+~~~javascript
+var ScrollUp = 0;
+
+addEventListener("mousewheel", e => {
+    const direction = e.deltaY > 0 ? "Scroll Down" : "Scroll Up";;
+    if (direction == "Scroll Up" && window.scrollY == 0) {
+        if (document.getElementById('NavBar').style.display == 'none' && ScrollUp > 3){
+            document.getElementById('NavBar').style.display = 'inline'
+            ScrollUp = 0;
+        }
+        ScrollUp = ScrollUp + 1;
+    }
+    if (direction == "Scroll Down") {
+        ScrollUp = 0;
+    }    
+});
+~~~
+
 
 <br/>
 
