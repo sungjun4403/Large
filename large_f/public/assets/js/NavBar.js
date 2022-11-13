@@ -1,5 +1,4 @@
 var ScrollUp = 0;
-var ScrollDown = 0;
 
 addEventListener("mousewheel", e => {
     const direction = e.deltaY > 0 ? "Scroll Down" : "Scroll Up";;

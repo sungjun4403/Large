@@ -20,7 +20,6 @@ public class MemberController {
         Map memberInfo = memberService.getGitToken(code, redirectAttributes);
         System.out.println(memberInfo);
         memberService.signIn(memberInfo);
-
     }
 
 }
