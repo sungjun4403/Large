@@ -24,6 +24,7 @@ public class Post extends BaseTimeEntity {
 
     private Boolean ifAds;
 
+
     @Builder
     public Post(String title, String body, Boolean ifAds) {
         this.title = title;

@@ -1,10 +1,10 @@
 package com.project.large.member.controller;
 
+import com.project.large.member.dto.MemberEdit;
 import com.project.large.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.*;
@@ -21,5 +21,4 @@ public class MemberController {
         System.out.println(memberInfo);
         memberService.signIn(memberInfo);
     }
-
 }

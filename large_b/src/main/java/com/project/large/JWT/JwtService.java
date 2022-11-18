@@ -66,13 +66,13 @@ public class JwtService {
                 .sign(Algorithm.HMAC512(secret));
     }
 
-    public void updateRefreshToken(String gitID, String refreshToken) {
-        memberRepository.findByGitID(gitID)
-                .ifPresentOrElse(
-                        member -> member.updateRefreshToken(refreshToken),
-                        () -> new Exception("회원이 없습니다")
-                );
-    }
+//    public void updateRefreshToken(String gitID, String refreshToken) {
+//        memberRepository.findByGitID(gitID)
+//                .ifPresentOrElse(
+//                        member -> member.updateRefreshToken(refreshToken),
+//                        () -> new Exception("회원이 없습니다")
+//                );
+//    }
 
     public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken, String gitID) {
         response.setStatus(HttpServletResponse.SC_OK);
