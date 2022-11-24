@@ -138,7 +138,7 @@ https://www.inflearn.com/course/스프링부트-JPA-활용-1
 <h3>6. Member 구현 </h3>
 2022/11/17 ~ 2022/11/23 <br/>
 
-
+- 최초 깃헙 로그인시 유저 정보가 저장되는 DB 테이블
 
 <br/>
 
@@ -150,7 +150,100 @@ https://www.inflearn.com/course/스프링부트-JPA-활용-1
 - 로그인 관련 기능 수행할 JWT 토큰 구현
 - 로그인 시 멤버 정보들을 사용하여 AccessToken과 RefreshToken을 생성하여 헤더에 싣는다. 
 
+<br/>
+
+* * * *
+
+<h3>8. real-time html renderer 구현1</h3>
+2022/11/21 ~ 2022/11/23<br/>
+
+- 높은 자유도의 기술 블로그인 본 서비스는 화면 구성 또한 유저가 주도권을 가진다. 블로그 설계와 포스트 입력 및 등록 모두 html, css, js로 지원하기 때문에 유저가 html 코드를 입력하며 화면을 확인하기 위해 실시간 렌더링 툴을 제공해야 한다. JSRender, RenderKid 등의 js 렌더링 라이브러리 등을 사용하려 하였으나 렌더링 결과에 대한 화면 설계, 렌더링에 들어가는 요소에 대한 입력 방법과 같은 복잡한 조건들로 인해 렌더링 라이브러리의 문법을 공부해야해 포기하고 다음 코드로 매우 간단하게 구현하였다. 
 
 <br/>
 
+~~~html
+<textarea id="inpt" cols=50 rows=50 oninput="reload()"></textarea>
+<div id="Render"></div>
+~~~
+
+~~~javascript
+function reload() {
+    document.getElementById('Render').innerHTML = document.getElementById('inpt').value
+}
+~~~
+
+<br/>
+
+<img width="900" src="https://user-images.githubusercontent.com/96364048/203693526-e4b184c2-1112-4302-8a0f-16bd06feec90.gif">
+
+<br/>
+
+실시간 렌더링 시연. oninput으로 한 문자 입력시마다 렌더링되는 것을 확인할 수 있다. 또한 태그 내 style에 text-decoration:none도 작동한다. 
+
+- 태그 내 sytle의 속성은 정상적으로 적용되나 아래와 같은 입력은 지원되지 않았다. (textarea 입력 가정) 
+
+<br/>
+
+~~~html
+<!-- this works -->
+<a href="https://google.com" style="text-decoration:none">GOOGLE</a>
+
+<!-- this doesn't  -->
+<a href="https://google.com" id="google">GOOGLE</a>
+<style>
+    #google {
+        text-decoration : none
+    }
+</style>
+~~~
+
+<br/>
+
+스타일 태그 분리시 작동하지 않는 이유는 2가지로 예측해 볼 수 있다.
+1. 태그 안 스타일 태그 렌더링 불가 
+
+<br/>
+
+~~~html
+<div id="Render">
+    <a href="https://google.com" id="google">GOOGLE</a>
+    
+    <!-- this doesn't  -->
+    <style>
+        #google {
+            text-decoration : none
+        }
+    </style>
+</div>
+~~~
+
+<br/>
+
+2. textarea.value를 .innerHTML로 대입하는 과정에서 텍스트 컴파일러 문제 발생 
+
+<br/>
+
+~~~html
+<div id="Render">
+    <!-- might be  -->
+    <a href="https://google.com" id="google">GOOGLE</a>&nbsp;<style>&nbsp;#google {&nbsp;text-decoration : none&nbsp;}&ensp;</style>
+</div>
+~~~
+
+<br/>
+
+엔터키나 스페이스가 대입 과정에서 이상한 코드로 치환된 것이 아닌가 하는 의심. 
+
+<br/>
+
+아마 전자일 듯 싶다. 
+
+<br/>
+
+* * * *
+
+<h3>9. 프로젝트 구체화</h3>
+2022/11/22<br/>
+
+<br/>
 
