@@ -1,4 +1,4 @@
-<h1>Log</h1>
+[](url)<h1>Log</h1>
 
 <h3>1. 기획</h3>
 2022/10/20 ~ 2022/10/31 (띄엄띄엄) <br/>
@@ -84,13 +84,22 @@ addEventListener("mousewheel", e => {
 
 * * * *
 
-<h3>5. Vue Routing</h3>
+<h3>5. Github 로그인 구현 </h3>
 2022/11/10 <br/>
 
 <br/>
 
-- 
+- Github 로그인은 카카오처럼 Oauth2.0 쓰기가 애매해서 <a href="https://somuchthings.tistory.com/130">Spring OAuth 없이 Spring Boot로 Github OAuth 사용하기</a> 참고해서 했음
+- 로그인 과정은 
+1. OAuth 로그인 화면에서 로그인 후 
+2. 헤더에 토큰을 받기 위한 토큰 인가 코드 받아와서 
+3. api로 코드 보낸 뒤 유저 정보 접근 위한 토큰 받기
+4. 토큰으로 유저 프로필 받아오기 
+- 결과적으로 로그인시 인가 가능한 정보는 
 
+<img width="500" alt="Screenshot 2022-11-10 at 6 19 21" src="https://user-images.githubusercontent.com/96364048/203679824-a4eec106-5ca8-43ca-a6dc-934f35f144e6.png">
+
+이 중에서 뭘 필드로 ㄱ설정할지 
 <br/>
 
 * * * *
