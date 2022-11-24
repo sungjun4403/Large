@@ -253,7 +253,37 @@ function reload() {
    
 <br/>
     
-- 일부 구현된 포스트, 멤버, JWT를 제외한 기능들의 구현 방법을 구체화하였다
+일부 구현된 포스트, 멤버, JWT를 제외한 기능들의 구현 방법을 구체화하였다
+- 댓글 기능 : <a href="https://github.com/apps/giscus">Gitcus api</a>
+ 
+<br/>
+ 
+<img width="775" src="https://user-images.githubusercontent.com/96364048/203699798-0a6e551a-656b-41e1-9c90-a52b5920b63a.png">
+    
+<br/>
+    
+- Markdown Renderer : <a href="https://docs.github.com/en/rest/markdown#render-a-markdown-document">Github official Markdown API</a>
+
+- 코드 검색 방법 : 주석과 주석 위치를 담는 리스트만 DB에 저장. 검색시 DB에서 주석 검색 후 위치 찾아 Github API로 코드 받아와 paste. DB에 모든 코드를 저장하는 것보다는 느리지만 검색부터 API로 하는 것보다 매우 효율적. 검색은 매우 빠르고 paste는 조금 느리지만 최선일듯.
+    
+- 코드 검색 후 paste 범위 선정 : 아래 깃헙 코파일럿 시연 처럼 검색하여 블로그 작성중 바로 코드 삽입할 수 있도록 할 예정. 사진 예시로 설명
+
+<img width="600" src="https://user-images.githubusercontent.com/96364048/203704749-7c869ac5-355a-4611-8575-7d9d101de32b.gif">
+    
+<br/>
+    
+아래 코드가 퍼블릭 레포지토리에 있을 때 
+    
+<img width="600" src="https://user-images.githubusercontent.com/96364048/203704354-761db70d-b89f-4326-826f-a4bc579af583.png">
+    
+<br/>
+
+    
+아래와 같이 <code>// 검색할 주석 내용 </code>을 입력 시 주석 및 첫 엔터까지가 우선 import 될 코드로 선정. 밑의 코드는 옵션으로 보여지며 추가로 삽입 가능
+    
+<img width="600" src="https://user-images.githubusercontent.com/96364048/203705401-a5197381-dd69-4d3c-83ce-413c3ff8f578.png">    
 
 <br/>
+    
+- 게시물 검색 
 
