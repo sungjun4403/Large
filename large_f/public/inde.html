@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang=""><head><script defer src="/js/chunk-vendors.js"></script><script defer src="/js/app.js"></script></head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- <link rel="icon" href="/GitIcon.ico"> -->
+    <link rel="icon" href="./assets/image/LARGE.ico">
+    <link rel="stylesheet" href="./assets/css/LARGE.css">
+    <title>LARGE</title>
+  <body>
+    <noscript>
+      <strong>We're sorry but large_f doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+
+    <div id="NavBar"></div>
+    <div id="body" class="unselectable">
+      <div style="margin-top:10%; ">
+        <span id="span1" class="large">LARGE</span><br>
+        <div style="padding-left: 17%;">
+          <span id="span3">bigger than</span> 
+          <span id="span4">Medium</span>
+        </div>
+      </div>
+      <button id="GetStartedBTN" type="button" onclick="location.href='https://github.com/login/oauth/authorize?client_id=010fc7e8d7cd79b2d8cb&redirect_uri=http://localhost:8080/auth/github/callback'">
+        Get Started!
+      </button>
+      <div>
+        <span id="span2">with git account</span>
+        <img src="./assets/image/GitIcon.png" title="go to github.com" width="20" alt="Gihubt Icon" class="imgg" onclick="location.href='https://github.com'">
+      </div>
+    </div>
+    <br>
+    <script type="text/javascript" src="./assets/js/NavBar.js"></script> 
+  </body>
+</html>
+
+<style>
+  #span1 {
+    font-size: 700%;
+  }
+
+  #span3 {
+    font-size: 100%;
+  }
+
+  #span4 {
+    font-size: 100%;
+  }
+
+  #body {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+  }
+
+  #GetStartedBTN {
+    margin-top: 10%;
+    background-color: black;
+    color:white;
+    padding: 0.75%;
+    padding-left: 1.1%;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: large;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  body{
+    background-color: #BEBEBE;
+  }
+
+  .imgg {
+      vertical-align: middle;
+      cursor: pointer;
+  }
+  #span2 {
+      font-size: 15px;
+      margin-bottom: 5px;
+      margin-right: -0.2%;
+      cursor: default;
+  }
+
+  body, html {
+      margin: 0px;
+      padding: 0px;
+  }
+</style>

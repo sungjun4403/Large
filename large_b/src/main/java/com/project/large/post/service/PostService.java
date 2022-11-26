@@ -1,5 +1,6 @@
 package com.project.large.post.service;
 
+import com.project.large.global.utils.SecurityUtil;
 import com.project.large.post.dto.PostCreate;
 import com.project.large.post.dto.PostEdit;
 import com.project.large.post.dto.PostEditor;
@@ -48,6 +49,8 @@ public class PostService {
 
     @Transactional
     public void edit (Long id, PostEdit postEdit) {
+//        SecurityUtil.getLoginedUserGitId()
+
         Post post = postRepository.findById(id).orElseThrow();
 
         PostEditor.PostEditorBuilder editorBuilder = post.toEditor();

@@ -10,8 +10,8 @@ import lombok.Setter;
 public class PostEdit {
     private String title;
     private String body;
-
     private Boolean ifAds;
+
 
     public PostEdit(String title, String body, Boolean ifAds) {
         this.title = title;

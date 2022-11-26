@@ -1,9 +1,11 @@
 package com.project.large.member.service;
 
+import com.project.large.jwt.JwtService;
 import com.project.large.member.dto.MemberCreate;
+import com.project.large.member.dto.MemberEdit;
+import com.project.large.member.dto.MemberEditor;
 import com.project.large.member.entity.Member;
 import com.project.large.member.repository.MemberRepository;
-import com.project.large.post.dto.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +14,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final JwtService jwtService;
 
     public Map getGitToken (String code, RedirectAttributes redirectAttributes) throws IOException{
         URL url = new URL("https://github.com/login/oauth/access_token");
@@ -88,39 +91,107 @@ public class MemberService {
         return sb.toString();
     }
 
-    public void signIn(Map memberInfo) {
+    public String signInAndGetToken(Map memberInfo) {
 
         if (memberRepository.findByGitID((String) memberInfo.get("login")).isEmpty()) { //계정 없으면
             MemberCreate memberCreate = MemberCreate.builder()
                     .gitID((String) memberInfo.get("login"))
+                    .memberToken((String) createMemberToken())
                     .profileImg((String) memberInfo.get("avatar_url"))
                     .name((String) memberInfo.get("name"))
                     .company((String) memberInfo.get("company"))
-                    .blog((String) memberInfo.get("blog"))
+                    .gitBlog((String) memberInfo.get("blog"))
                     .location((String) memberInfo.get("location"))
-                    .email((String) memberInfo.get("email"))
+                    .gitEmail((String) memberInfo.get("email"))
                     .bio((String) memberInfo.get("bio"))
                     .updated_at((String) memberInfo.get("updated_at"))
                     .build();
 
             Member member = Member.builder()
                     .gitID(memberCreate.getGitID())
+                    .memberToken(memberCreate.getMemberToken())
                     .profileImg(memberCreate.getProfileImg())
                     .name(memberCreate.getName())
                     .company(memberCreate.getCompany())
-                    .blog(memberCreate.getBlog())
+                    .gitBlog(memberCreate.getGitBlog())
                     .location(memberCreate.getLocation())
-                    .email(memberCreate.getEmail())
+                    .gitEmail(memberCreate.getGitEmail())
                     .bio(memberCreate.getBio())
                     .updated_at(memberCreate.getUpdated_at())
                     .build();
 
             memberRepository.save(member);
+            member.updateRefreshToken(jwtService.createRefreshToken());
+            return jwtService.createAccessToken(member);
         }
-
         else { //계정 있으면 로그인
-
+            Member member = memberRepository.findByGitID((String) memberInfo.get("login")).orElseThrow();
+            member.updateRefreshToken(jwtService.createRefreshToken());
+            return jwtService.createAccessToken(member);
         }
+    }
+
+
+    public String createMemberToken() {
+        Random random = new Random();
+        int length = random.nextInt(5) + 5;
+
+        StringBuffer newWord= new StringBuffer();
+        for (int i = 0; i < length; i++ ) {
+            int choice = random.nextInt(3);
+            switch (choice) {
+                case 0:
+                    newWord.append((char)(int) random.nextInt(25)+97);
+                    break;
+                case 1:
+                    newWord.append((char)(int) random.nextInt(25)+65);
+                    break;
+                case 2:
+                    newWord.append((char)(int) random.nextInt(10)+48);
+                    break;
+            }
+        }
+        return newWord.toString();
+    }
+
+    public Member getMemberByAccessToken(String jwtToken) {
+        String gitId = jwtService.extractGitID(jwtToken).orElseThrow();
+        Member member  = memberRepository.findByGitID(gitId).orElseThrow();
+        return member;
+    }
+
+    @Transactional
+    public void edit(String gitId, MemberEdit memberEdit) { //Editable 5 elements : profileImg, name, company, location, bio
+        Member member = memberRepository.findByGitID(gitId).orElseThrow();
+        MemberEditor.MemberEditorBuilder memberEditorBuilder = member.toEditor();
+
+        if (memberEdit.getProfileImg() != null) {
+            memberEditorBuilder.profileImg(memberEdit.getProfileImg());
+        }
+
+        if (memberEdit.getName() != null) {
+            memberEditorBuilder.name(memberEdit.getName());
+        }
+
+        if (memberEdit.getCompany() != null) {
+            memberEditorBuilder.company(memberEdit.getCompany());
+        }
+
+        if (memberEdit.getLocation() != null) {
+            memberEditorBuilder.location(memberEdit.getLocation());
+        }
+
+        if (memberEdit.getBio() != null) {
+            memberEditorBuilder.bio(memberEdit.getBio());
+        }
+
+        memberEditorBuilder.gitID(member.getGitID());
+        memberEditorBuilder.memberToken(member.getMemberToken());
+        memberEditorBuilder.gitBlog(member.getGitBlog());
+        memberEditorBuilder.gitEmail(member.getGitEmail());
+        memberEditorBuilder.updated_at(member.getUpdated_at());
+
+        member.edit(memberEditorBuilder.build());
 
     }
 }

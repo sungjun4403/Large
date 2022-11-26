@@ -1,0 +1,40 @@
+package com.project.large.jwt;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nimbusds.oauth2.sdk.ErrorObject;
+import org.springframework.http.MediaType;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class JwtExceptionFilter extends OncePerRequestFilter {
+
+    ObjectMapper objectMapper;
+
+    private final String NO_CHECK_URL = "/auth/github/callback";
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (request.getRequestURI().equals(NO_CHECK_URL)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        try {
+            filterChain.doFilter(request, response);
+        }
+        catch (JwtException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setCharacterEncoding("UTF-8");
+            ErrorObject errorObject = new ErrorObject(
+                    "jwt_access_token", e.getMessage()
+            );
+            objectMapper.writeValue(response.getWriter(), errorObject);
+        }
+    }
+}

@@ -1,4 +1,4 @@
-package com.project.large.JWT;
+package com.project.large.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -9,12 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.Option;
-import java.lang.management.OperatingSystemMXBean;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,13 +63,13 @@ public class JwtService {
                 .sign(Algorithm.HMAC512(secret));
     }
 
-//    public void updateRefreshToken(String gitID, String refreshToken) {
-//        memberRepository.findByGitID(gitID)
-//                .ifPresentOrElse(
-//                        member -> member.updateRefreshToken(refreshToken),
-//                        () -> new Exception("회원이 없습니다")
-//                );
-//    }
+    public void updateRefreshToken(String gitID, String refreshToken) {
+        memberRepository.findByGitID(gitID)
+                .ifPresentOrElse(
+                        member -> member.updateRefreshToken(refreshToken),
+                        () -> new Exception("회원이 없습니다")
+                );
+    }
 
     public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken, String gitID) {
         response.setStatus(HttpServletResponse.SC_OK);

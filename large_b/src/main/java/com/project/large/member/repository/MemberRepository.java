@@ -14,4 +14,6 @@ import java.util.function.Function;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByGitID(String gitID);
+
+    Optional<Member> findByRefreshToken(String refreshToken);
 }
