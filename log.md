@@ -158,7 +158,7 @@ https://www.inflearn.com/course/스프링부트-JPA-활용-1
 
 * * * *
 
-<h3>8. real-time html renderer 구현1</h3>
+<h3>8. real-time html renderer 구현 1</h3>
 2022/11/21 ~ 2022/11/23<br/>
 
 <br/>
