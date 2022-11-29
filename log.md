@@ -320,7 +320,7 @@ function reload() {
     
 * * * * 
     
-<h3>11. real-time Renderer 구현 2<h3>
+<h3>11. real-time Renderer 구현 2 </h3>
 2022/11/24~2022/11/29<br/>
     
 - css가 먹히지 않았던 이슈를 해결하기 위해 documents.styleSheets[0].inserRule(String CSSRules)를 통해 해결... 한줄 알았으나 insertRule 이기 떄문에 속성 추가는 되는데 변경은 안되었던 것...
