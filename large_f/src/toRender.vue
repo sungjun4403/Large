@@ -13,12 +13,14 @@
 
 
 <script>
+    
 export default {
     beforeMount() {
         var OriginalCSS = document.styleSheets[0].cssRules.length
         console.log(OriginalCSS)
         console.log(document.scripts)
         this.renderScript();
+
     },
 
     mounted() {
