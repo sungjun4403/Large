@@ -317,3 +317,27 @@ function reload() {
 3. 멤버 수정 기능은 정상적으로 작동하는데 postMan으로 확인시 404 not found 상태로 보여짐. 모든 기능 정상적으로 작동하고 URL 매핑까지 정상적으로 작동하여 주소까지 잘 찾아가지만 status는 404... 에러 메세지도 안뜨는 퓨어한 404... (아직 해결 X)
     
 <br/>
+    
+* * * * 
+    
+<h3>11. real-time Renderer 구현 2<h3>
+2022/11/24~2022/11/29<br/>
+    
+- css가 먹히지 않았던 이슈를 해결하기 위해 documents.styleSheets[0].inserRule(String CSSRules)를 통해 해결... 한줄 알았으나 insertRule 이기 떄문에 속성 추가는 되는데 변경은 안되었던 것...
+- 해결하기 위해 최초의 빈 styleSheet 객체를 deepClone하여 추가된 속성을 초기화하고 다시 밀어넣는 식을 사용하여 하였으나, 객체 특성상 deepClone 실패 (deepClone 사용하기 위해 require 사용하는 것도 어려웠음)
+- 결국 방식을 아예 바꿔 documents.write()를 사용하려 했으나 어디서 막힌지 모르는 보안 정책상 무작성 스크립트를 떄려넣는 것은 실패
+- 그 대안으로 생각난게 txt에 작성해서 렌더 전 html로 확장자 변경
+- require, import 차이를 몰라서 확장자 변경을 위한 툴 불러오기도 실패
+- CommonJS, ES module 차이부터 node js 기초까지 공부하면서 했으나 결국 원래 사용하려던 라이브러리는 작동 안됨. 결국 child_process 라는 모듈로 command line 명령어로 확장자 변경에는 성공. 
+- 파일 작성만 하면 되는데 vi는 파일에 들어가는 느낌이라 inline command line 명령어를 찾던지 해야할 듯. filepath, path, fs같은 node 파일 모듈은 실패. 이 역시 보안 이슈일 듯
+    
+    
+   
+    
+
+    
+     
+    
+    
+    
+    
