@@ -331,12 +331,34 @@ function reload() {
 - CommonJS, ES module 차이부터 node js 기초까지 공부하면서 했으나 결국 원래 사용하려던 라이브러리는 작동 안됨. 결국 child_process 라는 모듈로 command line 명령어로 확장자 변경에는 성공. 
 - 파일 작성만 하면 되는데 vi는 파일에 들어가는 느낌이라 inline command line 명령어를 찾던지 해야할 듯. filepath, path, fs같은 node 파일 모듈은 실패. 이 역시 보안 이슈일 듯
     
+<br/>
     
-   
+* * * * 
     
+<h3>12. Git 코드 검색 기능 구현 1</h3>
+2022/11/30<br/>
+    
+- 유저의 퍼블릭 레포 코드를 전부 저장할 수 없기 때문에 검색 위해 필요한 주석과 그 위치 정보만 저장할 예정
+- 결과적으로 DB에 저장될 주석 리스트는 <code>['주석 내용', '파일 경로', '주석 위치 (몇번째 줄, 어디부터)']</code> 형태 
+- [https://](https://raw.githubusercontent.com/[username]/[repo_name]/main/[filename]) 에서 코드 파일 받아올 수 있음. 결과는 아래
 
+<br/>
     
-     
+<img width="700" src="https://user-images.githubusercontent.com/96364048/204974708-8775dda7-5c33-406e-9ef7-e9a30fff983c.png">
+
+<br/>
+
+- 줄마다 리스트에 저장까지 성공. 언어마다 주석이 다르기 떄문에 (#, //, ''') 파일 확장자 명으로 먼저 코드 언어를 감지 한 후 각 줄에서 주석을 검색
+- 한 언어에서도 여러 확장자가 있기 때문에 (ex. python -> .py, .pyc(compiled), .ipynb(jupiter)) HashMap으로 <code>{Java=[java], CSS=[css], HTML5=[html], Javascript=[js], Python=[py, pyc, ipynb]}</code>로 저장. 
+- 한 언어에서 주석 종류도 다양하기 때문에 <code>{Java=[//], CSS=[/*+*/], HTML5=[<!--+-->], Javascript=[//], Python=['''+''', #]}</code> 형태로 저장. 언어 분류까지 구현. 주석 검색은 Git 코드 검색 구현 2에서. 
+    
+    
+echo로 인라인 코드 변경 
+    
+    
+    
+    
+    
     
     
     
