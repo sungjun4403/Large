@@ -149,6 +149,7 @@ https://www.inflearn.com/course/스프링부트-JPA-활용-1
 * * * *
 
 <h3>7. JWT 구현</h3>
+
 2022/11/19 ~ 2022/11/20<br/>
 
 - 로그인 관련 기능 수행할 JWT 토큰 구현
@@ -306,8 +307,6 @@ function reload() {
 
 <h3>10. Member Edit 기능 구현</h3>
 2022/11/23<br/>
-
-<br/>
     
 - 멤버 수정 기능 구현. github 로그인시 받아오는 정보 중 blog, email은 gitBlog, gitEmail로 refactor하였고 위 두 요소들은 본 서비스에서 수정하지 못하도록 함. __블로그와 이메일은 추가 입력__ 단계에서 입력 지원. memberToken, gitID은 식별에 사용되는 UNIQUE한 요소이기 때문에 수정 불가로 지정. __profileImg, name, company, location, bio는 수정 가능__ 
 
@@ -321,6 +320,7 @@ function reload() {
 * * * * 
     
 <h3>11. real-time Renderer 구현 2 </h3>
+
 2022/11/24~2022/11/29<br/>
     
 - css가 먹히지 않았던 이슈를 해결하기 위해 documents.styleSheets[0].inserRule(String CSSRules)를 통해 해결... 한줄 알았으나 insertRule 이기 떄문에 속성 추가는 되는데 변경은 안되었던 것...
@@ -336,6 +336,7 @@ function reload() {
 * * * * 
     
 <h3>12. Git 코드 검색 기능 구현 1</h3>
+    
 2022/11/30<br/>
     
 - 유저의 퍼블릭 레포 코드를 전부 저장할 수 없기 때문에 검색 위해 필요한 주석과 그 위치 정보만 저장할 예정
