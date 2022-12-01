@@ -30,3 +30,7 @@ exec(RenameCommand, (err, output) => {
 exec(createTxtCommand, (err, output) => {
     console.log(output)
 });
+
+exec('echo "modifffffffy file" >> ../../file/file.txt', (err, output) => {
+    console.log(output)
+});

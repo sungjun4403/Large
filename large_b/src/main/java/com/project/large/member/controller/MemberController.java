@@ -7,7 +7,6 @@ import com.project.large.member.service.MemberService;
 import com.project.large.post.dto.PostEdit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,13 +27,12 @@ public class MemberController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("AccessToken", jwtToken);
         headers.add("RefreshToken", member.getRefreshToken());
+
     }
 
     @PatchMapping("/user/{gitID}")
-    public void memberEdit(@PathVariable String gitID, @RequestBody MemberEdit memberEdit) {
-        System.out.println(gitID);
-//        memberService.edit(gitID, memberEdit);
-        System.out.println(memberEdit);
+    public void memberEdit(@PathVariable String gitID, @RequestBody MemberEdit memberEdit) throws IOException {
+        memberService.edit(gitID, memberEdit);
     }
 
 }
