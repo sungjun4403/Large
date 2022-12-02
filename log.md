@@ -353,6 +353,18 @@ function reload() {
 - 한 언어에서도 여러 확장자가 있기 때문에 (ex. python -> .py, .pyc(compiled), .ipynb(jupiter)) HashMap으로 <code>{Java=[java], CSS=[css], HTML5=[html], Javascript=[js], Python=[py, pyc, ipynb]}</code>로 저장. 
 - 한 언어에서 주석 종류도 다양하기 때문에 <code>{Java=[//], CSS=[/*+*/], HTML5=[<!--+-->], Javascript=[//], Python=['''+''', #]}</code> 형태로 저장. 언어 분류까지 구현. 주석 검색은 Git 코드 검색 구현 2에서. 
     
+<br/>
+    
+* * * * 
+    
+<h3>13. Git 코드 검색 기능 구현 1</h3>
+    
+2022/12/01~2022/12/03<br/>
+    
+- file.forEach안에 주석 for문, 이중 for문으로 주석 검색. 단일 주석 (비대칭 일회형 주석 ex. #, //) 검색 우선 구현
+- <code>[gitID, annotation, filepath, annotationStartsAt, annotationEndsAt]</code>형태로 정보 조합하여 저장. DB 저장까지 구현 완료
+- AnnotationRepository에서 List<Annotation> findByFilepath 구현. NPE대신 빈 리스트 반환 (Optional<List<String>> 포맷은 사용 불가)
+- 비단일 주석 (''' + ''''), 비대칭 주석 (<!-- + -->)은 따로 구현 
     
 echo로 인라인 코드 변경 
     
