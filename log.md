@@ -366,6 +366,8 @@ function reload() {
 - AnnotationRepository에서 List<Annotation> findByFilepath 구현. NPE대신 빈 리스트 반환 (Optional<List<String>> 포맷은 사용 불가)
 - 비단일 주석 (''' + ''''), 비대칭 주석 (<!-- + -->)은 따로 구현 
 - 깃헙 커밋시 코드도 변경되기 때문에 커밋 감지하여 Annotation table, Member.updated_at 갱신할 메서드도 필요 (Sync 기능)
+- 문자열 안의 주석 (ex. "#") 같은 주석 문자는 제외해야함
+- 주석 내용 중복 처리도 해야함
     
 echo로 인라인 코드 변경 
     
