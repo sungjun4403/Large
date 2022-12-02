@@ -362,7 +362,7 @@ function reload() {
 2022/12/01~2022/12/03<br/>
     
 - file.forEach안에 주석 for문, 이중 for문으로 주석 검색. 단일 주석 (비대칭 일회형 주석 ex. #, //) 검색 우선 구현
-- <code>[gitID', 'annotation', 'filepath', 'annotationStartsAt', 'annotationEndsAt']</code>형태로 정보 조합하여 저장. DB 저장까지 구현 완료
+- <code>[gitID, annotation, filepath, annotationStartsAt, annotationEndsAt]</code>형태로 정보 조합하여 저장. DB 저장까지 구현 완료
 - AnnotationRepository에서 List<Annotation> findByFilepath 구현. NPE대신 빈 리스트 반환 (Optional<List<String>> 포맷은 사용 불가)
 - 비단일 주석 (''' + ''''), 비대칭 주석 (<!-- + -->)은 따로 구현 
     
