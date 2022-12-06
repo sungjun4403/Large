@@ -1,9 +1,7 @@
 package com.project.large.member.entity;
 
 import com.project.large.member.dto.MemberEditor;
-import com.project.large.post.dto.PostEditor;
 import lombok.*;
-import org.hibernate.type.StringNVarcharType;
 
 import javax.persistence.*;
 

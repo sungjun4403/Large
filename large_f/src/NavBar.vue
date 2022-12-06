@@ -1,23 +1,35 @@
 <template>
     <div class="unselectable">
         <div class="Nav">
-            <div class="itm">
-                <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
-                <span class="span5">Edit Profile</span>
-            </div>
-            <div class="itm1">
-                <img src="../public/assets/image/Preferences.png" alt="Preferences" width="50" class="img"><br>
-                <span class="span5">Preferences</span>
-            </div>
-            <div class="itm">
-                <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
-                <span class="span5">Issue Report</span>
-            </div>
+
+            <router-link to="/edit_profile">
+                <div class="itm">
+                    <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
+                    <span class="span5">Edit Profile</span>
+                </div>
+            </router-link>
+
+            <router-link to="/preferences">
+                <div class="itm1">
+                    <img src="../public/assets/image/Preferences.png" alt="Preferences" width="50" class="img"><br>
+                    <span class="span5">Preferences</span>
+                </div>
+            </router-link>
+
+            <router-link to="/issue_report">
+                <div class="itm">
+                    <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
+                    <span class="span5">Issue Report</span>
+                </div>
+            </router-link>
+
         </div>
         <div id="close" class="close" @click="close()">
             X close
         </div>
         <br><br><br>
+        <router-view />
+
     </div>
 </template>
 
@@ -92,4 +104,18 @@ export default {
     div {
         font-size: large;
     }
+
+    a:link {
+    color : black;
+    }
+    a:visited {
+    color : black;
+    }
+    a:hover {
+    color : black;
+    }
+    a:active {
+    color : black;
+    }
+
 </style>
