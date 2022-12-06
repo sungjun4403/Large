@@ -368,9 +368,12 @@ function reload() {
 - 깃헙 커밋시 코드도 변경되기 때문에 커밋 감지하여 Annotation table, Member.updated_at 갱신할 메서드도 필요 (Sync 기능)
 - 문자열 안의 주석 (ex. "#") 같은 주석 문자는 제외해야함
 - 주석 내용 중복 처리도 해야함
+- 아래 DB 저장 예시 
     
-echo로 인라인 코드 변경 
-
+<br/>
+    
+<img width="700" src="https://user-images.githubusercontent.com/96364048/205903891-93abee52-2595-4d08-bbcc-f4f35965d083.png">
+    
 <br/>
     
 * * * * 
@@ -394,12 +397,28 @@ echo로 인라인 코드 변경
 command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶어서 기획부터 뒤집기로 했다. 
 
 <h3>파일 내 통짜 검색으로 변경</h3>    
+
+<br/>
     
 * * * * 
     
-<h3>15. Vue Routing</h3>
+<h3>15. Template 기능 구현 1</h3>
+    
+2022/12/05<br/>
+    
+- 템플릿 DB 구현, createTemplate 구현
+- 아래 DB 예시 
+
+<br/>
+    
+<img width="700" src="https://user-images.githubusercontent.com/96364048/205904825-88a05e06-c6d9-4ceb-84a3-bb6aaf391d1e.png">
+
+<br/>
+     
+* * * * 
+    
+<h3>16. Vue routing 1</h3>
     
 2022/12/06<br/>
     
-    
-    
+- vue routing
