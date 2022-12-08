@@ -1,33 +1,40 @@
 <template>
     <div class="unselectable">
-        <div class="Nav">
+        <div id="RealNav">
+            <div class="Nav" id="Nav">
 
-            <router-link to="/edit_profile">
-                <div class="itm">
-                    <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
-                    <span class="span5">Edit Profile</span>
-                </div>
-            </router-link>
+                <router-link to="/edit_profile">
+                    <div class="itm">
+                        <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
+                        <span class="span5">Edit Profile</span>
+                    </div>
+                </router-link>
 
-            <router-link to="/preferences">
-                <div class="itm1">
-                    <img src="../public/assets/image/Preferences.png" alt="Preferences" width="50" class="img"><br>
-                    <span class="span5">Preferences</span>
-                </div>
-            </router-link>
+                <router-link to="/preferences">
+                    <div class="itm1">
+                        <img src="../public/assets/image/Preferences.png" alt="Preferences" width="50" class="img"><br>
+                        <span class="span5">Preferences</span>
+                    </div>
+                </router-link>
 
-            <router-link to="/issue_report">
-                <div class="itm">
-                    <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
-                    <span class="span5">Issue Report</span>
-                </div>
-            </router-link>
+                <router-link to="/about">
+                <!-- <router-link to="/issue_report"> -->
+                    <div class="itm">
+                        <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
+                        <span class="span5">Issue Report</span>
+                    </div>
+                </router-link>
 
+            </div>
+
+            <div id="close" class="close" @click="close()">
+                X close
+            </div>
+            <br><br><br>
         </div>
-        <div id="close" class="close" @click="close()">
-            X close
-        </div>
-        <br><br><br>
+
+        
+
         <router-view />
 
     </div>
@@ -36,13 +43,16 @@
 
 <script>
 export default {
-    beforeMount() {
+    mounted() {
         this.close()
     },
 
     methods: {
         close() {
-            document.getElementById('NavBar').style.display = 'none'
+            document.getElementById('RealNav').style.display = 'none'
+            // document.getElementById('Nav').style.visibility = 'hidden'
+            // document.getElementById('close').style.display = 'hidden'
+            // document.getElementById('Nav').style.display = 'none'
         },
     }
 }
@@ -56,6 +66,7 @@ export default {
     #NavBar {
         font-family: 'Courier New', Courier, monospace;
     }
+
     .span5 {
         cursor: pointer;
     }

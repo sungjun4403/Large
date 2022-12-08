@@ -35,4 +35,9 @@ public class MemberController {
         memberService.edit(gitID, memberEdit);
     }
 
+    @GetMapping("/user/{gitID}")
+    public void GetMemberInfo(@PathVariable String gitID) {
+//        memberService
+    }
+
 }
