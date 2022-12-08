@@ -27,18 +27,12 @@
         <button @click="write()">click</button> 
 
         <br><br>
-        <!-- <button @click="count += 1">click</button>  -->
-        <button @click="countIf()">click</button> 
-        <p>COUNT : {{count}}</p>
-
     </div>
 </template>
 
 <script>
 import { ref } from 'vue';
 const axios = require('axios').default;
-
-
 
 export default {
     setup() {
@@ -47,17 +41,11 @@ export default {
         const company = ref("")
         const location = ref("")
         const bio = ref("")
-        const count = ref(0);
-
-        return {count, profileImg, name, company, location, bio}
+        
+        return {profileImg, name, company, location, bio}
     }, 
 
     methods: {
-        write() {
-            axios.get("http://localhost:8080/post")
-            console.log(axios.get("http://localhost:8080/post"))
-            console.log("WOWW")
-        },
         memberEdit() {
             axios.patch("http://localhost:8080/post", {
                 profileImg : this.profileImg.value,
@@ -67,9 +55,6 @@ export default {
                 bio : this.bio.value,
             })
         },
-        countIf() {
-            this.count += 1
-        }
     }
 }
 </script>
