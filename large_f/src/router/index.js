@@ -16,7 +16,7 @@ import PostViewAll from "@/components/Post/PostViewAll.vue"
 
 //Login
 import AfterLogin from "@/components/Login/AfterLogin.vue"
-
+import LoginFailed from "@/components/Login/LoginFailed.vue"
 
 const routes = [
   {
@@ -53,6 +53,11 @@ const routes = [
     path: "/afterlogin",
     name: "AfterLogin",
     component: AfterLogin,
+  },
+  {
+    path: "/login_failed",
+    name: "LoginFailed",
+    component: LoginFailed,
   },
 
 ];

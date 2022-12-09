@@ -22,7 +22,7 @@ import PostViewAll from '@/components/Post/PostViewAll.vue'
 
 //Login 
 import AfterLogin from "@/components/Login/AfterLogin.vue"
-
+import LoginFailed from "@/components/Login/LoginFailed"
 
 createApp(NavBar).use(router).mount('#NavBar')
 
@@ -42,6 +42,8 @@ createApp(PostViewAll).use(router).mount('#PostViewAll');
 
 //Login
 createApp(AfterLogin).use(router).mount('#AfterLogin');
+createApp(LoginFailed).use(router).mount('#LoginFailed');
+
 
 createApp(toRender).use(router).mount('#toRender');
 createApp(Rendered).use(router).mount('#Rendered');

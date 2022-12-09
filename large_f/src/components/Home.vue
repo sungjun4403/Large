@@ -1,5 +1,5 @@
 <template>
-    <div id="NavBar"></div>
+    <!-- <div id="NavBar"></div> -->
     <div id="body" class="unselectable">
       <div style="margin-top:10%; ">
         <span id="span1" class="large">LARGE</span><br>
@@ -8,7 +8,7 @@
           <span id="span4">Medium</span>
         </div>
       </div>
-      <button id="GetStartedBTN" type="button" onclick="location.href='https://github.com/login/oauth/authorize?client_id=010fc7e8d7cd79b2d8cb&redirect_uri=http://localhost:3000'">
+      <button id="GetStartedBTN" type="button" onclick="location.href='https://github.com/login/oauth/authorize?client_id=010fc7e8d7cd79b2d8cb&redirect_uri=http://localhost:3000/afterlogin'">
         Get Started!
       </button>
       <div>
@@ -23,7 +23,7 @@
       <br>  
       <router-link to="/about">to ABOUT</router-link> -->
     </div>
-    <br>
+    
     <!-- <script type="text/javascript" src="./assets/js/NavBar.js"></script>  -->
 </template>
 
