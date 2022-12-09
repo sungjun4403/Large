@@ -194,7 +194,4 @@ public class MemberService {
         member.edit(memberEditorBuilder.build());
 
     }
-
-
-
 }

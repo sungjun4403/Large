@@ -1,5 +1,6 @@
 package com.project.large.member.controller;
 
+import com.project.large.member.dto.MemberIfMe;
 import com.project.large.member.service.MemberService;
 import com.project.large.member.dto.MemberEdit;
 import com.project.large.member.entity.Member;
@@ -22,9 +23,12 @@ public class MemberController {
         Map memberInfo = memberService.getGitToken(code, redirectAttributes);
         String jwtToken = memberService.signInAndGetToken(memberInfo);
         Member member = memberService.getMemberByAccessToken(jwtToken);
+        String MemberToken = member.getMemberToken();
 
         HttpHeaders headers = new HttpHeaders();
+
         headers.add("AccessToken", jwtToken);
+        headers.add("MemberToken", MemberToken);
         headers.add("RefreshToken", member.getRefreshToken());
 
         return ResponseEntity.ok().headers(headers).body(null);
@@ -38,6 +42,11 @@ public class MemberController {
     @GetMapping("/user/{gitID}")
     public void GetMemberInfo(@PathVariable String gitID) {
 //        memberService
+    }
+
+    @PostMapping("/getUserInfo")
+    public MemberIfMe GetUserInfo (@RequestBody String AccessToken) {
+
     }
 
 }

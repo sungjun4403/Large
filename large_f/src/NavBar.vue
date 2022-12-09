@@ -53,10 +53,10 @@ export default {
     methods: {
         close() {
             document.getElementById('RealNav').style.display = 'none'
-            // document.getElementById('Nav').style.visibility = 'hidden'
-            // document.getElementById('close').style.display = 'hidden'
-            // document.getElementById('Nav').style.display = 'none'
         },
+        getIfMe() {
+            
+        }
     }
 }
 </script>
