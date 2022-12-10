@@ -1,5 +1,4 @@
 <template>
-    <!-- <div id="NavBar"></div> -->
     <div id="body" class="unselectable">
       <div style="margin-top:10%; ">
         <span id="span1" class="large">LARGE</span><br>
@@ -15,21 +14,11 @@
         <span id="span2">with git account</span>
         <img src="../../public/assets/image/GitIcon.png" title="go to github.com" width="20" alt="Gihubt Icon" class="imgg" onclick="location.href='https://github.com'">
       </div>
-
-
-<!-- 
-      <br>
-      <br>
-      <br>  
-      <router-link to="/about">to ABOUT</router-link> -->
     </div>
-    
-    <!-- <script type="text/javascript" src="./assets/js/NavBar.js"></script>  -->
 </template>
 
 <script>
 export default {
-
 
 }
 </script>
@@ -50,6 +39,9 @@ export default {
   #body {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    background-color: #BEBEBE;
+    padding-top: 10%;
+    padding-bottom: 50%;
   }
 
   #GetStartedBTN {

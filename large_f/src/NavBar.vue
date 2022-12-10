@@ -17,8 +17,7 @@
                     </div>
                 </router-link>
 
-                <router-link to="/about">
-                <!-- <router-link to="/issue_report"> -->
+                <router-link to="/issue_report">
                     <div class="itm">
                         <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
                         <span class="span5">Issue Report</span>
@@ -45,22 +44,50 @@
 
 
 <script>
+
+const axios = require('axios').default
+
 export default {
+    setup() {
+        const ScrollUp = 0;
+        return {ScrollUp}
+    },
     mounted() {
+        addEventListener("mousewheel", e => {
+            const direction = e.deltaY > 0 ? "Scroll Down" : "Scroll Up";
+            if (direction == "Scroll Up" && window.scrollY == 0) {
+                if (document.getElementById('RealNav').style.display == 'none' && this.ScrollUp > 3){
+                    document.getElementById('RealNav').style.display = 'inline'
+                    this.ScrollUp = 0;
+                }
+                this.ScrollUp = this.ScrollUp + 1;
+            }
+
+            if (direction == "Scroll Down") {
+                this.ScrollUp = 0;
+            }    
+            
+        });
         this.close()
+    },
+    // beforeMount() {
+    beforeMount() {
+        
+        this.getMemberInfo()
     },
 
     methods: {
         close() {
             document.getElementById('RealNav').style.display = 'none'
         },
-        getIfMe() {
-            
+        getMemberInfo() {
+            axios.post("http://localhost:8080/getUserInfo", {
+                AccessToken : localStorage.getItem("AccessToken")
+            })
         }
     }
 }
 </script>
-
 
 
 <style>

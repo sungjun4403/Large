@@ -45,8 +45,9 @@ public class MemberController {
     }
 
     @PostMapping("/getUserInfo")
-    public MemberIfMe GetUserInfo (@RequestBody String AccessToken) {
-
+    public void GetUserInfo (@RequestBody String AccessToken) {
+        System.out.println(AccessToken);
+        
     }
 
 }

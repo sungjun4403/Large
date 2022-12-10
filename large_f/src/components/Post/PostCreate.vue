@@ -34,6 +34,15 @@ export default ({
 
         return {title, body, ifAds}
     },
+    created() {
+        console.log("CREATED")
+    },
+    mounted() {
+        console.log("MOUNTED")
+    },
+    beforeMount() {
+        console.log("BEFORE MOUNT")
+    },
     methods: {
         PostCreate() {
             axios.post("http://localhost:8080/post", {

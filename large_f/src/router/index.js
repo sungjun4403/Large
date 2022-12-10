@@ -18,6 +18,7 @@ import PostViewAll from "@/components/Post/PostViewAll.vue"
 import AfterLogin from "@/components/Login/AfterLogin.vue"
 import LoginFailed from "@/components/Login/LoginFailed.vue"
 
+
 const routes = [
   {
     path: "/",
@@ -45,7 +46,7 @@ const routes = [
     component: PostCreate,
   },
   {
-    path: "/post/viewAll",
+    path: "/post/viewall",
     name: "PostViewAll",
     component: PostViewAll,
   },
