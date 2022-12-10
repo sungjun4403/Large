@@ -1,5 +1,7 @@
 package com.project.large.member.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.large.member.dto.MemberIfMe;
 import com.project.large.member.service.MemberService;
 import com.project.large.member.dto.MemberEdit;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -45,9 +48,9 @@ public class MemberController {
     }
 
     @PostMapping("/getUserInfo")
-    public void GetUserInfo (@RequestBody String AccessToken) {
-        System.out.println(AccessToken);
-        
+    public void GetUserInfo (@RequestBody String BodyAccessToken) throws JsonProcessingException {
+        memberService.getMemberByBodyAccessToken(BodyAccessToken);
+
     }
 
 }

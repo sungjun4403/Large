@@ -1,5 +1,6 @@
 package com.project.large.member.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.large.jwt.JwtService;
 import com.project.large.member.dto.MemberCreate;
 import com.project.large.member.dto.MemberEdit;
@@ -192,6 +193,16 @@ public class MemberService {
         memberEditorBuilder.updated_at(member.getUpdated_at());
 
         member.edit(memberEditorBuilder.build());
+
+    }
+
+    public void getMemberByBodyAccessToken(String BodyAccessToken) throws JsonProcessingException {
+        Map<String,Object> result = new ObjectMapper().readValue(BodyAccessToken, HashMap.class);
+
+        String AccessToken = (String) result.get("AccessToken");
+
+        String gitID = String.valueOf(jwtService.extractGitID(AccessToken));
+        System.out.println(gitID);
 
     }
 }
