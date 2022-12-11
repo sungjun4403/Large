@@ -321,7 +321,7 @@ function reload() {
     
 <h3>11. real-time Renderer 구현 2 </h3>
 
-2022/11/24~2022/11/29<br/>
+2022/11/24 ~ 2022/11/29<br/>
     
 - css가 먹히지 않았던 이슈를 해결하기 위해 documents.styleSheets[0].inserRule(String CSSRules)를 통해 해결... 한줄 알았으나 insertRule 이기 떄문에 속성 추가는 되는데 변경은 안되었던 것...
 - 해결하기 위해 최초의 빈 styleSheet 객체를 deepClone하여 추가된 속성을 초기화하고 다시 밀어넣는 식을 사용하여 하였으나, 객체 특성상 deepClone 실패 (deepClone 사용하기 위해 require 사용하는 것도 어려웠음)
@@ -359,7 +359,7 @@ function reload() {
     
 <h3>13. Git 코드 검색 기능 구현 1</h3>
     
-2022/12/01~2022/12/03<br/>
+2022/12/01 ~ 2022/12/03<br/>
     
 - file.forEach안에 주석 for문, 이중 for문으로 주석 검색. 단일 주석 (비대칭 일회형 주석 ex. #, //) 검색 우선 구현
 - <code>[gitID, annotation, filepath, annotationStartsAt, annotationEndsAt]</code>형태로 정보 조합하여 저장. DB 저장까지 구현 완료
@@ -419,6 +419,40 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
     
 <h3>16. Vue routing 1</h3>
     
-2022/12/06<br/>
+2022/12/06~<br/>
     
 - vue routing
+- router/index.js
+    
+<br/>
+    
+<img width="700" src="https://user-images.githubusercontent.com/96364048/206902006-a3d53091-a3f9-4e26-bb6a-15f9a31b1d7b.png">
+    
+<br/>
+    
+- main.js에서 router 사용할 component에 <code>import router from './router'</code>, <code>createApp(NavBar).use(router).mount('#NavBar')</code>  
+
+- github application 설정에서 callback uri를 localhost:3000/afterlogin으로 수정. 로그인 후 아래 화면으로 이동하여 백에 인가 코드 (path varible : code) 전달 후 /:gitID (ex. localhost:3000/sungjun4403)으로 이동
+    
+<img width="700" src="https://user-images.githubusercontent.com/96364048/206903288-c9db7731-8917-45f1-b4e9-23bf0f295ff7.png">
+
+<br/>
+    
+- <h3>Issues</h3>    
+    
+    - router-link 태그에서 에서 to="/경로 어쩌구 저쩌구"에 변수 대입이 안됨. { name: "" param: "" }. name도 안먹고 param에 동적할당하는 방법도 모르겠.
+    
+    - created, beforeMount, mounted 에서 실행되는 메서드가 두번씩 실행됨. VM숫자숫자 먼저, Vue 머신이 두번째. 아래는 추정 원인
+    
+<br/>
+    
+<img width="616" alt="" src="https://user-images.githubusercontent.com/96364048/206902558-0445bf7e-ac44-4c8a-a991-5077f42ac1a6.png">
+    
+<br/>
+    
+
+    
+    
+    
+    
+    
