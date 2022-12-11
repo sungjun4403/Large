@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,7 +34,8 @@ public class MemberController {
         headers.add("AccessToken", jwtToken);
         headers.add("MemberToken", MemberToken);
         headers.add("RefreshToken", member.getRefreshToken());
-
+        headers.add("gitID", member.getGitID());
+        System.out.println(member.getGitID());
         return ResponseEntity.ok().headers(headers).body(null);
     }
 
@@ -48,9 +50,10 @@ public class MemberController {
     }
 
     @PostMapping("/getUserInfo")
-    public void GetUserInfo (@RequestBody String BodyAccessToken) throws JsonProcessingException {
-        memberService.getMemberByBodyAccessToken(BodyAccessToken);
-
+    public Member GetUserInfo (@RequestBody String BodyAccessToken) throws JsonProcessingException {
+        Member member = memberService.getMemberByBodyAccessToken(BodyAccessToken);
+        return member;
     }
+
 
 }

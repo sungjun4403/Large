@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -196,13 +197,14 @@ public class MemberService {
 
     }
 
-    public void getMemberByBodyAccessToken(String BodyAccessToken) throws JsonProcessingException {
+    public Member getMemberByBodyAccessToken(String BodyAccessToken) throws JsonProcessingException {
         Map<String,Object> result = new ObjectMapper().readValue(BodyAccessToken, HashMap.class);
 
         String AccessToken = (String) result.get("AccessToken");
 
-        String gitID = String.valueOf(jwtService.extractGitID(AccessToken));
-        System.out.println(gitID);
+        String gitID = jwtService.extractGitID(AccessToken).orElseThrow();
+        Member member = memberRepository.findByGitID(gitID).orElseThrow();
+        return member;
 
     }
 }

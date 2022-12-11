@@ -3,7 +3,7 @@
         <div id="RealNav">
             <div class="Nav" id="Nav">
 
-                <router-link to="/edit_profile">
+                <router-link to="{ path: '/preferences' + 'sungjun4403' }">
                     <div class="itm">
                         <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
                         <span class="span5">Edit Profile</span>
@@ -11,6 +11,7 @@
                 </router-link>
 
                 <router-link to="/preferences">
+                <!-- <router-link to="this.$route.params.gitID + '/preferences'"> -->
                     <div class="itm1">
                         <img src="../public/assets/image/Preferences.png" alt="Preferences" width="50" class="img"><br>
                         <span class="span5">Preferences</span>
@@ -30,9 +31,7 @@
                 X close
             </div>
             <br><br><br>
-            <router-link to="/post/create">POST CREATE</router-link>
-            <br>
-            <router-link to="/post/viewAll">POST VIEW ALL</router-link>
+            
         </div>
 
         
@@ -45,7 +44,7 @@
 
 <script>
 
-const axios = require('axios').default
+// const axios = require('axios').default
 
 export default {
     setup() {
@@ -69,6 +68,7 @@ export default {
             
         });
         this.close()
+
     },
     // beforeMount() {
     beforeMount() {
@@ -81,11 +81,13 @@ export default {
             document.getElementById('RealNav').style.display = 'none'
         },
         getMemberInfo() {
-            axios.post("http://localhost:8080/getUserInfo", {
-                AccessToken : localStorage.getItem("AccessToken")
-            })
+            // axios.post("http://localhost:8080/getUserInfo", {
+            //     AccessToken : localStorage.getItem("AccessToken")
+            // }).then((response) => {
+            //     localStorage.setItem("memberToken", response.data.memberToken) 
+            // })
         }
-    }
+    },
 }
 </script>
 
