@@ -5,9 +5,7 @@
         <br>
         WELCOME!
         <div>
-            <router-link to="/post/create">POST CREATE</router-link>
-            <br>
-            <router-link to="/post/viewAll">POST VIEW ALL</router-link>
+            
             <br><br>
         </div>
     </div>

@@ -7,6 +7,8 @@
             <br>
         </li>
     </div>
+
+    
 </template>
 
 <script>
@@ -18,7 +20,7 @@ const axios = require('axios').default;
 
 
 export default ({
-    
+
     setup() {
         const posts = ref([])
 

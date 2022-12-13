@@ -74,7 +74,7 @@ public class MemberService {
         conn.setRequestProperty("Authorization", "token " + access_token);
 
         int responseCode = conn.getResponseCode();
-        Map<String,Object> result = new ObjectMapper().readValue(getResponse(conn, responseCode), HashMap.class);
+        HashMap result = new ObjectMapper().readValue(getResponse(conn, responseCode), HashMap.class);
         conn.disconnect();
 
         return result;
@@ -102,7 +102,7 @@ public class MemberService {
                     .profileImg((String) memberInfo.get("avatar_url"))
                     .name((String) memberInfo.get("name"))
                     .company((String) memberInfo.get("company"))
-                    .gitBlog((String) memberInfo.get("blog"))
+//                    .gitBlog((String) memberInfo.get("blog"))
                     .location((String) memberInfo.get("location"))
                     .gitEmail((String) memberInfo.get("email"))
                     .bio((String) memberInfo.get("bio"))

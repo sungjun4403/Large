@@ -30,7 +30,9 @@
             <div id="close" class="close" @click="close()">
                 X close
             </div>
+            
             <br><br><br>
+            <div id="UserNavBar"></div>
             
         </div>
 

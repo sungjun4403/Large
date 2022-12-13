@@ -25,7 +25,7 @@ import UserHome from "@/components/User/UserHome.vue"
 const routes = [
   { path: "/", name: "Home", component: Home },
   { path: "/issue_report", name: "IssueReport", component: IssueReport },
-  
+
   { path: "/post/create", name: "PostCreate", component: PostCreate },
   { path: "/post/viewall", name: "PostViewAll", component: PostViewAll },
 
