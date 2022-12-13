@@ -3,7 +3,12 @@ import router from './router'
 
 import NavBar from './NavBar.vue'
 
-import UserNavBar from "@/components/User/UserNavBar.vue"
+// import UserNavBar from "@/components/User/UserNavBar.vue"
 
-createApp(NavBar).use(router).mount('#NavBar')
-createApp(UserNavBar).use(router).mount('#UserNavBar')
+// createApp(NavBar).use(router).mount('#NavBar')
+// createApp(UserNavBar).use(router).mount('#UserNavBar')
+
+const app = createApp(NavBar)
+
+app.use(router)
+app.mount("#NavBar")

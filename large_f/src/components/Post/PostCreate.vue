@@ -37,12 +37,13 @@ export default ({
     created() {
         console.log("CREATED")
     },
-    mounted() {
-        console.log("MOUNTED")
-    },
     beforeMount() {
         console.log("BEFORE MOUNT")
     },
+    mounted() {
+        console.log("MOUNTED")
+    },
+
     methods: {
         PostCreate() {
             axios.post("http://localhost:8080/post", {

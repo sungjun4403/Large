@@ -24,7 +24,7 @@ export default {
                     localStorage.setItem("memberToken", response.headers["membertoken"])
                     localStorage.setItem("gitID", response.headers["gitid"])
                     
-                    window.location.href = "http://localhost:3000/" + response.headers["gitid"]
+                    // window.location.href = "http://localhost:3000/" + response.headers["gitid"]
                 }
                 else { //로그인 실패시 LoginFailed로 리다이렉트 
                     window.location.href = "http://localhost:3000/login_failed"

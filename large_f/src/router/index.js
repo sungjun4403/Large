@@ -21,7 +21,6 @@ import LoginFailed from "@/components/Login/LoginFailed.vue"
 //User
 import UserHome from "@/components/User/UserHome.vue"
 
-
 const routes = [
   { path: "/", name: "Home", component: Home },
   { path: "/issue_report", name: "IssueReport", component: IssueReport },
