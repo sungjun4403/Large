@@ -17,6 +17,8 @@ export default ({
     width: 10vw;
     float: left;
     height: 100vh;
+    
+    position: fixed;
     background-color: chartreuse;
 }
 </style>

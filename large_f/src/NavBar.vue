@@ -2,8 +2,8 @@
     <div class="unselectable">
         <div id="RealNav">
             <div class="Nav" id="Nav">
-
-                <router-link to="{ path: '/preferences' + 'sungjun4403' }">
+                <!-- <router-link :to="{ name: 'EditProfile', params: { gitID: localStorage.getItem('gitID') }}"> -->
+                <router-link to="/">
                     <div class="itm">
                         <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
                         <span class="span5">Edit Profile</span>
@@ -24,6 +24,7 @@
                         <span class="span5">Issue Report</span>
                     </div>
                 </router-link>
+                
 
             </div>
 
@@ -31,6 +32,12 @@
                 X close
             </div>
             
+            <router-link to="/">
+                <button type="button">go to login page</button>
+            </router-link>
+
+            <button type="button" @click="logout();">logout</button>
+
             <br><br><br>
             
             
@@ -43,6 +50,7 @@
 
 
 <script>
+import axios from 'axios';
 
 // const axios = require('axios').default
 
@@ -69,6 +77,8 @@ export default {
         });
         this.close()
 
+        this.ifTokenIsAuthentic()
+
     },
     // beforeMount() {
     beforeMount() {
@@ -86,6 +96,21 @@ export default {
             // }).then((response) => {
             //     localStorage.setItem("memberToken", response.data.memberToken) 
             // })
+        },
+
+        logout() {
+            localStorage.clear()
+        },
+
+        ifTokenIsAuthentic() {
+            const AccessToken = localStorage.getItem("AccessToken")
+            const gitID = localStorage.getItem("gitID")
+            axios.post("http://localhost:8080/ifTokenIsAuthentic", {
+                AccessToken: AccessToken,
+                gitID: gitID
+            }).then((response) => {
+                console.log(response.data)
+            })
         }
     },
 }

@@ -18,7 +18,26 @@
             ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
 
             <br><br>
-            
+            NOOO
+            <br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO<br><br>
+            NOOO
+
             <button @click="PostCreate()">click</button> 
         </div>
     </div>
@@ -28,7 +47,6 @@
 import { ref } from "@vue/reactivity";
 
 const axios = require('axios').default;
-localStorage.setItem("mounted", 2)
 
 export default ({
     setup() {
@@ -45,9 +63,6 @@ export default ({
         console.log("BEFORE MOUNT")
     },
     mounted() {
-        console.log(localStorage.getItem("mounted"))
-        localStorage.setItem("mounted", localStorage.getItem("mounted")-1)
-        console.log(localStorage.getItem("mounted"))
         console.log("MOUNTED")
     },
 

@@ -2,7 +2,9 @@ package com.project.large.member.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.large.jwt.JwtService;
 import com.project.large.member.dto.MemberIfMe;
+import com.project.large.member.dto.IfTokenIsAuthentic;
 import com.project.large.member.service.MemberService;
 import com.project.large.member.dto.MemberEdit;
 import com.project.large.member.entity.Member;
@@ -21,6 +23,7 @@ import java.util.StringTokenizer;
 @RestController
 public class MemberController {
     private final MemberService memberService;
+    private final JwtService jwtService;
 
     @GetMapping("/auth/github/callback")
     public ResponseEntity GitLogin(@RequestParam String code, RedirectAttributes redirectAttributes) throws IOException {
@@ -49,11 +52,21 @@ public class MemberController {
 //        memberService
     }
 
-    @PostMapping("/getUserInfo")
-    public Member GetUserInfo (@RequestBody String BodyAccessToken) throws JsonProcessingException {
-        Member member = memberService.getMemberByBodyAccessToken(BodyAccessToken);
-        return member;
-    }
+    @PostMapping("/ifTokenIsAuthentic")
+    public Boolean GetUserInfo (@RequestBody IfTokenIsAuthentic ifTokenIsAuthentic) {
+        String extractedGitID = jwtService.extractGitID(ifTokenIsAuthentic.getAccessToken()).orElseThrow();
 
+        System.out.println("extracted: " + extractedGitID);
+        System.out.println(ifTokenIsAuthentic.getGitID());
+
+        if (ifTokenIsAuthentic.getGitID() == extractedGitID) {
+            System.out.println("IDENTICAL");
+            return true;
+        }
+        else {
+            System.out.println("NON IDENTICAL");
+            return false;
+        }
+    }
 
 }
