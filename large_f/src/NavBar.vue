@@ -32,11 +32,9 @@
             </div>
             
             <br><br><br>
-            <div id="UserNavBar"></div>
+            
             
         </div>
-
-        
 
         <router-view />
 
@@ -90,9 +88,6 @@ export default {
             // })
         }
     },
-    components: {
-        
-    }
 }
 </script>
 

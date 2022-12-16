@@ -1,12 +1,13 @@
 <template>
-    <div>
+    <div id="UserNav">
+        {{gitID}}
         &nbsp;&nbsp;
         <router-link :to="{ name: 'UserHome', params: { gitID: gitID }}">HOME</router-link>
         &nbsp;
         <router-link :to="'/post/create'">POST CREATE</router-link>
         &nbsp;
         <router-link to="/post/viewAll">POST VIEW ALL</router-link>
-        {{gitID}}
+        
     </div>
 </template>
 
@@ -21,3 +22,10 @@ export default ({
     },
 })
 </script>
+
+<style>
+    #UserNav {
+        width: 100vw;
+        background-color: pink;
+    }
+</style>

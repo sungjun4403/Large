@@ -1,22 +1,26 @@
 <template>
-    <div id="body">
-        <h2>CREATE POST</h2>
+    <div>
+        <UserSideBar />
+        <div id="content">
+            
+            <h2>CREATE POST</h2>
 
-        <br>
+            <br>
 
-        <input type="text" id="title" name="title" v-model="title" placeholder="title">
+            <input type="text" id="title" name="title" v-model="title" placeholder="title">
 
-        <br><br>
+            <br><br>
 
-        <input type="text" name="body" v-model="body" placeholder="body">
+            <input type="text" name="body" v-model="body" placeholder="body">
 
-        <br><br>
+            <br><br>
 
-        ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
+            ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
 
-        <br><br>
-        
-        <button @click="PostCreate()">click</button> 
+            <br><br>
+            
+            <button @click="PostCreate()">click</button> 
+        </div>
     </div>
 </template>
 
@@ -24,7 +28,7 @@
 import { ref } from "@vue/reactivity";
 
 const axios = require('axios').default;
-
+localStorage.setItem("mounted", 2)
 
 export default ({
     setup() {
@@ -41,6 +45,9 @@ export default ({
         console.log("BEFORE MOUNT")
     },
     mounted() {
+        console.log(localStorage.getItem("mounted"))
+        localStorage.setItem("mounted", localStorage.getItem("mounted")-1)
+        console.log(localStorage.getItem("mounted"))
         console.log("MOUNTED")
     },
 
@@ -66,5 +73,8 @@ export default ({
 </script>
 
 <style>
-
+    #content {
+        float: right;
+        width: 90vw;
+    }
 </style>
