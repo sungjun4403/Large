@@ -47,24 +47,14 @@ public class MemberController {
         memberService.edit(gitID, memberEdit);
     }
 
-    @GetMapping("/user/{gitID}")
-    public void GetMemberInfo(@PathVariable String gitID) {
-//        memberService
-    }
-
     @PostMapping("/ifTokenIsAuthentic")
     public Boolean GetUserInfo (@RequestBody IfTokenIsAuthentic ifTokenIsAuthentic) {
         String extractedGitID = jwtService.extractGitID(ifTokenIsAuthentic.getAccessToken()).orElseThrow();
 
-        System.out.println("extracted: " + extractedGitID);
-        System.out.println(ifTokenIsAuthentic.getGitID());
-
-        if (ifTokenIsAuthentic.getGitID() == extractedGitID) {
-            System.out.println("IDENTICAL");
+        if (ifTokenIsAuthentic.getGitID().equals(extractedGitID)) {
             return true;
         }
         else {
-            System.out.println("NON IDENTICAL");
             return false;
         }
     }

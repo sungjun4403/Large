@@ -2,29 +2,45 @@
     <div class="unselectable">
         <div id="RealNav">
             <div class="Nav" id="Nav">
-                <!-- <router-link :to="{ name: 'EditProfile', params: { gitID: localStorage.getItem('gitID') }}"> -->
-                <router-link to="/">
-                    <div class="itm">
+                <div v-if="IfTokenIsYours == true">
+                    <router-link :to="{ name: 'EditProfile', params: { gitID: gitID }}">
+                        <div class="itm">
+                            <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
+                            <span class="span5">Edit Profile</span>
+                        </div>
+                    </router-link>
+
+                    <router-link :to="{ name: 'Preferences', params: { gitID : gitID }}">
+                        <div class="itm1">
+                            <img src="../public/assets/image/Preferences.png" alt="Preferences" width="50" class="img"><br>
+                            <span class="span5">Preferences</span>
+                        </div>
+                    </router-link>
+
+                    <router-link :to="{ name: 'IssueReport' }">
+                        <div class="itm">
+                            <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
+                            <span class="span5">Issue Report</span>
+                        </div>
+                    </router-link>
+                </div>
+
+                <div v-else>
+                    <div class="itm" @click="LoginRequired('Edit Profile')">
                         <img src="../public/assets/image/ProfileIcon.png" alt="Profile Icon" width="40" class="img"><br>
                         <span class="span5">Edit Profile</span>
                     </div>
-                </router-link>
 
-                <router-link to="/preferences">
-                <!-- <router-link to="this.$route.params.gitID + '/preferences'"> -->
-                    <div class="itm1">
+                    <div class="itm1" @click="LoginRequired('Preferences')">
                         <img src="../public/assets/image/Preferences.png" alt="Preferences" width="50" class="img"><br>
                         <span class="span5">Preferences</span>
                     </div>
-                </router-link>
 
-                <router-link to="/issue_report">
-                    <div class="itm">
+                    <div class="itm" @click="LoginRequired('Issue Report')">
                         <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
                         <span class="span5">Issue Report</span>
                     </div>
-                </router-link>
-                
+                </div>
 
             </div>
 
@@ -38,9 +54,7 @@
 
             <button type="button" @click="logout();">logout</button>
 
-            <br><br><br>
-            
-            
+            <br><br><br>            
         </div>
 
         <router-view />
@@ -51,13 +65,20 @@
 
 <script>
 import axios from 'axios';
+import { ref } from '@vue/reactivity';
 
 // const axios = require('axios').default
 
 export default {
     setup() {
         const ScrollUp = 0;
-        return {ScrollUp}
+        const IfTokenIsYours = ref(false)
+        const gitID = ref("")
+        return {ScrollUp, IfTokenIsYours, gitID}
+    },
+    beforeMount() {
+        this.gitID = localStorage.getItem("gitID")
+        this.getIfTokenIsAuthentic()
     },
     mounted() {
         addEventListener("mousewheel", e => {
@@ -76,42 +97,31 @@ export default {
             
         });
         this.close()
-
-        this.ifTokenIsAuthentic()
-
     },
-    // beforeMount() {
-    beforeMount() {
-        
-        this.getMemberInfo()
-    },
-
     methods: {
         close() {
             document.getElementById('RealNav').style.display = 'none'
-        },
-        getMemberInfo() {
-            // axios.post("http://localhost:8080/getUserInfo", {
-            //     AccessToken : localStorage.getItem("AccessToken")
-            // }).then((response) => {
-            //     localStorage.setItem("memberToken", response.data.memberToken) 
-            // })
-        },
-
+        }, 
         logout() {
             localStorage.clear()
+            window.location.href = "http://localhost:3000/"
         },
-
-        ifTokenIsAuthentic() {
+        getIfTokenIsAuthentic() {
             const AccessToken = localStorage.getItem("AccessToken")
             const gitID = localStorage.getItem("gitID")
             axios.post("http://localhost:8080/ifTokenIsAuthentic", {
                 AccessToken: AccessToken,
                 gitID: gitID
             }).then((response) => {
-                console.log(response.data)
+                this.IfTokenIsYours = response.data
             })
-        }
+        },
+        LoginRequired(PageName) {
+            console.log("Login required to access " + PageName + "!")
+        },
+        // showFloatAlert(Message) {
+            
+        // }
     },
 }
 </script>
