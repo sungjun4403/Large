@@ -1,15 +1,16 @@
 <template>
     <div id="body">
-        gitID : {{gitID}} <br>
-        profileImg : {{profileImg}} <br>
-        name : {{name}} <br>
-        company : {{company}} <br>
-        gitBlog : {{gitBlog}} <br>
-        location : {{location}} <br>
-        gitEmail : {{gitEmail}} <br>
-        bio : {{bio}} <br>
-        updated_at : {{updated_at}} <br>
-
+        <div id="info">
+            gitID : {{gitID}} <br>
+            profileImg : <img :src="profileImg" width="40" height="40">  <br>
+            name : {{name}} <br>
+            company : {{company}} <br>
+            gitBlog : {{gitBlog}} <br>
+            location : {{location}} <br>
+            gitEmail : {{gitEmail}} <br>
+            bio : {{bio}} <br>
+            updated_at : {{updated_at}} <br>
+        </div>
 
         <h2>EDIT PROFILE</h2>
 
@@ -81,7 +82,6 @@ export default {
             })
         },
         memberEdit() {
-            console.log("REACED")
             axios.patch("http://localhost:8080/" + localStorage.getItem("gitID") + "/memberEdit", {
                 // profileImg : this.toEditProfileImg.value,
                 // name : this.toEditName.value,
@@ -95,10 +95,7 @@ export default {
                 bio : this.toEditBio,
             }).then((response) => {
                 if (response.status == 200) {
-                    console.log("OK")
-                }
-                else {
-                    console.log("NO")
+                    this.getMemberInfo()
                 }
             })
         },
@@ -107,7 +104,8 @@ export default {
 </script>
 
 <style>
-#body {
-
+#info {
+    text-align: left;
+    margin-left: 20%;
 }
 </style>
