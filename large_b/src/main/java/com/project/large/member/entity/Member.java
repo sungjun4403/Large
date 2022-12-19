@@ -34,9 +34,10 @@ public class Member {
     private String bio;
 
     private String updated_at;
+    private Integer commits;
 
     @Builder
-    public Member(String gitID, String memberToken, String profileImg, String name, String company, String gitBlog, String location, String gitEmail, String bio, String updated_at) {
+    public Member(String gitID, String memberToken, String profileImg, String name, String company, String gitBlog, String location, String gitEmail, String bio, String updated_at, Integer commits) {
         this.gitID = gitID;
         this.memberToken = memberToken;
         this.profileImg = profileImg;
@@ -50,6 +51,7 @@ public class Member {
         this.bio = bio;
 
         this.updated_at = updated_at;
+        this.commits = commits;
     }
 
     public MemberEditor.MemberEditorBuilder toEditor() {
@@ -66,7 +68,8 @@ public class Member {
                 .gitEmail(gitEmail)
                 .bio(bio)
 
-                .updated_at(updated_at);
+                .updated_at(updated_at)
+                .commits(commits);
     }
 
     public void updateRefreshToken(String refreshToken) {
@@ -87,5 +90,6 @@ public class Member {
         gitEmail = memberEditor.getGitEmail();
 
         updated_at = memberEditor.getUpdated_at();
+        commits = memberEditor.getCommits();
     }
 }

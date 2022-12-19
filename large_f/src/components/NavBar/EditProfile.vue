@@ -48,6 +48,12 @@ const axios = require('axios').default;
 
 export default {
     setup() {
+        const toEditProfileImg = ref("")
+        const toEditName = ref("")
+        const toEditCompany = ref("")
+        const toEditLocation = ref("")
+        const toEditBio = ref("")
+        
         const gitID = ref("")
         const profileImg = ref("")
         const name = ref("")
@@ -58,7 +64,10 @@ export default {
         const bio = ref("")
         const updated_at = ref("")
 
-        return {gitID, profileImg, name, company, gitBlog, location, gitEmail, bio, updated_at}
+        return {
+            gitID, profileImg, name, company, gitBlog, location, gitEmail, bio, updated_at,
+            toEditProfileImg, toEditName, toEditCompany, toEditLocation, toEditBio
+            }
     }, 
     mounted() {
         this.getMemberInfo()

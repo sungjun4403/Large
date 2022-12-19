@@ -108,6 +108,7 @@ public class MemberService {
                     .gitEmail((String) memberInfo.get("email"))
                     .bio((String) memberInfo.get("bio"))
                     .updated_at((String) memberInfo.get("updated_at"))
+                    .commits(-1)
                     .build();
 
             Member member = Member.builder()
@@ -121,6 +122,7 @@ public class MemberService {
                     .gitEmail(memberCreate.getGitEmail())
                     .bio(memberCreate.getBio())
                     .updated_at(memberCreate.getUpdated_at())
+                    .commits(memberCreate.getCommits())
                     .build();
 
             memberRepository.save(member);
@@ -193,6 +195,7 @@ public class MemberService {
         memberEditorBuilder.gitBlog(member.getGitBlog());
         memberEditorBuilder.gitEmail(member.getGitEmail());
         memberEditorBuilder.updated_at(member.getUpdated_at());
+        memberEditorBuilder.commits(member.getCommits());
 
         member.edit(memberEditorBuilder.build());
 

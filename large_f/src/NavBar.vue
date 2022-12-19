@@ -18,7 +18,7 @@
                     </router-link>
 
                     <router-link :to="{ name: 'IssueReport' }">
-                        <div class="itm">
+                        <div class="itm2">
                             <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
                             <span class="span5">Issue Report</span>
                         </div>
@@ -145,17 +145,14 @@ export default {
     .span5 {
         cursor: pointer;
     }
-
     .itm {
         width: fit-content;
     }    
-    
     .itm1 {
         width: fit-content;
-        margin-top: 1.6%;
-        margin-bottom: 1.4%;
-        margin-left: 7%;
-        margin-right: 7%;
+    }
+    .itm2 {
+        width: fit-content;
     }
 
     .close {

@@ -24,9 +24,10 @@ public class MemberEdit { // 9
     private String bio;
 
     private String updated_at;
+    private Integer commits;
 
 
-    public MemberEdit(String memberToken, String gitID, String profileImg, String name, String company, String gitBlog, String location, String email, String bio, String updated_at) { // 9
+    public MemberEdit(String memberToken, String gitID, String profileImg, String name, String company, String gitBlog, String location, String email, String bio, String updated_at, Integer commits) { // 9
         this.memberToken = memberToken;
         this.gitID = gitID;
         this.profileImg = profileImg;
@@ -40,5 +41,6 @@ public class MemberEdit { // 9
         this.bio = bio;
 
         this.updated_at = updated_at;
+        this.commits = commits;
     }
 }

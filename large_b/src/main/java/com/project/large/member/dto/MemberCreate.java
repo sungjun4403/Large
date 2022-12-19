@@ -20,9 +20,10 @@ public class MemberCreate {
     private String gitEmail;
     private String bio;
     private String updated_at;
+    private Integer commits;
 
     @Builder
-    public MemberCreate(String gitID, String memberToken, String profileImg, String name, String company, String gitBlog, String location, String gitEmail, String bio, String updated_at) {
+    public MemberCreate(String gitID, String memberToken, String profileImg, String name, String company, String gitBlog, String location, String gitEmail, String bio, String updated_at, Integer commits) {
         this.gitID = gitID;
         this.memberToken = memberToken;
         this.profileImg = profileImg;
@@ -33,6 +34,7 @@ public class MemberCreate {
         this.gitEmail = gitEmail;
         this.bio = bio;
         this.updated_at = updated_at;
+        this.commits = commits;
     }
 
 }

@@ -20,5 +20,8 @@ public class gitController {
         List<String> getCode = gitService.getSourceFile(path);
     }
 
-    @PostMapping("/")
+    @GetMapping("/pytest")
+    public void pytest() {
+
+    }
 }
