@@ -1,10 +1,9 @@
 package com.project.large.member.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.large.jwt.JwtService;
-import com.project.large.member.dto.MemberIfMe;
 import com.project.large.member.dto.IfTokenIsAuthentic;
+import com.project.large.member.dto.MemberResponse;
+import com.project.large.member.repository.MemberRepository;
 import com.project.large.member.service.MemberService;
 import com.project.large.member.dto.MemberEdit;
 import com.project.large.member.entity.Member;
@@ -15,15 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 @RequiredArgsConstructor
 @RestController
 public class MemberController {
     private final MemberService memberService;
     private final JwtService jwtService;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/auth/github/callback")
     public ResponseEntity GitLogin(@RequestParam String code, RedirectAttributes redirectAttributes) throws IOException {
@@ -42,13 +40,13 @@ public class MemberController {
         return ResponseEntity.ok().headers(headers).body(null);
     }
 
-    @PatchMapping("/user/{gitID}")
+    @PatchMapping("/{gitID}/memberEdit")
     public void memberEdit(@PathVariable String gitID, @RequestBody MemberEdit memberEdit) throws IOException {
         memberService.edit(gitID, memberEdit);
     }
 
     @PostMapping("/ifTokenIsAuthentic")
-    public Boolean GetUserInfo (@RequestBody IfTokenIsAuthentic ifTokenIsAuthentic) {
+    public Boolean ifTokenIsAuthentic (@RequestBody IfTokenIsAuthentic ifTokenIsAuthentic) {
         String extractedGitID = jwtService.extractGitID(ifTokenIsAuthentic.getAccessToken()).orElseThrow();
 
         if (ifTokenIsAuthentic.getGitID().equals(extractedGitID)) {
@@ -56,6 +54,18 @@ public class MemberController {
         }
         else {
             return false;
+        }
+    }
+
+    @PostMapping("/{gitID}/getUserInfo")
+    public MemberResponse getMemberInfo (@RequestBody IfTokenIsAuthentic ifTokenIsAuthentic) {
+        String extractedGitID = jwtService.extractGitID(ifTokenIsAuthentic.getAccessToken()).orElseThrow();
+        if (ifTokenIsAuthentic.getGitID().equals(extractedGitID)) {
+            MemberResponse memberResponse = memberService.createMemberResponseByMember(memberRepository.findByGitID(extractedGitID).orElseThrow());
+            return memberResponse;
+        }
+        else {
+            return null;
         }
     }
 

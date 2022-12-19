@@ -41,7 +41,6 @@
                         <span class="span5">Issue Report</span>
                     </div>
                 </div>
-
             </div>
 
             <div id="close" class="close" @click="close()">
@@ -56,6 +55,8 @@
 
             <br><br><br>            
         </div>
+        
+        <div id="FloatAlert"></div>
 
         <router-view />
 
@@ -117,11 +118,18 @@ export default {
             })
         },
         LoginRequired(PageName) {
-            console.log("Login required to access " + PageName + "!")
+            this.showFloatAlert(PageName)
         },
-        // showFloatAlert(Message) {
+        showFloatAlert(Message) {
+            const FloatAlert = document.getElementById("FloatAlert")
+            FloatAlert.innerHTML = "Login required to access <h4>" + Message + "</h4>!"
+            FloatAlert.style.opacity = 1
+            setTimeout(function() {
+                FloatAlert.style.opacity = 0
+                FloatAlert.innerHTML = ""
+            }, 5000)
             
-        // }
+        }
     },
 }
 </script>
@@ -195,5 +203,14 @@ export default {
     a:active {
     color : black;
     }
+    h4 {
+        display: inline; 
+    }
+    #FloatAlert {
+        transition: 1000ms;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
 
 </style>

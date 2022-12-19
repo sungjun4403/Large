@@ -5,6 +5,7 @@ import com.project.large.jwt.JwtService;
 import com.project.large.member.dto.MemberCreate;
 import com.project.large.member.dto.MemberEdit;
 import com.project.large.member.dto.MemberEditor;
+import com.project.large.member.dto.MemberResponse;
 import com.project.large.member.entity.Member;
 import com.project.large.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -205,6 +206,19 @@ public class MemberService {
         String gitID = jwtService.extractGitID(AccessToken).orElseThrow();
         Member member = memberRepository.findByGitID(gitID).orElseThrow();
         return member;
+    }
 
+    public MemberResponse createMemberResponseByMember(Member member) {
+        return MemberResponse.builder()
+                .gitID(member.getGitID())
+                .profileImg(member.getProfileImg())
+                .name(member.getName())
+                .company(member.getCompany())
+                .gitBlog(member.getGitBlog())
+                .location(member.getLocation())
+                .gitEmail(member.getGitEmail())
+                .bio(member.getBio())
+                .updated_at(member.getUpdated_at())
+                .build();
     }
 }
