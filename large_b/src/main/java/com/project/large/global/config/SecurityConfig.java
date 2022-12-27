@@ -19,7 +19,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String WEB_URL = "https://localhost.com";
+    public static final String WEB_URL = "http://localhost:3000";
 
     private final CorsFilter corsFilter;
     private final JwtService jwtService;
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(corsFilter);
 
         http.authorizeRequests()
-                .antMatchers()
+                .antMatchers(WEB_URL+"/main/**")
                 .authenticated()
                 .anyRequest().permitAll()
                 .and()

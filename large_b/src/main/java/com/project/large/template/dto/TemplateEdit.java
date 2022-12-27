@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class TemplateEditor {
+public class TemplateEdit {
     private String gitID;
 
     private String templateName;
@@ -14,7 +14,7 @@ public class TemplateEditor {
     private String hotKey;
 
     @Builder
-    public TemplateEditor (String gitID, String templateName, Integer templateNumber, String template, String hotKey) {
+    public TemplateEdit(String gitID, String templateName, Integer templateNumber, String template, String hotKey) {
         this.gitID = gitID;
         this.templateName = templateName;
         this.templateNumber = templateNumber;

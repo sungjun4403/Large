@@ -23,6 +23,7 @@
                             <span class="span5">Issue Report</span>
                         </div>
                     </router-link>
+
                 </div>
 
                 <div v-else>
@@ -41,17 +42,19 @@
                         <span class="span5">Issue Report</span>
                     </div>
                 </div>
+
+                <router-link to="/">
+                    <button type="button">go to login page</button>
+                </router-link>
+
+                <button type="button" @click="logout();">logout</button>
             </div>
 
             <div id="close" class="close" @click="close()">
                 X close
             </div>
             
-            <router-link to="/">
-                <button type="button">go to login page</button>
-            </router-link>
-
-            <button type="button" @click="logout();">logout</button>
+            
 
             <br><br><br>            
         </div>
@@ -109,10 +112,13 @@ export default {
         },
         getIfTokenIsAuthentic() {
             const AccessToken = localStorage.getItem("AccessToken")
-            const gitID = localStorage.getItem("gitID")
-            axios.post("http://localhost:8080/ifTokenIsAuthentic", {
-                AccessToken: AccessToken,
-                gitID: gitID
+            
+            axios({
+                url: 'http://localhost:8080/ifTokenIsAuthentic/' + this.gitID,
+                method: 'get',
+                headers: {
+                    'Authorization' : 'Bearer ' + AccessToken
+                }
             }).then((response) => {
                 this.IfTokenIsYours = response.data
             })
@@ -177,6 +183,8 @@ export default {
     .Nav {
         background-color: #D9D9D9;
         text-align: center;
+        padding-top: 3%;
+        padding-bottom: 3%;
     }
 
     .Nav div {

@@ -28,11 +28,11 @@ export default ({
     },
 
     mounted() {
-        this.getAllPost();
+        this.getAllPosts();
     },
 
     methods: {
-        getAllPost() {
+        getAllPosts() {
             axios.get("http://localhost:8080/post").then((response) => {
                 response.data.forEach(element => {
                     this.posts.push(element)

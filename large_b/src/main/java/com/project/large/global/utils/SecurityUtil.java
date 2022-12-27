@@ -2,6 +2,7 @@ package com.project.large.global.utils;
 
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,8 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class SecurityUtil {
 
     public static String getLoginedUserGitId() {
-        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
 
-        return user.getUsername();
+        return name;
     }
 }

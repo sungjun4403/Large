@@ -127,6 +127,7 @@ public class MemberService {
 
             memberRepository.save(member);
             member.updateRefreshToken(jwtService.createRefreshToken());
+
             return jwtService.createAccessToken(member);
         }
         else { //계정 있으면 로그인
@@ -199,16 +200,6 @@ public class MemberService {
 
         member.edit(memberEditorBuilder.build());
 
-    }
-
-    public Member getMemberByBodyAccessToken(String BodyAccessToken) throws JsonProcessingException {
-        Map<String,Object> result = new ObjectMapper().readValue(BodyAccessToken, HashMap.class);
-
-        String AccessToken = (String) result.get("AccessToken");
-
-        String gitID = jwtService.extractGitID(AccessToken).orElseThrow();
-        Member member = memberRepository.findByGitID(gitID).orElseThrow();
-        return member;
     }
 
     public MemberResponse createMemberResponseByMember(Member member) {

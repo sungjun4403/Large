@@ -1,7 +1,7 @@
 package com.project.large.member.controller;
 
+import com.project.large.global.utils.SecurityUtil;
 import com.project.large.jwt.JwtService;
-import com.project.large.member.dto.IfTokenIsAuthentic;
 import com.project.large.member.dto.MemberResponse;
 import com.project.large.member.repository.MemberRepository;
 import com.project.large.member.service.MemberService;
@@ -36,20 +36,26 @@ public class MemberController {
         headers.add("MemberToken", MemberToken);
         headers.add("RefreshToken", member.getRefreshToken());
         headers.add("gitID", member.getGitID());
-        System.out.println(member.getGitID());
         return ResponseEntity.ok().headers(headers).body(null);
     }
 
-    @PatchMapping("/{gitID}/memberEdit")
+    @PatchMapping("/memberEdit/{gitID}")
     public void memberEdit(@PathVariable String gitID, @RequestBody MemberEdit memberEdit) throws IOException {
-        memberService.edit(gitID, memberEdit);
+        String extractedGitID = SecurityUtil.getLoginedUserGitId();
+
+        if (gitID.equals(extractedGitID)) {
+            memberService.edit(gitID, memberEdit);
+        }
+        else {
+        }
+
     }
 
-    @PostMapping("/ifTokenIsAuthentic")
-    public Boolean ifTokenIsAuthentic (@RequestBody IfTokenIsAuthentic ifTokenIsAuthentic) {
-        String extractedGitID = jwtService.extractGitID(ifTokenIsAuthentic.getAccessToken()).orElseThrow();
+    @GetMapping("/ifTokenIsAuthentic/{gitID}")
+    public Boolean ifTokenIsAuthentic (@PathVariable String gitID) {
+        String extractedGitID = SecurityUtil.getLoginedUserGitId();
 
-        if (ifTokenIsAuthentic.getGitID().equals(extractedGitID)) {
+        if (gitID.equals(extractedGitID)) {
             return true;
         }
         else {
@@ -57,16 +63,16 @@ public class MemberController {
         }
     }
 
-    @PostMapping("/{gitID}/getUserInfo")
-    public MemberResponse getMemberInfo (@RequestBody IfTokenIsAuthentic ifTokenIsAuthentic) {
-        String extractedGitID = jwtService.extractGitID(ifTokenIsAuthentic.getAccessToken()).orElseThrow();
-        if (ifTokenIsAuthentic.getGitID().equals(extractedGitID)) {
-            MemberResponse memberResponse = memberService.createMemberResponseByMember(memberRepository.findByGitID(extractedGitID).orElseThrow());
+    @GetMapping("/getUserInfo/{gitID}")
+    public MemberResponse getMemberInfo (@PathVariable String gitID) {
+        String extractedGitID = SecurityUtil.getLoginedUserGitId();
+        if (gitID.equals(extractedGitID)) {
+            MemberResponse memberResponse = memberService.
+                    createMemberResponseByMember(memberRepository.findByGitID(extractedGitID).orElseThrow());
             return memberResponse;
         }
         else {
             return null;
         }
     }
-
 }

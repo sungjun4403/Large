@@ -14,29 +14,31 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("/")
-    public void home() {};
-
+    //CREATE
     @PostMapping("/post")
-    public void post (@RequestBody PostCreate postCreate) {
+    public void create (@RequestBody PostCreate postCreate) {
         postService.write(postCreate);
     }
 
+    //VIEW ALL
     @GetMapping("/post")
     public List<PostResponse> getList() {
         return postService.getList();
     }
 
+    //VIEW ONE
     @GetMapping("/post/{postId}")
     public PostResponse get(@PathVariable long postId) {
         return postService.get(postId);
     }
 
+    //EDIT
     @PatchMapping("/post/{postId}")
     public void edit(@PathVariable long postId, @RequestBody PostEdit postEdit) {
         postService.edit(postId, postEdit);
     }
 
+    //DELETE
     @DeleteMapping("/post/{postId}")
     public void delete(@PathVariable Long postId) {
         postService.delete(postId);

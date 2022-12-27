@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
 
+    //CREATE
     public void write (PostCreate postCreate) {
-
         Post post = Post.builder()
                 .title(postCreate.getTitle())
                 .body(postCreate.getBody())
@@ -30,12 +30,14 @@ public class PostService {
         postRepository.save(post);
     }
 
+    //VIEW ALL
     public List<PostResponse> getList() {
         return postRepository.getList().stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }
 
+    //VIEW ONE
     public PostResponse get(Long id){
         Post post = postRepository.findById(id).orElseThrow();
 
@@ -47,29 +49,27 @@ public class PostService {
                 .build();
     }
 
+    //EDIT
     @Transactional
     public void edit (Long id, PostEdit postEdit) {
-//        SecurityUtil.getLoginedUserGitId()
 
         Post post = postRepository.findById(id).orElseThrow();
 
         PostEditor.PostEditorBuilder editorBuilder = post.toEditor();
 
-        if(postEdit.getTitle() != null) {
+        if(postEdit.getTitle() != null) { //수정 요청 값이 있으면 대체
             editorBuilder.title(postEdit.getTitle());
         }
-
         if(postEdit.getBody() != null) {
             editorBuilder.body(postEdit.getBody());
         }
-
         if(postEdit.getIfAds() != null) {
             editorBuilder.ifAds(postEdit.getIfAds());
         }
-
         post.edit(editorBuilder.build());
     }
 
+    //DELETE
     public void delete (Long id) {
         Post post = postRepository.findById(id).orElseThrow();
         postRepository.delete(post);

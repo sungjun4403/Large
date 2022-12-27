@@ -35,6 +35,23 @@ public class Template {
         this.hotKey = hotKey;
     }
 
+    public TemplateEditor.TemplateEditorBuilder toEditor() {
+        return TemplateEditor.builder()
+                .gitID(gitID)
+                .templateName(templateName)
+                .templateNumber(templateNumber)
+                .template(template)
+                .hotKey(hotKey);
+    }
+
+    public void edit(TemplateEditor templateEditor) {
+        gitID = templateEditor.getGitID();
+        templateName = templateEditor.getTemplateName();
+        templateNumber = templateEditor.getTemplateNumber();
+        template = templateEditor.getTemplate();
+        hotKey = templateEditor.getHotKey();
+    }
+
 
 
 //    public TemplateEditor.TemplateEditorBuiler

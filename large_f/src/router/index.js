@@ -2,9 +2,14 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import Home from "@/components/Home.vue";
 
-//NavBar components
+/*  NavBar components */
 import EditProfile from "@/components/NavBar/EditProfile.vue"
+
 import Preferences from "@/components/NavBar/Preferences.vue"
+//Preferences components
+import EditTemplate from "@/components/NavBar/Preferences/EditTemplate.vue"
+import Template from "@/components/NavBar/Preferences/Template/Template.vue"
+
 import IssueReport from "@/components/NavBar/IssueReport.vue"
 
 //Post
@@ -33,6 +38,9 @@ const routes = [
 
   { path: "/:gitID", name: "UserHome", component: UserHome },
   { path: "/:gitID/preferences", name: "Preferences", component: Preferences },
+  { path: "/:gitID/preferences/edit_template", name: "EditTemplate", component: EditTemplate },
+  { path: "/:gitID/preferences/template", name: "Template", component: Template },
+
   { path: "/:gitID/edit_profile", name: "EditProfile", component: EditProfile },
   
 ];

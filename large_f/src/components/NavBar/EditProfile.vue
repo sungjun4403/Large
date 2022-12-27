@@ -64,9 +64,12 @@ export default {
         const bio = ref("")
         const updated_at = ref("")
 
+        const AccessToken = localStorage.AccessToken
+
         return {
             gitID, profileImg, name, company, gitBlog, location, gitEmail, bio, updated_at,
-            toEditProfileImg, toEditName, toEditCompany, toEditLocation, toEditBio
+            toEditProfileImg, toEditName, toEditCompany, toEditLocation, toEditBio,
+            AccessToken
             }
     }, 
     mounted() {
@@ -75,9 +78,12 @@ export default {
 
     methods: {
         getMemberInfo () {
-            axios.post("http://localhost:8080/" + localStorage.getItem("gitID") + "/getUserInfo", {
-                gitID: localStorage.getItem("gitID"),
-                AccessToken: localStorage.getItem("AccessToken")
+            axios({
+                url: 'http://localhost:8080/getUserInfo/' + localStorage.gitID,
+                method: 'get',
+                headers: {
+                    'Authorization' : 'Bearer ' + this.AccessToken
+                }
             }).then((response) => {
                 this.gitID = response.data.gitID
                 this.profileImg = response.data.profileImg
@@ -90,18 +96,21 @@ export default {
                 this.updated_at = response.data.updated_at
             })
         },
+
         memberEdit() {
-            axios.patch("http://localhost:8080/" + localStorage.getItem("gitID") + "/memberEdit", {
-                // profileImg : this.toEditProfileImg.value,
-                // name : this.toEditName.value,
-                // company : this.toEditCompany.value,
-                // location : this.toEditLocation.value,
-                // bio : this.toEditBio.value,
-                profileImg : this.toEditProfileImg,
-                name : this.toEditName,
-                company : this.toEditCompany,
-                location : this.toEditLocation,
-                bio : this.toEditBio,
+            axios({
+                url: "http://localhost:8080/memberEdit/" + localStorage.gitID, 
+                method: 'patch',
+                headers: {
+                    'Authorization' : 'Bearer ' + this.AccessToken
+                },
+                data: {
+                    profileImg : this.toEditProfileImg,
+                    name : this.toEditName,
+                    company : this.toEditCompany,
+                    location : this.toEditLocation,
+                    bio : this.toEditBio,
+                }
             }).then((response) => {
                 if (response.status == 200) {
                     this.getMemberInfo()

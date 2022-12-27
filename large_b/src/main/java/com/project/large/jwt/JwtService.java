@@ -7,6 +7,14 @@ import com.project.large.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +50,7 @@ public class JwtService {
     private static final String ACCESS_TOKEN_SUBJECT = "AccessToken";
     private static final String REFRESH_TOKEN_SUBJECT = "RefreshToken";
     private static final String ID = "UserCode";
-    private static final String BEARER = "Bearer";
+    private static final String BEARER = "Bearer ";
     private static final String GITID = "GitID";
 
     private final MemberRepository memberRepository;
@@ -54,9 +62,12 @@ public class JwtService {
                 .withClaim(ID, member.getId())
                 .withClaim(GITID, member.getGitID())
                 .sign(Algorithm.HMAC512(secret));
+
     }
 
     public String createRefreshToken() {
+
+
         return JWT.create()
                 .withSubject(REFRESH_TOKEN_SUBJECT)
                 .withExpiresAt(new Date(System.currentTimeMillis() + refreshTokenValidityInSeconds * 1000))
@@ -127,8 +138,7 @@ public class JwtService {
         try {
             JWT.require(Algorithm.HMAC512(secret)).build().verify(token);
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
