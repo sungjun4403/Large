@@ -1,44 +1,54 @@
 <template>
-    <div id="body">
-        <div id="info">
-            gitID : {{gitID}} <br>
-            profileImg : <img :src="profileImg" width="40" height="40">  <br>
-            name : {{name}} <br>
-            company : {{company}} <br>
-            gitBlog : {{gitBlog}} <br>
-            location : {{location}} <br>
-            gitEmail : {{gitEmail}} <br>
-            bio : {{bio}} <br>
-            updated_at : {{updated_at}} <br>
+<!--     
+    Access : User
+    Component Relations : 
+ -->
+    <div>
+        <div id="body" v-if="IfTokenIsYours == true">
+            <div id="info">
+                gitID : {{gitID}} <br>
+                profileImg : <img :src="profileImg" width="40" height="40">  <br>
+                name : {{name}} <br>
+                company : {{company}} <br>
+                gitBlog : {{gitBlog}} <br>
+                location : {{location}} <br>
+                gitEmail : {{gitEmail}} <br>
+                bio : {{bio}} <br>
+                updated_at : {{updated_at}} <br>
+            </div>
+
+            <h2>EDIT PROFILE</h2>
+
+            <br>
+
+            <input type="text" id="profileImg" name="profileImg" v-model="toEditProfileImg" placeholder="profileImg">
+
+            <br><br>
+
+            <input type="text" id="name" name="name" v-model="toEditName" placeholder="name">
+
+            <br><br>
+
+            <input type="text" id="company" name="company" v-model="toEditCompany" placeholder="company">
+
+            <br><br>
+
+            <input type="text" id="location" name="location" v-model="toEditLocation" placeholder="location">
+
+            <br><br>
+
+            <input type="text" id="bio" name="bio" v-model="toEditBio" placeholder="bio">
+
+            <br><br>
+            
+            <button @click="memberEdit()">click</button> 
+
+            <br><br>
         </div>
 
-        <h2>EDIT PROFILE</h2>
-
-        <br>
-
-        <input type="text" id="profileImg" name="profileImg" v-model="toEditProfileImg" placeholder="profileImg">
-
-        <br><br>
-
-        <input type="text" id="name" name="name" v-model="toEditName" placeholder="name">
-
-        <br><br>
-
-        <input type="text" id="company" name="company" v-model="toEditCompany" placeholder="company">
-
-        <br><br>
-
-        <input type="text" id="location" name="location" v-model="toEditLocation" placeholder="location">
-
-        <br><br>
-
-        <input type="text" id="bio" name="bio" v-model="toEditBio" placeholder="bio">
-
-        <br><br>
-        
-        <button @click="memberEdit()">click</button> 
-
-        <br><br>
+        <div v-else-if="IfTokenIsYours == false">
+            <AccessDenied />
+        </div>
     </div>
 </template>
 
@@ -47,6 +57,7 @@ import { ref } from 'vue';
 const axios = require('axios').default;
 
 export default {
+    props: ["IfTokenIsYours"],
     setup() {
         const toEditProfileImg = ref("")
         const toEditName = ref("")

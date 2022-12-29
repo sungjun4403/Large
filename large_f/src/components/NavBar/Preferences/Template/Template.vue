@@ -1,18 +1,24 @@
 <template>
-    <div id="TemplateBody">
-        <br>
-        Template
-
-        <li v-for="template in templates" :key="template.id">
-            {{template.templateNumber}}
-            {{template.templateName}}
-            {{template.template}}
-            {{template.hotKey}}
+    <div>
+        <div id="TemplateBody" v-if="IfTokenIsYours == true">
             <br>
-        </li>
+            Template
 
-        <br>
-        <textarea id="textarea" cols="30" rows="10"></textarea>
+            <li v-for="template in templates" :key="template.id">
+                {{template.templateNumber}}
+                {{template.templateName}}
+                {{template.template}}
+                {{template.hotKey}}
+                <br>
+            </li>
+
+            <br>
+            <textarea id="textarea" cols="30" rows="10"></textarea>
+        </div>    
+
+        <div v-else-if="IfTokenIsYours == false">
+            <AccessDenied />
+        </div>
     </div>
 </template>
 
@@ -21,6 +27,7 @@ import { ref } from "@vue/reactivity"
 const axios = require('axios').default;
 
 export default ({
+    props: ["IfTokenIsYours"],
     setup() {
         const templates = ref([])
 

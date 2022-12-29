@@ -21,7 +21,7 @@ import PostViewAll from "@/components/Post/PostViewAll.vue"
 
 //Login
 import AfterLogin from "@/components/Login/AfterLogin.vue"
-import LoginFailed from "@/components/Login/LoginFailed.vue"
+import LoginFailed from "@/components/Login/Exceptions/LoginFailed.vue"
 
 //User
 import UserHome from "@/components/User/UserHome.vue"

@@ -61,7 +61,7 @@
         
         <div id="FloatAlert"></div>
 
-        <router-view />
+        <router-view v-bind:IfTokenIsYours="IfTokenIsYours"/>
 
     </div>
 </template>
@@ -197,16 +197,16 @@ export default {
     }
 
     a:link {
-    color : black;
+        color : black;
     }
     a:visited {
-    color : black;
+        color : black;
     }
     a:hover {
-    color : black;
+        color : black;
     }
     a:active {
-    color : black;
+        color : black;
     }
     h4 {
         display: inline; 

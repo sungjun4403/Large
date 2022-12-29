@@ -32,12 +32,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("filter WORKING");
-        System.out.println("filter WORKING");
-        System.out.println("filter WORKING");
-        System.out.println("filter WORKING");
-        System.out.println("filter WORKING");
-        System.out.println("filter WORKING");
         if (request.getRequestURI().equals(NO_CHECK_URL)) {
             filterChain.doFilter(request, response);
             return;
@@ -69,7 +63,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-//
+
     private void saveAuthentication(Member member) {
         UserDetails user = User.builder()
                 .username(member.getGitID())
@@ -77,18 +71,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 .roles("user")
                 .build();
 
-        System.out.println(user);
-        System.out.println("1");
-        System.out.println("1");
-        System.out.println("1");
-        System.out.println("1");
-
         Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authoritiesMapper.mapAuthorities(user.getAuthorities()));
 
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
-        System.out.println(context);
     }
 
     private void checkAccessTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {

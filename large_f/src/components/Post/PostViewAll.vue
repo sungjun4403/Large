@@ -13,11 +13,8 @@
 
 <script>
 // import { ref } from "@vue/reactivity";
-
 import { ref } from '@vue/reactivity';
-
 const axios = require('axios').default;
-
 
 export default ({
 

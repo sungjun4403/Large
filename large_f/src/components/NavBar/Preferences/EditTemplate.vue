@@ -1,27 +1,32 @@
 <template>
-    <div id="EditTemplateBody">
-        Edit Template
+    <div>
+        <div id="EditTemplateBody" v-if="IfTokenIsYours == true">
+            Edit Template
 
-        <br><br>
+            <br><br>
 
-        <input type="text" id="toEditTemplateName" name="toEditTemplateName" v-model="toEditTemplateName" placeholder="TemplateName">
+            <input type="text" id="toEditTemplateName" name="toEditTemplateName" v-model="toEditTemplateName" placeholder="TemplateName">
 
-        <br><br>
+            <br><br>
 
-        <input type="text" id="toEditTemplateNumber" name="toEditTemplateNumber" v-model="TemplateNumber" placeholder="TemplateNumber">
+            <input type="text" id="toEditTemplateNumber" name="toEditTemplateNumber" v-model="TemplateNumber" placeholder="TemplateNumber">
 
-        <br><br>
+            <br><br>
 
-        <input type="text" id="toEditHotKey" name="toEditHotKey" v-model="toEditHotKey" placeholder="HotKey">
+            <input type="text" id="toEditHotKey" name="toEditHotKey" v-model="toEditHotKey" placeholder="HotKey">
 
-        <br><br>
+            <br><br>
 
-        <input type="text" id="toEditTemplate" name="toEditTemplate" v-model="toEditTemplate" placeholder="Template">
+            <input type="text" id="toEditTemplate" name="toEditTemplate" v-model="toEditTemplate" placeholder="Template">
 
-        <br><br>
+            <br><br>
 
-        <button @click="templateEdit()">ONCLICK</button>
+            <button @click="templateEdit()">ONCLICK</button>
 
+        </div>
+        <div v-else-if="IfTokenIsYours == false">
+            <AccessDenied />
+        </div>
     </div>
 </template>
 
@@ -33,6 +38,7 @@ import axios from "axios"
 
 
 export default ({
+    props: ["IfTokenIsYours"],
     setup() {
         const TemplateName = ref("")
         const TemplateNumber = ref(-1)
