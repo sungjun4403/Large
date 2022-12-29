@@ -452,8 +452,22 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
     
 <br/>
     
-
+* * * * 
     
+<h3>17~20. 이것 저것</h3>
+    
+2022/12/10~29<br/>
+    
+- 업데이트를 까먹었다. 로그 업데이트는 ~~귀찮아서 안~~ 까먹고 못했고, 깃 커밋은 진짜 까먹었다. 기획 수정이든 코딩이든 매일 하긴 했다. 
+- 위 이슈는 해결했고 axios 사용해서 front - back 통신, jwt 구현해 놓은 것들 사용, edit_profile, edit_template등 여러가지 화면 만들고 기능 구현했다. (디자인은 아직) 
+- UserNavBar는 UserSideBar로 대체 되었다. 
+- Vue 전반에 대한 이해를 좀 하려고 하긴 했는데,, mounted 두번 실행되는 것은 아직도 해결 못했다. 
+- Git Commit 감지 대신 직접 sync를 채택했다. Flask도 사용해보았는데 감지할 방법이 없었다.
+- Git Last Commited at은 자체 status 버튼으로 대체한다. 
+- jwt 헤더에 실어 나른 뒤 SecurityUtils.getLoginedUserGitId()로 token이 valid한지 확인하고 gitID를 추출하도록 하였다. 
+- 로그인시 AccessToken을 LocalStorage에 저장하도록 하였고 권한 확인이 필요할 때에는 위 방법으로 확인하도록 하였다. 로그아웃 시에는 LocalStroage를 비우도록 하였다. 
+   
+ 
     
     
     
