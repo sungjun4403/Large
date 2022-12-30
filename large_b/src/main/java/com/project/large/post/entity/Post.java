@@ -1,22 +1,23 @@
 package com.project.large.post.entity;
 
+import com.project.large.comment.entity.Comment;
 import com.project.large.global.entity.BaseTimeEntity;
 import com.project.large.post.dto.PostEditor;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
+@Builder
+@AllArgsConstructor
 public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     private Long id;
 
     private String title;
@@ -24,13 +25,10 @@ public class Post extends BaseTimeEntity {
 
     private Boolean ifAds;
 
+    @OneToMany(mappedBy = "post")
+    @Builder.Default
+    private List<Comment> comments = new ArrayList<>();
 
-    @Builder
-    public Post(String title, String body, Boolean ifAds) {
-        this.title = title;
-        this.body = body;
-        this.ifAds = ifAds;
-    }
 
     public PostEditor.PostEditorBuilder toEditor() {
         return PostEditor.builder()
