@@ -43,6 +43,9 @@
                     </div>
                 </div>
 
+                <router-link :to="{ path: '/' + gitID }">
+                    <button type="button">Blog Home</button>
+                </router-link>
                 <router-link to="/">
                     <button type="button">go to login page</button>
                 </router-link>

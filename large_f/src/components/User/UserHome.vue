@@ -1,13 +1,26 @@
 <template>
-    <div id="body">
+    <div id="UserHomeBody">
         
         {{gitID}}'s dev-log ! 
         <br>
         WELCOME!
-        <div>
-            
-            <br><br>
-        </div>
+        <!-- <script type="application/javascript" defer src="https://giscus.app/client.js"
+            data-repo="sungjun4403/Giscus"
+            data-repo-id="R_kgDOIm2KXA"
+            data-category="General"
+            data-category-id="DIC_kwDOIm2KXM4CTDA4"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="ko"
+            crossorigin="anonymous"
+            async>
+        </script>
+        <div id="giscus"></div> -->
+
     </div>
 </template>
 
@@ -32,5 +45,7 @@ export default {
 </script>
 
 <style>
-
+    #UserHomeBody {
+        text-align: center;
+    }
 </style>
