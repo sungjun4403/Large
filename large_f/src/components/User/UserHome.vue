@@ -4,23 +4,7 @@
         {{gitID}}'s dev-log ! 
         <br>
         WELCOME!
-        <!-- <script type="application/javascript" defer src="https://giscus.app/client.js"
-            data-repo="sungjun4403/Giscus"
-            data-repo-id="R_kgDOIm2KXA"
-            data-category="General"
-            data-category-id="DIC_kwDOIm2KXM4CTDA4"
-            data-mapping="pathname"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-theme="preferred_color_scheme"
-            data-lang="ko"
-            crossorigin="anonymous"
-            async>
-        </script>
-        <div id="giscus"></div> -->
-
+ 
     </div>
 </template>
 
@@ -37,6 +21,7 @@ export default {
     mounted() {
         // this.gitID = this.$route.params.gitID
         this.gitID = localStorage.getItem("gitID")
+        this.$forceUpdate()
     },
     methods: {
 
@@ -44,7 +29,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
     #UserHomeBody {
         text-align: center;
     }
