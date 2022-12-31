@@ -1,7 +1,7 @@
 <template>
     <div id="body">
 
-        <div id="txt"><h2>REDIRECTING</h2> to Home</div>
+        <div id="txt"><h2>REDIRECTING</h2> to <a href="/">Home</a></div>
 
     </div>
 </template>

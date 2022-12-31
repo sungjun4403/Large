@@ -1,5 +1,6 @@
 package com.project.large.member.entity;
 
+import com.project.large.global.entity.BaseTimeEntity;
 import com.project.large.member.dto.MemberEditor;
 import lombok.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class Member {
+public class Member extends BaseTimeEntity {
 //element name starts with 'git' is uneditable in this service. to edit those elements, edit in github
 
     @Column(length = 1000)
