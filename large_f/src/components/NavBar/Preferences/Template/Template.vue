@@ -4,7 +4,7 @@
             <br>
             Templates
 
-            <div v-for="(template, index) in templates" :key="template.id">                
+            <div id="ModifyBody" v-for="(template, index) in templates" :key="template.id">                
                 
                 <input :id="'templateNumber' + template.id" class="templateNumber" size="1" >
                 <input :id="'templateName' + template.id" class="templateName" size="10">
@@ -13,7 +13,7 @@
 
                 <img @click="removeTemplate()" id="removeTemplateImg" src="../../../../../public/assets/image/removeTemplate.png" alt="removeTemplate">
                 <!-- <div @click="removeTemplate()"><img @click="removeTemplate()" id="addTemplateImg" src="" alt="addTemplateImg"></div> -->
-                 <img v-if="index == templates.length-1" @click="addTemplate()" id="addTemplateImg" src="../../../../../public/assets/image/addTemplate.png" alt="addTemplate">
+                 <img v-if="index == templates.length-1" @click="addTemplate(template.templateNumber)" id="addTemplateImg" src="../../../../../public/assets/image/addTemplate.png" alt="addTemplate">
                 <br>
             </div>
 
@@ -25,6 +25,9 @@
 
         <div v-else-if="IfTokenIsYours == false">
             <AccessDenied />
+        </div>
+        <div v-else>
+            PENDING
         </div>
     </div>
 </template>
@@ -75,6 +78,9 @@ export default ({
         //     }
         // })
     },
+    updated() {
+        this.setDefaultInput();
+    },
     methods: {
         getAllTemplates() {
             axios({
@@ -90,7 +96,6 @@ export default ({
             }).then(()=> {
                 this.setDefaultInput()
             })
-            
         },
         setDefaultInput() {
             this.templates.forEach((template) => {
@@ -102,9 +107,17 @@ export default ({
         },
         removeTemplate() {
         },
-        addTemplate() {  
+        addTemplate(lastNumber) {  
             this.templateAddCount += 1 
-            const templateToAdd = {id: 'Add' + this.templateAddCount, gitID: this.gitID, templateName: '', templateNumber: , template: '', hotKey: ''}
+            const templateToAdd = {
+                id: 'Add' + this.templateAddCount, 
+                gitID: this.gitID, 
+                templateName: '', 
+                templateNumber: lastNumber + 1,
+                template: '',
+                hotKey: ''
+                } 
+        
             this.templates.push(templateToAdd)
         },
         templateInput(templateId) {

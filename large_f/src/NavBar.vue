@@ -79,7 +79,7 @@ import { ref } from '@vue/reactivity';
 export default {
     setup() {
         const ScrollUp = 0;
-        const IfTokenIsYours = ref(false)
+        const IfTokenIsYours = ref("PENDING")
         const gitID = ref("")
         return {ScrollUp, IfTokenIsYours, gitID}
     },

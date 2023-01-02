@@ -19,9 +19,8 @@ public class BaseTimeEntity {
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createDate = DateTimeUtils.now();
+    private LocalDateTime createDate;
 
     @LastModifiedDate
-    @Column(updatable = true)
-    private LocalDateTime lastModifiedDate = DateTimeUtils.now();
+    private LocalDateTime lastModifiedDate;
 }
