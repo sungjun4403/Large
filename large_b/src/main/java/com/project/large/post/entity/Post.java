@@ -24,6 +24,9 @@ public class Post extends BaseTimeEntity {
     private String body;
 
     private Boolean ifAds;
+    private String gitID;
+    private String profileImg;
+    private String bio;
 
     @OneToMany(mappedBy = "post")
     @Builder.Default
@@ -34,12 +37,19 @@ public class Post extends BaseTimeEntity {
         return PostEditor.builder()
                 .title(title)
                 .body(body)
-                .ifAds(ifAds);
+                .ifAds(ifAds)
+                .gitID(gitID)
+                .profileImg(profileImg)
+                .bio(bio);
     }
 
     public void edit(PostEditor postEditor) {
         title = postEditor.getTitle();
         body = postEditor.getBody();
         ifAds = postEditor.getIfAds();
+
+        gitID = postEditor.getGitID();
+        profileImg = postEditor.getProfileImg();
+        bio = postEditor.getBio();
     }
 }

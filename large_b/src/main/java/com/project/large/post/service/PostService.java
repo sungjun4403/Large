@@ -25,6 +25,9 @@ public class PostService {
                 .title(postCreate.getTitle())
                 .body(postCreate.getBody())
                 .ifAds(postCreate.getIfAds())
+                .gitID(postCreate.getGitID())
+                .profileImg(postCreate.getProfileImg())
+                .bio(postCreate.getBio())
                 .build();
 
         postRepository.save(post);
@@ -43,9 +46,13 @@ public class PostService {
 
         return PostResponse.builder()
                 .id(post.getId())
+
                 .title(post.getTitle())
                 .body(post.getBody())
                 .ifAds(post.getIfAds())
+                .gitID(post.getGitID())
+                .profileImg(post.getProfileImg())
+                .bio(post.getBio())
                 .build();
     }
 

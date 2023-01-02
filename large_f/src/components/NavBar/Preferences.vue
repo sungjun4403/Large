@@ -1,10 +1,18 @@
 <template>
     <div>
         <div id="TemplateBody" v-if="IfTokenIsYours == true">
-            Preferences
+            Preferences <br>
+            
             <router-link :to="{ name: 'Template', params: { gitID: gitID }}">
                 Template
             </router-link>
+
+            <br>
+            <router-link :to="{ name: 'Template', params: { gitID: gitID }}">
+                
+            </router-link>
+
+
         </div>
         
         <div v-else-if="IfTokenIsYours == false">

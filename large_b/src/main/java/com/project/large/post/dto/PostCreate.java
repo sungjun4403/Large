@@ -11,13 +11,20 @@ import lombok.Setter;
 public class PostCreate {
     private String title;
     private String body;
-
     private Boolean ifAds;
 
+    private String gitID;
+    private String profileImg;
+    private String bio;
+
     @Builder
-    public PostCreate(String title, String body, Boolean ifAds) {
+    public PostCreate(String title, String body, Boolean ifAds, String gitID, String profileImg, String bio) {
         this.title = title;
         this.body = body;
         this.ifAds = ifAds;
+
+        this.gitID = gitID;
+        this.profileImg = profileImg;
+        this.bio = bio;
     }
 }

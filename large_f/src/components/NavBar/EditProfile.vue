@@ -31,11 +31,9 @@
 
                 <h4> Bio </h4> <br>
                 <input type="text" id="bio" v-model="toEditBio" placeholder="bio" @input="modifyInputSize('bio')"> <br><br>
-
             </div>
-            
-
             <br><br>
+
             <button @click="memberEdit()">click</button> 
 
             <br><br>
@@ -160,7 +158,6 @@ export default {
             const toCap = toModify[0]
             toModify = toModify.slice(1)
             return "toEdit" + toCap.toUpperCase() + toModify
-
         },
     }
 }

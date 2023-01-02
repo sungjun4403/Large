@@ -12,10 +12,17 @@ public class PostEdit {
     private String body;
     private Boolean ifAds;
 
+    private String gitID;
+    private String profileImg;
+    private String bio;
 
-    public PostEdit(String title, String body, Boolean ifAds) {
+    public PostEdit(String title, String body, Boolean ifAds, String gitID, String profileImg, String bio) {
         this.title = title;
         this.body = body;
         this.ifAds = ifAds;
+
+        this.gitID = gitID;
+        this.profileImg = profileImg;
+        this.bio = bio;
     }
 }

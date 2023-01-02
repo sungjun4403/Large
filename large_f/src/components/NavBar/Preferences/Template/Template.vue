@@ -2,18 +2,25 @@
     <div>
         <div id="TemplateBody" v-if="IfTokenIsYours == true">
             <br>
-            Template
+            Templates
 
-            <li v-for="template in templates" :key="template.id">
-                {{template.templateNumber}}
-                {{template.templateName}}
-                {{template.template}}
-                {{template.hotKey}}
+            <div v-for="(template, index) in templates" :key="template.id">                
+                
+                <input :id="'templateNumber' + template.id" class="templateNumber" size="1" >
+                <input :id="'templateName' + template.id" class="templateName" size="10">
+                <input :id="'template' + template.id" class="template" size="30" @click="templateInput(template.id)">
+                <input :id="'hotKey' + template.id" class="hotKey" size="15">
+
+                <img @click="removeTemplate()" id="removeTemplateImg" src="../../../../../public/assets/image/removeTemplate.png" alt="removeTemplate">
+                <!-- <div @click="removeTemplate()"><img @click="removeTemplate()" id="addTemplateImg" src="" alt="addTemplateImg"></div> -->
+                 <img v-if="index == templates.length-1" @click="addTemplate()" id="addTemplateImg" src="../../../../../public/assets/image/addTemplate.png" alt="addTemplate">
                 <br>
-            </li>
+            </div>
 
             <br>
-            <textarea id="textarea" cols="30" rows="10"></textarea>
+
+            <!-- <button @click="setDefaultInput()">button</button> -->
+            <!-- <textarea id="textarea" cols="30" rows="10"></textarea> -->
         </div>    
 
         <div v-else-if="IfTokenIsYours == false">
@@ -29,28 +36,44 @@ const axios = require('axios').default;
 export default ({
     props: ["IfTokenIsYours"],
     setup() {
+        let gitID = localStorage.gitID
+
         const templates = ref([])
 
-        return { templates }
+        const toEditTemplateNumber = ref(0)
+        const toEditTemplateName = ref("")
+        const toEditTemplate = ref("")
+        const toEditHotKey = ref("")
+
+        const templateAddCount = ref(0)
+        const templateDeleteCount = ref(0)
+
+        return { 
+            gitID, 
+            templates,
+            toEditTemplateNumber, toEditTemplateName, toEditTemplate, toEditHotKey,
+            templateAddCount, templateDeleteCount,
+
+         }
     },
     mounted() {
-        var inSlash = false
         this.getAllTemplates()
-        var textarea = document.getElementById("textarea")
-        // var textarea = document.textarea
-        textarea.addEventListener('keydown', (e) => {
-            if (e.key == "/") {
-                inSlash = true
-            }
-            if (inSlash == true) {
-                setTimeout(function () {
-                    console.log(textarea.value.indexOf("/http"))
-                }, 100)
-            }
-            if (e.key == " ") {
-                inSlash = false
-            }
-        })
+        // var inSlash = false 
+        // var textarea = document.getElementById("textarea")
+        // // var textarea = document.textarea
+        // textarea.addEventListener('keydown', (e) => {
+        //     if (e.key == "/") {
+        //         inSlash = true
+        //     }
+        //     if (inSlash == true) {
+        //         setTimeout(function () {
+        //             console.log(textarea.value.indexOf("/http"))
+        //         }, 100)
+        //     }
+        //     if (e.key == " ") {
+        //         inSlash = false
+        //     }
+        // })
     },
     methods: {
         getAllTemplates() {
@@ -64,15 +87,66 @@ export default ({
                 response.data.forEach(element => {
                     this.templates.push(element)
                 });
+            }).then(()=> {
+                this.setDefaultInput()
             })
-        }
             
+        },
+        setDefaultInput() {
+            this.templates.forEach((template) => {
+                document.getElementById("templateNumber" + template.id).value = template.templateNumber
+                document.getElementById("templateName" + template.id).value = template.templateName
+                document.getElementById("template" + template.id).value = template.template
+                document.getElementById("hotKey" + template.id).value = template.hotKey
+            })
+        },
+        removeTemplate() {
+        },
+        addTemplate() {  
+            this.templateAddCount += 1 
+            const templateToAdd = {id: 'Add' + this.templateAddCount, gitID: this.gitID, templateName: '', templateNumber: , template: '', hotKey: ''}
+            this.templates.push(templateToAdd)
+        },
+        templateInput(templateId) {
+            document.getElementById("template" + templateId)
+        },
+        biggerTemplateInput() {
+            
+        }
     }
 })
 </script>
 
-<style>
+<style scoped>
     #TemplateBody {
         text-align: center;
     }
+
+    input {
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+        /* border-right; */
+        font-family: 'Courier New', Courier, monospace;
+    }
+    input:focus {
+        outline: none;
+    }
+    .hotKey {
+        border-right: none;
+    }
+    #addTemplateImg {
+        cursor: pointer;
+        height: 1em;
+        vertical-align: middle;
+        margin-right: -1em;
+    }
+    #removeTemplateImg {
+        cursor: pointer;
+        height: 1em;
+        vertical-align: middle;
+        margin-left: 0.27em;
+        margin-right: 0.27em;
+    }
+
 </style>
