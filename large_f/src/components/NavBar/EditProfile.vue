@@ -34,13 +34,17 @@
             </div>
             <br><br>
 
-            <button @click="memberEdit()">click</button> 
+            <button id="memberEditButton" @click="memberEdit()">click</button>
 
             <br><br>
         </div>
 
         <div v-else-if="IfTokenIsYours == false">
             <AccessDenied />
+        </div>
+
+        <div v-else> 
+            <Pending />
         </div>
     </div>
 </template>
@@ -183,6 +187,9 @@ export default {
     }
     #EditProfileBody {
         
+    }
+    #memberEditButton {
+        margin-left: 20%;
     }
 
 </style>

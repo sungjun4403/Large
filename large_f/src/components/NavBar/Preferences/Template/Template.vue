@@ -19,7 +19,7 @@
 
             <br>
 
-            <!-- <button @click="setDefaultInput()">button</button> -->
+            <button @click="sendWholeModify()">button</button>
             <!-- <textarea id="textarea" cols="30" rows="10"></textarea> -->
         </div>    
 
@@ -27,7 +27,7 @@
             <AccessDenied />
         </div>
         <div v-else>
-            PENDING
+            <Pending />
         </div>
     </div>
 </template>
@@ -125,7 +125,23 @@ export default ({
         },
         biggerTemplateInput() {
             
+        },
+        sendWholeModify() {
+            const wholeTemplate = []
+            this.templates.forEach((template) => {
+                wholeTemplate.push(template)
+            })
+            console.log(wholeTemplate)
+            axios({
+                url: 'http://localhost:8080/template/wholeModify/' + localStorage.getItem("gitID"),
+                method: 'post',
+                headers: {
+                    'Authorization' : 'Bearer ' + localStorage.getItem("AccessToken")
+                },
+                data: wholeTemplate
+            })
         }
+
     }
 })
 </script>

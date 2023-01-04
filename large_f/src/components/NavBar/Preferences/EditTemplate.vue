@@ -21,7 +21,7 @@
 
             <br><br>
 
-            <button @click="templateEdit()">ONCLICK</button>
+            <button type="submit" @click="templateEdit()">ONCLICK</button>
 
         </div>
         <div v-else-if="IfTokenIsYours == false">

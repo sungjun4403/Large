@@ -7,9 +7,11 @@ import com.project.large.template.dto.TemplateEdit;
 import com.project.large.template.entity.Template;
 import com.project.large.template.repository.TemplateRepository;
 import com.project.large.template.service.TemplateService;
+import com.sun.tools.jconsole.JConsoleContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
@@ -48,5 +50,16 @@ public class TemplateController {
     public void delete (@PathVariable String gitID, @PathVariable Long templateID) {
         templateService.delete(templateID);
     }
+
+    //CREATE
+    @PostMapping("template/wholeModify/{gitID}")
+//    public void wholeModify(@PathVariable String gitID, @RequestBody String wholeTemplate) {
+    public void wholeModify(@PathVariable String gitID, @RequestBody List<LinkedHashMap<Object, Object>> wholeTemplate) {
+        templateService.MapWholeTemplateList(wholeTemplate);
+
+
+    }
+
+
 }
 

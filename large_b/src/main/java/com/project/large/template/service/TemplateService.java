@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -66,5 +69,9 @@ public class TemplateService {
     public void delete (Long id) {
         Template template = templateRepository.findById(id).orElseThrow();
         templateRepository.delete(template);
+    }
+
+    public void MapWholeTemplateList(List<LinkedHashMap<Object, Object>> wholeTemplate) {
+        System.out.println(wholeTemplate.get(0).get("template"));
     }
 }
