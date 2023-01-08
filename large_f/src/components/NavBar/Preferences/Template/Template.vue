@@ -11,12 +11,14 @@
                 <input :id="'template' + template.id" class="template" size="30" @click="templateInput(template.id)">
                 <input :id="'hotKey' + template.id" class="hotKey" size="15">
 
-                <img @click="removeTemplate()" id="removeTemplateImg" src="../../../../../public/assets/image/removeTemplate.png" alt="removeTemplate">
+                <img @click="removeTemplate(index)" id="removeTemplateImg" src="../../../../../public/assets/image/removeTemplate.png" alt="removeTemplate">
                 <!-- <div @click="removeTemplate()"><img @click="removeTemplate()" id="addTemplateImg" src="" alt="addTemplateImg"></div> -->
                  <img v-if="index == templates.length-1" @click="addTemplate(template.templateNumber)" id="addTemplateImg" src="../../../../../public/assets/image/addTemplate.png" alt="addTemplate">
                 <br>
             </div>
-
+            <div v-if="templates.length == 0">
+                <span>Create Template</span> <img @click="addTemplate(0)" id="addTemplateImg" src="../../../../../public/assets/image/addTemplate.png" alt="addTemplate">
+            </div>
             <br>
 
             <button @click="sendWholeModify()">button</button>
@@ -105,9 +107,10 @@ export default ({
                 document.getElementById("hotKey" + template.id).value = template.hotKey
             })
         },
-        removeTemplate() {
+        removeTemplate(index) {            
+            this.templates.splice(index, 1)
         },
-        addTemplate(lastNumber) {  
+        addTemplate(lastNumber) { 
             this.templateAddCount += 1 
             const templateToAdd = {
                 id: 'Add' + this.templateAddCount, 
@@ -126,12 +129,23 @@ export default ({
         biggerTemplateInput() {
             
         },
+        // setTemplateNumber() {
+        //     this.templates.forEach((template, index) => {
+        //         template.templateNumber = index + 1
+        //     })
+        //     this.setDefaultInput()
+        // },
         sendWholeModify() {
+            // this.setTemplateNumber()
             const wholeTemplate = []
             this.templates.forEach((template) => {
+                template.templateName =  document.getElementById("templateName" + template.id).value 
+                template.templateNumber = document.getElementById("templateNumber" + template.id).value
+                template.template = document.getElementById("template" + template.id).value
+                template.hotKey = document.getElementById("hotKey" + template.id).value 
+                
                 wholeTemplate.push(template)
             })
-            console.log(wholeTemplate)
             axios({
                 url: 'http://localhost:8080/template/wholeModify/' + localStorage.getItem("gitID"),
                 method: 'post',
@@ -140,8 +154,8 @@ export default ({
                 },
                 data: wholeTemplate
             })
-        }
 
+        },
     }
 })
 </script>

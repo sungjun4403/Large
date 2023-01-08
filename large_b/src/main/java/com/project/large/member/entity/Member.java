@@ -1,13 +1,19 @@
 package com.project.large.member.entity;
 
+import com.project.large.comment.entity.Comment;
 import com.project.large.global.entity.BaseTimeEntity;
 import com.project.large.member.dto.MemberEditor;
+import com.project.large.post.entity.Post;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Member extends BaseTimeEntity {
 //element name starts with 'git' is uneditable in this service. to edit those elements, edit in github
@@ -37,23 +43,9 @@ public class Member extends BaseTimeEntity {
     private String updated_at;
     private Integer commits;
 
-    @Builder
-    public Member(String gitID, String memberToken, String profileImg, String name, String company, String gitBlog, String location, String gitEmail, String bio, String updated_at, Integer commits) {
-        this.gitID = gitID;
-        this.memberToken = memberToken;
-        this.profileImg = profileImg;
-
-        this.name = name;
-        this.company = company;
-        this.gitBlog = gitBlog;
-
-        this.location = location;
-        this.gitEmail = gitEmail;
-        this.bio = bio;
-
-        this.updated_at = updated_at;
-        this.commits = commits;
-    }
+    @OneToMany(mappedBy = "member")
+    @Builder.Default
+    private List<Post> post = new ArrayList<>();
 
     public MemberEditor.MemberEditorBuilder toEditor() {
         return MemberEditor.builder()

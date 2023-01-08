@@ -2,6 +2,7 @@ package com.project.large.post.entity;
 
 import com.project.large.comment.entity.Comment;
 import com.project.large.global.entity.BaseTimeEntity;
+import com.project.large.member.entity.Member;
 import com.project.large.post.dto.PostEditor;
 import lombok.*;
 
@@ -17,13 +18,18 @@ import java.util.List;
 public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
+    @Column(name = "postId")
     private Long id;
 
     private String title;
     private String body;
 
     private Boolean ifAds;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     private String gitID;
     private String profileImg;
     private String bio;

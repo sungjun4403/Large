@@ -1,13 +1,11 @@
 package com.project.large.template.controller;
 
 
-import com.project.large.global.utils.SecurityUtil;
 import com.project.large.template.dto.TemplateCreate;
 import com.project.large.template.dto.TemplateEdit;
 import com.project.large.template.entity.Template;
 import com.project.large.template.repository.TemplateRepository;
 import com.project.large.template.service.TemplateService;
-import com.sun.tools.jconsole.JConsoleContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +40,7 @@ public class TemplateController {
     //EDIT
     @PatchMapping("template/{gitID}/{templateID}")
     public void edit (@PathVariable String gitID, @PathVariable Long templateID, @RequestBody TemplateEdit templateEdit) {
-        templateService.edit(templateEdit, gitID, templateID);
+        templateService.edit(templateEdit, templateID);
     }
 
     //DELETE
@@ -53,11 +51,10 @@ public class TemplateController {
 
     //CREATE
     @PostMapping("template/wholeModify/{gitID}")
-//    public void wholeModify(@PathVariable String gitID, @RequestBody String wholeTemplate) {
     public void wholeModify(@PathVariable String gitID, @RequestBody List<LinkedHashMap<Object, Object>> wholeTemplate) {
-        templateService.MapWholeTemplateList(wholeTemplate);
-
-
+        //Trim -> Add (create) 분리 -> delete -> check if modified -> edit
+        List<LinkedHashMap<Object, Object>> trimmedWholeTemplate = templateService.trimWholeTemplate(wholeTemplate);
+        templateService.divideCreateFromWhole(trimmedWholeTemplate, gitID);
     }
 
 
