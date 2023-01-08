@@ -15,18 +15,13 @@
         <br><br>
 
         <input type="text" id="toEditTemplate" name="toEditTemplate" v-model="toEditTemplate" placeholder="Template">
-
-        <br><br>
-
-        <buyo
-
     </div>
 </template>
 
 
 <script>
 import { ref } from "@vue/reactivity"
-// const axios = require("axios")
+// const axios = require("")
 
 
 export default ({

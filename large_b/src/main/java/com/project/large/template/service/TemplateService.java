@@ -28,6 +28,11 @@ public class TemplateService {
                 .hotKey(templateCreate.getHotKey())
                 .build();
 
+        if (templateRepository
+                .findByGitIDAndTemplateNumber(template.getGitID(), template.getTemplateNumber())
+                .orElse(null) != null) {
+            return;
+        }
         templateRepository.save(template);
     }
 
@@ -92,17 +97,23 @@ public class TemplateService {
             }
             else {
                 Template toSave = Template.builder()
-                        .gitID((String) template.get("gitID"))
-                        .templateName((String) template.get("templateName"))
+                        .gitID(template.get("gitID").toString())
+                        .templateName(template.get("templateName").toString())
                         .templateNumber(Integer.parseInt(template.get("templateNumber").toString()))
-                        .template((String) template.get("template"))
-                        .hotKey((String) template.get("hotKey"))
+                        .template(template.get("template").toString())
+                        .hotKey(template.get("hotKey").toString())
                         .build();
+                if (templateRepository
+                        .findByGitIDAndTemplateNumber(toSave.getGitID(), toSave.getTemplateNumber())
+                        .orElse(null) != null) {
+                    return;
+                }
                 templateRepository.save(toSave);
             }
         });
     }
 
+    @Transactional
     public void modifyNDelete(List<LinkedHashMap<Object, Object>> modifiedNDeleted, String gitID) {
         List<Template> lastlySavedTemplate = templateRepository.findByGitID(gitID);
         List<Long> lastlySavedId = new ArrayList<>();
@@ -156,8 +167,11 @@ public class TemplateService {
                             .template(toModifyTemplate.get("template").toString())
                             .hotKey(toModifyTemplate.get("hotKey").toString())
                             .build();
+
+                    System.out.println(toModifyTemplate);
                     System.out.println(templateEdit);
-                    edit(templateEdit, toModifyId);
+                    System.out.println(toModifyId);
+                    this.edit(templateEdit, toModifyId);
                 }
             });
         }

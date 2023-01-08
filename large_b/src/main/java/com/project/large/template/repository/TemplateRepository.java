@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface TemplateRepository extends JpaRepository<Template, Long> {
     List<Template> findByGitID(String gitID);
+    List<Template> findByTemplateNumber(Integer templateNumber);
     Optional<Template> findById(Long id);
     Optional<Template> findByGitIDAndTemplateNumber(String gitID, Integer templateNumber);
 }
