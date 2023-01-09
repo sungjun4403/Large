@@ -25,6 +25,7 @@ import LoginFailed from "@/components/Login/Exceptions/LoginFailed.vue"
 
 //User
 import UserHome from "@/components/User/UserHome.vue"
+import Post from "@/components/User/Post.vue"
 
 const routes = [
   { path: "/", name: "Home", component: Home },
@@ -37,6 +38,8 @@ const routes = [
   { path: "/login_failed", name: "LoginFailed", component: LoginFailed },
 
   { path: "/:gitID", name: "UserHome", component: UserHome },
+  { path: "/:gitID/post=:postId", name: "Post", component: Post },
+
   { path: "/:gitID/preferences", name: "Preferences", component: Preferences },
   { path: "/:gitID/preferences/edit_template", name: "EditTemplate", component: EditTemplate },
   { path: "/:gitID/preferences/template", name: "Template", component: Template },
