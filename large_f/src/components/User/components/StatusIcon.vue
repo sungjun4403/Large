@@ -3,29 +3,39 @@
         <div id="StatusIcon"> 
             
         </div>
-        <span>
-            {{now}}
-        </span>
+        <span>{{now}}</span>
+
     </div>
     
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
 const moment = require('moment')
+
+//now - time = icon bcg color
 export default {
-    props: ['IconHeight'],
+    props: ['IconHeight', 'time'],
     setup() {
-        return {
+        const now = ref("")
         
+        return {
+            now
         }
     },
-    mounted() {
-        console.log(this.IconHeight)
-        const today = moment()
-        console.log(today.format())
-        const StatusIcon = document.getElementById("StatusIcon")
+    mounted() {        
+        this.now = moment().locale('ko').format('LTS')        
+        
+        setInterval(()=> {
+            this.now = moment().locale('ko').format('LTS')
+        }, 500)
+
+        const StatusIcon = document.getElementById("StatusIcon")    
         StatusIcon.style.width = this.IconHeight
         StatusIcon.style.height = this.IconHeight
+    },
+    methods: {
+
     }
 }
 </script>
@@ -34,7 +44,7 @@ export default {
     #StatusIcon {
         width: 100px;
         height: 100px;
-        background-color: chartreuse;
+        background-color: rgba(127, 255, 0, 1);
         border-radius: 50%;
     }
 </style>

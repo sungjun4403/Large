@@ -5,12 +5,13 @@
         <br>
         WELCOME!
         <br><br>
-        <div v-for="(post, index) in posts" :key="post.id">
+        <div v-for="(post) in posts" :key="post.id">
             <router-link :to="{ name: 'Post', params: { gitID: post.gitID, postId: post.id }}">
                 <div>
                     {{post.title}}
-                    {{post}}
-                    {{index}}
+                    {{post.body}}
+                    {{post.gitID}}
+                    {{post.LastModifiedFromNow}}
                 </div>
             </router-link>
             <br>
@@ -22,10 +23,11 @@
 <script>
 import { ref } from '@vue/reactivity'
 const axios = require("axios").default
+const moment = require('moment')
 
 export default {
     setup() {
-        // const gitID = this.$route.params.get("gitID")
+        
         const gitID = ref("")
         const posts = ref([])
         // const gitID = "suingujn4403"
@@ -36,7 +38,6 @@ export default {
     },
     beforeMount() {
         this.gitID = this.$route.params.gitID
-        this.$forceUpdate()
 
         axios({
             url: 'http://localhost:8080/post/brief/' + this.gitID,
@@ -44,12 +45,19 @@ export default {
             
         }).then((response) => {
             response.data.forEach(element => {
+                const LastModifiedFromNow = moment(element.lastModifiedDate).fromNow()
+                element.LastModifiedFromNow = LastModifiedFromNow
                 this.posts.push(element)    
+
             })
         })
     },
     mounted() {
-        
+        setInterval(()=> {
+            this.posts.forEach(post => {
+                post.LastModifiedFromNow = moment(post.lastModifiedDate).fromNow()            
+            }, 30000)
+        })
     },
     methods: {
 

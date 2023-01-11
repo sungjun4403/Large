@@ -4,7 +4,7 @@
         {{$route.params.gitID}}
         {{$route.params.postId}}
         
-        <StatusIcon v-bind:IconHeight="IconHeight"/>
+        <StatusIcon v-bind:value="[IconHeight, LastModifiedDate]"/>
 
         <br><br>
 
@@ -29,10 +29,11 @@ export default {
         const NameNImg = ref("")
         const comments = ref("")
         const IconHeight = '20px'
+        const LastModifiedDate = ref("")
 
         return {
             NameNImg, comments, 
-            IconHeight,
+            IconHeight, LastModifiedDate
 
         }
     },
