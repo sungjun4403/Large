@@ -9,4 +9,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query(value = "SELECT * FROM post", nativeQuery = true)
     List<Post> getList();
+    List<Post> findByGitID(String gitID);
 }

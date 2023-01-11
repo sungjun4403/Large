@@ -140,6 +140,7 @@ export default {
                     company : this.toEditCompany,
                     location : this.toEditLocation,
                     bio : this.toEditBio,
+                    
                 }
             }).then((response) => {
                 if (response.status == 200) {

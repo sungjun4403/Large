@@ -11,6 +11,7 @@ public class PostResponse {
     private final String title;
     private final String body;
     private final Boolean ifAds;
+    private final Boolean ifComments;
 
     private final String gitID;
     private final String profileImg;
@@ -21,6 +22,7 @@ public class PostResponse {
         this.title = post.getTitle();
         this.body = post.getBody();
         this.ifAds = post.getIfAds();
+        this.ifComments = post.getIfComments();
 
         this.gitID = post.getGitID();
         this.profileImg = post.getProfileImg();
@@ -28,11 +30,12 @@ public class PostResponse {
     }
 
     @Builder
-    public PostResponse(Long id, String title, String body, Boolean ifAds, String gitID, String profileImg, String bio) {
+    public PostResponse(Long id, String title, String body, Boolean ifAds, Boolean ifComments, String gitID, String profileImg, String bio) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.ifAds = ifAds;
+        this.ifComments = ifComments;
         this.gitID = gitID;
         this.profileImg = profileImg;
         this.bio = bio;

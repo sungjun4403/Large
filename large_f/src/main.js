@@ -6,6 +6,8 @@ import NavBar from './NavBar.vue'
 import UserSideBar from "@/components/User/UserSideBar.vue"
 import AccessDenied from "@/components/Login/Exceptions/AccessDenied.vue"
 import Pending from "@/components/Login/Exceptions/Pending.vue"
+import Comments from "@/components/Post/Comments.vue"
+import NameNImg from "@/components/User/components/NameNImg.vue"
 // createApp(NavBar).use(router).mount('#NavBar')
 // createApp(UserNavBar).use(router).mount('#UserNavBar')
 
@@ -15,4 +17,6 @@ app.use(router)
 app.component("UserSideBar", UserSideBar)
 app.component("AccessDenied", AccessDenied)
 app.component("Pending", Pending)
+app.component("Comments", Comments)
+app.component("NameNImg", NameNImg)
 app.mount("#NavBar")

@@ -1,19 +1,21 @@
 <template>
-    <div id="PostBody">
-        POST
+    <div id="CommentsBody">
+        COMMENTS
         {{$route.params.gitID}}
-        {{$route.params.postId}}
     </div>
 </template>
 
 <script>
-export default {
+export default ({
     setup() {
         
     },
-}
+
+})
 </script>
 
 <style scoped>
 
 </style>
+
+

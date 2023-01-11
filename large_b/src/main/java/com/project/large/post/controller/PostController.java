@@ -3,6 +3,7 @@ package com.project.large.post.controller;
 import com.project.large.post.dto.PostCreate;
 import com.project.large.post.dto.PostEdit;
 import com.project.large.post.dto.PostResponse;
+import com.project.large.post.dto.PostResponseBrief;
 import com.project.large.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,12 @@ public class PostController {
         return postService.getList();
     }
 
+    //VIEW ALL BY GITID - BRIEF (WITHOUT PROFILEIMG)
+    @GetMapping("/post/brief/{gitID}")
+    public List<PostResponseBrief> getAllPostByGitID(@PathVariable String gitID) {
+        return postService.getAllPostBrieflyByGitID(gitID);
+    }
+
     //VIEW ONE
     @GetMapping("/post/{postId}")
     public PostResponse get(@PathVariable long postId) {
@@ -35,7 +42,7 @@ public class PostController {
     //EDIT
     @PatchMapping("/post/{postId}")
     public void edit(@PathVariable long postId, @RequestBody PostEdit postEdit) {
-        postService.edit(postId, postEdit);
+        postService.edit(postEdit, postId);
     }
 
     //DELETE

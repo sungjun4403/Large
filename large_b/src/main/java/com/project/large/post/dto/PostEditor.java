@@ -8,16 +8,18 @@ public class PostEditor {
     private String title;
     private String body;
     private Boolean ifAds;
+    private Boolean ifComments;
 
     private String gitID;
     private String profileImg;
     private String bio;
 
     @Builder
-    public PostEditor(String title, String body, Boolean ifAds, String gitID, String profileImg, String bio) {
+    public PostEditor(String title, String body, Boolean ifAds, Boolean ifComments, String gitID, String profileImg, String bio) {
         this.title = title;
         this.body = body;
         this.ifAds = ifAds;
+        this.ifComments = ifComments;
 
         this.gitID = gitID;
         this.profileImg = profileImg;

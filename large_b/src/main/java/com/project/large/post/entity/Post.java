@@ -25,6 +25,7 @@ public class Post extends BaseTimeEntity {
     private String body;
 
     private Boolean ifAds;
+    private Boolean ifComments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -44,6 +45,7 @@ public class Post extends BaseTimeEntity {
                 .title(title)
                 .body(body)
                 .ifAds(ifAds)
+                .ifComments(ifComments)
                 .gitID(gitID)
                 .profileImg(profileImg)
                 .bio(bio);
@@ -53,6 +55,7 @@ public class Post extends BaseTimeEntity {
         title = postEditor.getTitle();
         body = postEditor.getBody();
         ifAds = postEditor.getIfAds();
+        ifComments = postEditor.getIfComments();
 
         gitID = postEditor.getGitID();
         profileImg = postEditor.getProfileImg();

@@ -1,16 +1,14 @@
 package com.project.large.post.service;
 
 import com.project.large.global.utils.SecurityUtil;
-import com.project.large.post.dto.PostCreate;
-import com.project.large.post.dto.PostEdit;
-import com.project.large.post.dto.PostEditor;
-import com.project.large.post.dto.PostResponse;
+import com.project.large.post.dto.*;
 import com.project.large.post.entity.Post;
 import com.project.large.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +23,7 @@ public class PostService {
                 .title(postCreate.getTitle())
                 .body(postCreate.getBody())
                 .ifAds(postCreate.getIfAds())
+                .ifComments(postCreate.getIfComments())
                 .gitID(postCreate.getGitID())
                 .profileImg(postCreate.getProfileImg())
                 .bio(postCreate.getBio())
@@ -50,6 +49,7 @@ public class PostService {
                 .title(post.getTitle())
                 .body(post.getBody())
                 .ifAds(post.getIfAds())
+                .ifComments(post.getIfComments())
                 .gitID(post.getGitID())
                 .profileImg(post.getProfileImg())
                 .bio(post.getBio())
@@ -58,7 +58,7 @@ public class PostService {
 
     //EDIT
     @Transactional
-    public void edit (Long id, PostEdit postEdit) {
+    public void edit (PostEdit postEdit, Long id) {
 
         Post post = postRepository.findById(id).orElseThrow();
 
@@ -73,6 +73,9 @@ public class PostService {
         if(postEdit.getIfAds() != null) {
             editorBuilder.ifAds(postEdit.getIfAds());
         }
+        if(postEdit.getIfComments() != null) {
+            editorBuilder.ifComments(postEdit.getIfComments());
+        }
         post.edit(editorBuilder.build());
     }
 
@@ -80,5 +83,24 @@ public class PostService {
     public void delete (Long id) {
         Post post = postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
+    }
+
+    public List<PostResponseBrief> getAllPostBrieflyByGitID(String gitID) {
+
+        List<Post> postByGitID = postRepository.findByGitID(gitID);
+        List<PostResponseBrief> postResponseBriefList = new ArrayList<>();
+
+        postByGitID.forEach(post -> {
+            PostResponseBrief toAdd = PostResponseBrief.builder()
+                    .id(post.getId())
+                    .gitID(post.getGitID())
+                    .body(post.getBody())
+                    .title(post.getTitle())
+                    .build();
+            postResponseBriefList.add(toAdd);
+        });
+
+        return postResponseBriefList;
+
     }
 }
