@@ -13,6 +13,7 @@ import java.util.*;
 
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TemplateService {
     private final TemplateRepository templateRepository;
@@ -37,7 +38,6 @@ public class TemplateService {
     }
 
     //EDIT
-    @Transactional
     public void edit (TemplateEdit templateEdit, Long templateID) {
         Template template = templateRepository.findById(templateID).orElseThrow();
 
@@ -57,7 +57,8 @@ public class TemplateService {
         if (templateEdit.getHotKey() != null) {
             editorBuilder.hotKey(templateEdit.getHotKey());
         }
-
+        System.out.println(editorBuilder.build());
+        System.out.println(templateEdit);
         template.edit(editorBuilder.build());
     }
 
@@ -90,6 +91,7 @@ public class TemplateService {
 
     }
 
+
     private void createFromCreated(List<LinkedHashMap<Object, Object>> created) {
         created.forEach(template -> {
             if (template.get("template").toString().isEmpty() || template.get("template").toString().isBlank()) {
@@ -113,7 +115,6 @@ public class TemplateService {
         });
     }
 
-    @Transactional
     public void modifyNDelete(List<LinkedHashMap<Object, Object>> modifiedNDeleted, String gitID) {
         List<Template> lastlySavedTemplate = templateRepository.findByGitID(gitID);
         List<Long> lastlySavedId = new ArrayList<>();
@@ -159,7 +160,6 @@ public class TemplateService {
             toModify.forEach(toModifyId -> {
                 LinkedHashMap<Object, Object> toModifyTemplate = mappedMND.get(toModifyId);
                 if (checkIfModified(toModifyId, toModifyTemplate)) {
-                    System.out.println("EDIT" + toModifyId);
                     TemplateEdit templateEdit = TemplateEdit.builder()
                             .gitID(toModifyTemplate.get("gitID").toString())
                             .templateName(toModifyTemplate.get("templateName").toString())
@@ -168,63 +168,10 @@ public class TemplateService {
                             .hotKey(toModifyTemplate.get("hotKey").toString())
                             .build();
 
-                    System.out.println(toModifyTemplate);
-                    System.out.println(templateEdit);
-                    System.out.println(toModifyId);
-                    this.edit(templateEdit, toModifyId);
+                    edit(templateEdit, toModifyId);
                 }
             });
         }
-
-//        //Lastly saved template DB
-//        List<Template> userTemplateList= templateRepository.findByGitID(gitID);
-//        List<Integer> userTemplateNumberList = new ArrayList<>();
-//        List<Integer> toRemoveNum = new ArrayList<>();
-//        List<Integer> modifiedNDeletedNum = new ArrayList<>();
-//        List<Integer> toEditNum = new ArrayList<>();
-//        List<Long> toEditId = new ArrayList<>();
-//        Map<Long, LinkedHashMap<Object, Object>> mappedMND = new HashMap<>();
-//
-//        //{1 (temNum): {template}, ...}
-//        modifiedNDeleted.forEach(template -> {
-//            mappedMND.put(Long.parseLong(template.get("id").toString()), template);
-//        });
-//
-//        //userTemplateNumberList == modifiedNDeletedNum + toRemove
-//
-//        //userTemplateNumberList는 마지막 template 리스트
-//        userTemplateList.forEach(userTemplate -> {
-//            userTemplateNumberList.add(userTemplate.getTemplateNumber());
-//            toRemoveNum.add(userTemplate.getTemplateNumber());
-//        });
-//        modifiedNDeleted.forEach(template -> {
-//            modifiedNDeletedNum.add(Integer.parseInt(template.get("templateNumber").toString()));
-//        });
-//
-//        modifiedNDeletedNum.forEach(templateNum -> {
-//            //DELETE
-//            if (userTemplateNumberList.contains(templateNum)) {
-//                toRemoveNum.remove(toRemoveNum.indexOf(templateNum));
-//                toEditNum.add(templateNum);
-//            }
-////            //EDIT
-////            else {
-////                System.out.println("EDIT" + templateNum);
-////                LinkedHashMap<Object, Object> toEdit = mappedMND.get(templateNum);
-////                TemplateEdit templateEdit = TemplateEdit.builder()
-////                        .gitID(toEdit.get("gitID").toString())
-////                        .templateName(toEdit.get("templateName").toString())
-////                        .templateNumber(Integer.parseInt(toEdit.get("templateNumber").toString()))
-////                        .template(toEdit.get("template").toString())
-////                        .hotKey(toEdit.get("hotKey").toString())
-////                        .build();
-////                edit(templateEdit, gitID, Long.parseLong(toEdit.get("id").toString()));
-////            }
-//        });
-//        toRemoveNum.forEach(removeTemplateNum -> {
-//            Template toRemove = templateRepository.findByGitIDAndTemplateNumber(gitID, removeTemplateNum).orElseThrow();
-//            templateRepository.delete(toRemove);
-//        });
     }
 
     public boolean checkIfModified(Long toModifyId, LinkedHashMap<Object, Object> toModifyTemplate) {

@@ -6,8 +6,13 @@
         WELCOME!
         <br><br>
         <div v-for="(post, index) in posts" :key="post.id">
-            {{post}}
-            {{index}}
+            <router-link :to="{ name: 'Post', params: { gitID: post.gitID, postId: post.id }}">
+                <div>
+                    {{post.title}}
+                    {{post}}
+                    {{index}}
+                </div>
+            </router-link>
             <br>
         </div>
  

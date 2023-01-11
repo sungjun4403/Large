@@ -1,6 +1,7 @@
 package com.project.large.template.entity;
 
 
+import com.project.large.global.entity.BaseTimeEntity;
 import com.project.large.template.dto.TemplateEditor;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class Template {
+public class Template extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

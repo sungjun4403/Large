@@ -4,6 +4,8 @@
         {{$route.params.gitID}}
         {{$route.params.postId}}
         
+        <StatusIcon v-bind:IconHeight="IconHeight"/>
+
         <br><br>
 
         <NameNImg />
@@ -17,16 +19,20 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import StatusIcon from '../User/components/StatusIcon.vue'
 const axios = require('axios').default
 
 export default {
+  components: { StatusIcon },
     props: ["IfTokenIsYours"],
     setup() {
         const NameNImg = ref("")
         const comments = ref("")
+        const IconHeight = '20px'
 
         return {
-            NameNImg, comments,
+            NameNImg, comments, 
+            IconHeight,
 
         }
     },

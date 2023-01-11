@@ -96,6 +96,8 @@ public class PostService {
                     .gitID(post.getGitID())
                     .body(post.getBody())
                     .title(post.getTitle())
+                    .createDate(post.getCreateDate())
+                    .lastModifiedDate(post.getLastModifiedDate())
                     .build();
             postResponseBriefList.add(toAdd);
         });

@@ -21,7 +21,10 @@ public class Post extends BaseTimeEntity {
     @Column(name = "postId")
     private Long id;
 
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String body;
 
     private Boolean ifAds;
