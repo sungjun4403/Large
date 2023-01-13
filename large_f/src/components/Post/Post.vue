@@ -41,7 +41,7 @@ export default {
         const postId = this.$route.params.postId
         
         axios({
-            url: 'http://localhost:8080/' + postId,
+            url: 'http://localhost:8080/post/' + postId,
             method: 'get',
 
         }).then((response) => {

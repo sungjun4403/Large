@@ -15,7 +15,7 @@ public class PostResponseBrief {
     private final LocalDateTime createDate;
     private final LocalDateTime lastModifiedDate;
 
-    public PostResponseBrief(Post post, LocalDateTime time, LocalDateTime createDate, LocalDateTime lastModifiedDate) {
+    public PostResponseBrief (Post post, LocalDateTime time, LocalDateTime createDate, LocalDateTime lastModifiedDate) {
         this.id = post.getId();
         this.title = post.getTitle();
         this.body = post.getBody();
@@ -25,7 +25,7 @@ public class PostResponseBrief {
     }
 
     @Builder
-    public PostResponseBrief(Long id, String title, String body, String gitID, LocalDateTime time, LocalDateTime createDate, LocalDateTime lastModifiedDate) {
+    public PostResponseBrief(Long id, String title, String body, String gitID, LocalDateTime createDate, LocalDateTime lastModifiedDate) {
         this.id = id;
         this.title = title;
         this.body = body;

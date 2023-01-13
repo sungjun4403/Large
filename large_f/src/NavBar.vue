@@ -51,6 +51,7 @@
                 </router-link>
 
                 <button type="button" @click="logout();">logout</button>
+                <button type="button" @click="logout();"></button>
             </div>
 
             <div id="close" class="close" @click="close()">

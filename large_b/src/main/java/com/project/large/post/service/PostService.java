@@ -1,6 +1,5 @@
 package com.project.large.post.service;
 
-import com.project.large.global.utils.SecurityUtil;
 import com.project.large.post.dto.*;
 import com.project.large.post.entity.Post;
 import com.project.large.post.repository.PostRepository;
@@ -35,7 +34,7 @@ public class PostService {
     //VIEW ALL
     public List<PostResponse> getList() {
         return postRepository.getList().stream()
-                .map(PostResponse::new)
+                .map(post -> new PostResponse(post))
                 .collect(Collectors.toList());
     }
 
