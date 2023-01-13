@@ -485,5 +485,17 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
     
 - Member 삭제, Template, Comment, Post는 cascade
     
+* * * * 
+    
+<h3>24. StatusIcon 구현 1</h3>
+    
+2023/01/10~13<br/>
+    
+- 페이스북 활동중, discord 프로필 밑 활동 아이콘 같은 역할
+- js moment.js 라이브러리 활용. 
+    
+
+    
+    
     
     
