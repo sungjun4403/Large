@@ -466,9 +466,24 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
 - Git Last Commited at은 자체 status 버튼으로 대체한다. 
 - jwt 헤더에 실어 나른 뒤 SecurityUtils.getLoginedUserGitId()로 token이 valid한지 확인하고 gitID를 추출하도록 하였다. 
 - 로그인시 AccessToken을 LocalStorage에 저장하도록 하였고 권한 확인이 필요할 때에는 위 방법으로 확인하도록 하였다. 로그아웃 시에는 LocalStroage를 비우도록 하였다. 
-   
- 
+
+* * * * 
     
+<h3>21~22. 이것 저것</h3>
+    
+2023/01/03~13<br/>
+    
+- UserHome 구현 (getAllPostsByGitID) 
+- template 프론트 구현 진짜 완료
+- 기타 등등 
+    
+* * * * 
+    
+<h3>23. 회원 탈퇴 기능 구현</h3>
+    
+2023/01/13<br/>
+    
+- Member 삭제, Template, Comment, Post는 cascade
     
     
     
