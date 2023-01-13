@@ -75,4 +75,15 @@ public class MemberController {
             return null;
         }
     }
+
+    @GetMapping("/deleteNCascade/{gitID}")
+    public void deleteNCascade (@PathVariable String gitID) {
+        String extractedGitID = SecurityUtil.getLoginedUserGitId();
+        if (gitID.equals(extractedGitID)) {
+            memberService.deleteNCascade(extractedGitID);
+        }
+        else {
+            return;
+        }
+    }
 }

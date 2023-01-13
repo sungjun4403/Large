@@ -51,7 +51,7 @@
                 </router-link>
 
                 <button type="button" @click="logout();">logout</button>
-                <button type="button" @click="logout();"></button>
+                <button type="button" @click="DeleteAccount();">Delete Account</button>
             </div>
 
             <div id="close" class="close" @click="close()">
@@ -82,10 +82,12 @@ export default {
         const ScrollUp = 0;
         const IfTokenIsYours = ref("PENDING")
         const gitID = ref("")
-        return {ScrollUp, IfTokenIsYours, gitID}
+        const AccessToken = ref("")
+        return {ScrollUp, IfTokenIsYours, gitID, AccessToken}
     },
     beforeMount() {
         this.gitID = localStorage.getItem("gitID")
+        this.AccessToken = localStorage.getItem("AccessToken")
         this.getIfTokenIsAuthentic()
     },
     mounted() {
@@ -115,13 +117,11 @@ export default {
             window.location.href = "http://localhost:3000/"
         },
         getIfTokenIsAuthentic() {
-            const AccessToken = localStorage.getItem("AccessToken")
-            
             axios({
                 url: 'http://localhost:8080/ifTokenIsAuthentic/' + this.gitID,
                 method: 'get',
                 headers: {
-                    'Authorization' : 'Bearer ' + AccessToken
+                    'Authorization' : 'Bearer ' + this.AccessToken
                 }
             }).then((response) => {
                 this.IfTokenIsYours = response.data
@@ -137,9 +137,19 @@ export default {
             setTimeout(function() {
                 FloatAlert.style.opacity = 0
                 FloatAlert.innerHTML = ""
-            }, 5000)
-            
-        }
+            }, 5000)   
+        },
+        DeleteAccount() {
+            axios({
+                url: 'http://localhost:8080/deleteNCascade/' + this.gitID,
+                method: 'get',
+                headers: {
+                    'Authorization' : 'Bearer ' + this.AccessToken
+                }
+            }).then(()=> {
+                window.location.href = "http://localhost:3000/"
+            })
+        },
     },
 }
 </script>

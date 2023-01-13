@@ -1,6 +1,9 @@
 package com.project.large.member.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.project.large.comment.entity.Comment;
+import com.project.large.comment.repository.CommentRepository;
+import com.project.large.comment.service.CommentService;
 import com.project.large.jwt.JwtService;
 import com.project.large.member.dto.MemberCreate;
 import com.project.large.member.dto.MemberEdit;
@@ -8,6 +11,12 @@ import com.project.large.member.dto.MemberEditor;
 import com.project.large.member.dto.MemberResponse;
 import com.project.large.member.entity.Member;
 import com.project.large.member.repository.MemberRepository;
+import com.project.large.post.entity.Post;
+import com.project.large.post.repository.PostRepository;
+import com.project.large.post.service.PostService;
+import com.project.large.template.entity.Template;
+import com.project.large.template.repository.TemplateRepository;
+import com.project.large.template.service.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +28,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
 public class MemberService {
+    private final CommentRepository commentRepository;
+    private final PostRepository postRepository;
+    private final TemplateRepository templateRepository;
+
+    private final CommentService commentService;
+    private final PostService postService;
+    private final TemplateService templateService;
+
     private final MemberRepository memberRepository;
     private final JwtService jwtService;
 
@@ -214,5 +228,26 @@ public class MemberService {
                 .bio(member.getBio())
                 .updated_at(member.getUpdated_at())
                 .build();
+    }
+
+    @Transactional
+    public void deleteNCascade(String gitID) {
+        List<Comment> toDeleteComments = commentRepository.findByGitID(gitID);
+        List<Post> toDeletePost = postRepository.findByGitID(gitID);
+        List<Template> toDeleteTemplate = templateRepository.findByGitID(gitID);
+
+        toDeleteComments.forEach((comment) -> {
+            commentService.delete(comment.getId());
+        });
+        toDeletePost.forEach((post) -> {
+            postService.delete(post.getId());
+        });
+        toDeleteTemplate.forEach((template) -> {
+            templateService.delete(template.getId());
+        });
+
+        Member toDeleteMember = memberRepository.findByGitID(gitID).orElseThrow();
+
+        memberRepository.delete(toDeleteMember);
     }
 }
