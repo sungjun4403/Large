@@ -52,6 +52,8 @@ public class PostService {
                 .gitID(post.getGitID())
                 .profileImg(post.getProfileImg())
                 .bio(post.getBio())
+                .createDate(post.getCreateDate())
+                .lastModifiedDate(post.getLastModifiedDate())
                 .build();
     }
 

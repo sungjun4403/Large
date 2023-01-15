@@ -3,11 +3,10 @@
         POST
         {{$route.params.gitID}}
         {{$route.params.postId}}
-        <br>
-        <br>
+        <br><br>
         {{post}}
         <br><br>
-        <StatusIcon v-bind:value="[IconHeight, LastModifiedDate]"/>
+        <StatusIcon :IconHeight='IconHeight' :time='LastModifiedDate' />
 
         <br><br>
 
@@ -32,12 +31,14 @@ export default {
         const post = ref([])
         const NameNImg = ref("")
         const comments = ref("")
+    
         const IconHeight = '20px'
         const LastModifiedDate = ref("")
+        const CreateDate = ref("")
 
         return {
             NameNImg, comments, 
-            IconHeight, LastModifiedDate,
+            IconHeight, LastModifiedDate, CreateDate,
             post
 
         }
@@ -50,16 +51,15 @@ export default {
             method: 'get',
 
         }).then((response) => {
-            console.log(response)
             this.post.push(response.data)
+            this.LastModifiedDate = response.data.lastModifiedDate
+            this.CreateDate = response.data.createDate
+            
             
         })
+    },    
+    updated() {
     },
-    // mounted() {
-    //     console.log(this.$route.params.postId)
-        
-    // }
-    
 }
 </script>
 
