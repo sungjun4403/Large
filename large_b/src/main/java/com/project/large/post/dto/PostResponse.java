@@ -17,7 +17,6 @@ public class PostResponse {
     private final LocalDateTime createDate;
     private final LocalDateTime lastModifiedDate;
 
-    //Member
     private final String gitID;
     private final String profileImg;
     private final String bio;

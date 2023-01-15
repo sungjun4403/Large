@@ -3,7 +3,10 @@
         POST
         {{$route.params.gitID}}
         {{$route.params.postId}}
-        
+        <br>
+        <br>
+        {{post}}
+        <br><br>
         <StatusIcon v-bind:value="[IconHeight, LastModifiedDate]"/>
 
         <br><br>
@@ -26,6 +29,7 @@ export default {
   components: { StatusIcon },
     props: ["IfTokenIsYours"],
     setup() {
+        const post = ref([])
         const NameNImg = ref("")
         const comments = ref("")
         const IconHeight = '20px'
@@ -33,7 +37,8 @@ export default {
 
         return {
             NameNImg, comments, 
-            IconHeight, LastModifiedDate
+            IconHeight, LastModifiedDate,
+            post
 
         }
     },
@@ -46,6 +51,8 @@ export default {
 
         }).then((response) => {
             console.log(response)
+            this.post.push(response.data)
+            
         })
     },
     // mounted() {

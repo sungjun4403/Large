@@ -15,7 +15,7 @@ public class PostResponseBrief {
     private final LocalDateTime createDate;
     private final LocalDateTime lastModifiedDate;
 
-    public PostResponseBrief (Post post, LocalDateTime time, LocalDateTime createDate, LocalDateTime lastModifiedDate) {
+    public PostResponseBrief (Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
         this.body = post.getBody();
