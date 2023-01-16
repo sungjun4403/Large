@@ -9,7 +9,8 @@
 <script>
 import { ref } from '@vue/reactivity'
 const moment = require('moment')
-let colors = ['#A8F368', '#B6CB66', '#C3A365', '#D17B63', '#DE5361', '#EC2B60', '#F9035E']
+
+let colors = ["86FFA2","6BCC82","509961","366641","1B3320","000000"]
 // second, minute, hour, day, month, year
 
 //now - time = icon bcg color
@@ -68,7 +69,7 @@ export default {
             }
             
             const StatusIcon = document.getElementById("StatusIcon")        
-            StatusIcon.style.backgroundColor = colors[i]
+            StatusIcon.style.backgroundColor = '#' + colors[i]
         },
     },
     updated() {
