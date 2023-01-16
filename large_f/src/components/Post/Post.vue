@@ -1,20 +1,35 @@
 <template>
     <div id="PostBody">
-        POST
-        {{$route.params.gitID}}
-        {{$route.params.postId}}
+        <br>
+        <div id="PostPost">
+            {{post}}
+            {{post.title}} by {{post.gitID}} <br>
+            Created at {{post.createDate}} 
+            Last Modidied at {{post.lastModifiedDate}}
+            {{post.body}}
+            
+        </div>
+        
         <br><br>
-        {{post}}
-        <br><br>
-        <StatusIcon :IconHeight='IconHeight' :time='LastModifiedDate' />
+
+        <div id="PostStatusIcon">
+            <StatusIcon :IconHeight='IconHeight' :time='LastModifiedDate' />
+        </div>
 
         <br><br>
-
+        
         <NameNImg />
 
         <br>
 
-        <Comments />
+        <div id="PostComments" v-if="post.ifComments == true">
+            <Comments />
+            CSPODSPOKLS:K
+        </div>
+
+        <div id="PostCommentsNotAllowed" v-if="post.ifComments == false">
+            comments are not allowed in this post
+        </div>
 
     </div>
 </template>
@@ -51,7 +66,7 @@ export default {
             method: 'get',
 
         }).then((response) => {
-            this.post.push(response.data)
+            this.post = response.data
             this.LastModifiedDate = response.data.lastModifiedDate
             this.CreateDate = response.data.createDate
             
@@ -64,5 +79,7 @@ export default {
 </script>
 
 <style scoped>
-
+    #PostPost {
+        text-align: center;
+    }
 </style>
