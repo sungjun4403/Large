@@ -89,10 +89,17 @@ public class MemberService {
         conn.setRequestProperty("Authorization", "token " + access_token);
 
         int responseCode = conn.getResponseCode();
-        HashMap result = new ObjectMapper().readValue(getResponse(conn, responseCode), HashMap.class);
-        conn.disconnect();
+        String valueToMap = getResponse(conn, responseCode);
+        if (valueToMap.isEmpty() || valueToMap.isBlank()) {
+            conn.disconnect();
+            return null;
+        }
+        else {
+            HashMap result = new ObjectMapper().readValue(valueToMap, HashMap.class);
+            conn.disconnect();
 
-        return result;
+            return result;
+        }
     }
 
     private String getResponse(HttpURLConnection conn, int responseCode) throws IOException {
@@ -232,19 +239,9 @@ public class MemberService {
 
     @Transactional
     public void deleteNCascade(String gitID) {
-        List<Comment> toDeleteComments = commentRepository.findByGitID(gitID);
-        List<Post> toDeletePost = postRepository.findByGitID(gitID);
-        List<Template> toDeleteTemplate = templateRepository.findByGitID(gitID);
-
-        toDeleteComments.forEach((comment) -> {
-            commentService.delete(comment.getId());
-        });
-        toDeletePost.forEach((post) -> {
-            postService.delete(post.getId());
-        });
-        toDeleteTemplate.forEach((template) -> {
-            templateService.delete(template.getId());
-        });
+        postRepository.deleteByGitID(gitID);
+        commentRepository.deleteByGitID(gitID);
+        templateRepository.deleteByGitID(gitID);
 
         Member toDeleteMember = memberRepository.findByGitID(gitID).orElseThrow();
 

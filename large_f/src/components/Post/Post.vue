@@ -2,10 +2,9 @@
     <div id="PostBody">
         <br>
         <div id="PostPost">
-            {{post}}
             {{post.title}} by {{post.gitID}} <br>
             Created at {{post.createDate}} 
-            Last Modidied at {{post.lastModifiedDate}}
+            Last Modidied at {{post.lastModifiedDate}} <br>
             {{post.body}}
             
         </div>

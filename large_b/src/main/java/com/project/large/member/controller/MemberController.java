@@ -26,6 +26,9 @@ public class MemberController {
     @GetMapping("/auth/github/callback")
     public ResponseEntity GitLogin(@RequestParam String code, RedirectAttributes redirectAttributes) throws IOException {
         Map memberInfo = memberService.getGitToken(code, redirectAttributes);
+        if (memberInfo == null) {
+            return null;
+        }
         String jwtToken = memberService.signInAndGetToken(memberInfo);
         Member member = memberService.getMemberByAccessToken(jwtToken);
         String MemberToken = member.getMemberToken();

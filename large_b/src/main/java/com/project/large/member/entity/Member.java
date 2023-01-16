@@ -5,6 +5,7 @@ import com.project.large.global.entity.BaseTimeEntity;
 import com.project.large.member.dto.MemberEditor;
 import com.project.large.post.entity.Post;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@Transactional
 public class Member extends BaseTimeEntity {
 //element name starts with 'git' is uneditable in this service. to edit those elements, edit in github
 
@@ -43,7 +45,7 @@ public class Member extends BaseTimeEntity {
     private String updated_at;
     private Integer commits;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Post> post = new ArrayList<>();
 

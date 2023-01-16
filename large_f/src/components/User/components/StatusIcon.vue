@@ -1,6 +1,6 @@
 <template>
-    <div id="StatusIconBody" >
-        <div id="StatusIcon" :title="IconTitle"></div>
+    <div id="StatusIconBody">
+        <div id="StatusIcon" @mouseover="onCursor()" @mouseleave="killCountInterval()"></div>
         <span>{{now}}</span>
     </div>
     
@@ -10,6 +10,8 @@
 import { ref } from '@vue/reactivity'
 const moment = require('moment')
 
+var killCount = false
+var timeToCount = 0
 let colors = ["86FFA2","6BCC82","509961","366641","1B3320","000000"]
 // second, minute, hour, day, month, year
 
@@ -38,6 +40,7 @@ export default {
                 clearInterval(timeInterval)
             }
         }, 500)
+        this.onCursor()
     },
     methods: {
         setIconHeight() {
@@ -71,11 +74,34 @@ export default {
             const StatusIcon = document.getElementById("StatusIcon")        
             StatusIcon.style.backgroundColor = '#' + colors[i]
         },
+        onCursor() {
+            killCount = false
+            const StatusIcon = document.getElementById("StatusIcon")
+            
+            StatusIcon.addEventListener("mouseover", function(event) {
+                const mouseover = setInterval(()=> {
+                    if (event.target.id == "StatusIcon")  {
+                        timeToCount = timeToCount + 100
+                    }
+                    if (timeToCount >= 2700) {
+                        console.log("SHOW!")                        
+                    }
+                    if (killCount == true) {
+                        timeToCount = 0
+                        clearInterval(mouseover)
+                    }
+                }, 100)
+            });
+        },
+        killCountInterval() {
+            killCount = true
+        },
     },
     updated() {
         
     },
     unmounted() {
+        console.log("UNMOUNTED")
         this.killInterval = true
     }
 }

@@ -12,4 +12,5 @@ public interface TemplateRepository extends JpaRepository<Template, Long> {
     List<Template> findByTemplateNumber(Integer templateNumber);
     Optional<Template> findById(Long id);
     Optional<Template> findByGitIDAndTemplateNumber(String gitID, Integer templateNumber);
+    Long deleteByGitID (String gitID);
 }
