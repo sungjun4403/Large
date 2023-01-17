@@ -9,6 +9,7 @@
 <script>
 import { ref } from '@vue/reactivity'
 const moment = require('moment')
+const currentUrl = window.location.href
 
 var killCount = false
 var timeToCount = 0
@@ -28,17 +29,15 @@ export default {
         }
     },
     mounted() {
+        console.log(window.history)
         this.setIconHeight()
         this.now = moment().locale('ko').format('LTS')        
         
-        const timeInterval = setInterval(()=> {
+        setInterval(()=> {
             this.now = moment().locale('ko').format('LTS')
             this.setIconColorNTitle()
 
-            if (this.killInterval == true) {
-                console.log("KILL INTERVAL")
-                clearInterval(timeInterval)
-            }
+
         }, 500)
         this.onCursor()
     },
@@ -90,6 +89,12 @@ export default {
                         timeToCount = 0
                         clearInterval(mouseover)
                     }
+                    if (currentUrl != window.location.href) {
+                        console.log("NOOOOO")
+                    } 
+                    if (currentUrl == window.location.href) {
+                        console.log("YES")
+                    }
                 }, 100)
             });
         },
@@ -97,13 +102,6 @@ export default {
             killCount = true
         },
     },
-    updated() {
-        
-    },
-    unmounted() {
-        console.log("UNMOUNTED")
-        this.killInterval = true
-    }
 }
 </script>
 
