@@ -448,7 +448,7 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
     
 <br/>
     
-<img width="616" alt="" src="https://user-images.githubusercontent.com/96364048/206902558-0445bf7e-ac44-4c8a-a991-5077f42ac1a6.png">
+<img width="700" alt="" src="https://user-images.githubusercontent.com/96364048/206902558-0445bf7e-ac44-4c8a-a991-5077f42ac1a6.png">
     
 <br/>
     
@@ -467,6 +467,8 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
 - jwt 헤더에 실어 나른 뒤 SecurityUtils.getLoginedUserGitId()로 token이 valid한지 확인하고 gitID를 추출하도록 하였다. 
 - 로그인시 AccessToken을 LocalStorage에 저장하도록 하였고 권한 확인이 필요할 때에는 위 방법으로 확인하도록 하였다. 로그아웃 시에는 LocalStroage를 비우도록 하였다. 
 
+<br/>
+    
 * * * * 
     
 <h3>21~22. 이것 저것</h3>
@@ -477,6 +479,10 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
 - template 프론트 구현 진짜 완료
 - 기타 등등 
     
+<img width="700" alt="" src="https://user-images.githubusercontent.com/96364048/214343961-942acd40-8552-4d39-97f3-a21b88576153.png">
+
+<br/>
+    
 * * * * 
     
 <h3>23. 회원 탈퇴 기능 구현</h3>
@@ -484,6 +490,21 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
 2023/01/13<br/>
     
 - Member 삭제, Template, Comment, Post는 cascade
+    
+~~~java
+    @Transactional
+    public void deleteNCascade(String gitID) {
+        postRepository.deleteByGitID(gitID);
+        commentRepository.deleteByGitID(gitID);
+        templateRepository.deleteByGitID(gitID);
+
+        Member toDeleteMember = memberRepository.findByGitID(gitID).orElseThrow();
+
+        memberRepository.delete(toDeleteMember);
+    }
+~~~
+
+<br/>
     
 * * * * 
     
@@ -493,9 +514,50 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
     
 - 페이스북 활동중, discord 프로필 밑 활동 아이콘 같은 역할
 - js moment.js 라이브러리 활용. 
-    
+- 아래 아이콘은 post, template, profile, comment 등 여러 곳에서 재사용할 예정. 해당 component에 변수로는 IconHeight, time등이 있음 
 
+<img width="200" style="float:left" src="https://user-images.githubusercontent.com/96364048/214347341-2f25ebe6-6a33-45cc-953d-5bf50f5988f2.png">
+<img width="200" style="float:left" src="https://user-images.githubusercontent.com/96364048/214347350-71749522-9426-494a-b9cc-3f91b3f4dedd.png">
+<img width="400" style="float:right" src="https://user-images.githubusercontent.com/96364048/214347373-6959e851-d039-43e6-867a-66c504b2c51f.png">
     
+~~~javascript
+    setIconColorNTitle() {
+        const fromNow = moment(this.time).fromNow()
+        var i = -1
+        this.IconTitle = fromNow
+        if (fromNow.split(" ")[2] == "seconds" || fromNow.split(" ")[2] == "second") {
+            i = 0
+        }
+        if (fromNow.split(" ")[1] == "minutes" || fromNow.split(" ")[1] == "minute") {
+            i = 1
+        }
+        if (fromNow.split(" ")[1] == "hours" || fromNow.split(" ")[1] == "hour") {
+            i = 2
+        }
+        if (fromNow.split(" ")[1] == "days" || fromNow.split(" ")[1] == "day") {
+            i = 3
+        }
+        if (fromNow.split(" ")[1] == "months" || fromNow.split(" ")[1] == "month") {
+            i = 4
+        }
+        if (fromNow.split(" ")[1] == "years" || fromNow.split(" ")[1] == "year") {
+            i = 5
+        }
+
+        const StatusIcon = document.getElementById("StatusIcon")        
+        StatusIcon.style.backgroundColor = '#' + colors[i]
+    }, 
+~~~
+
+- 현재는 초, 분, 시, 일, 월, 연 단위로 일단 쪼갬. moment(this.time).fromNow() 시 "a few seconds ago", "5 minutes ago"등에서 시간 단위를 추출하여 아이콘 색상 설정. 컬러는 현재 7개로 지정하였지만 gradient로 변경할 예정 (r, g, b에 ++, --)
+    
+<br/>
+    
+* * * * 
+    
+<h3>25. StatusIcon 구현 1</h3>
+    
+2023/01/10~13<br/>
     
     
     
