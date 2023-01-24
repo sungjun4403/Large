@@ -23,7 +23,13 @@
                             <span class="span5">Issue Report</span>
                         </div>
                     </router-link>
+                    
+                    <router-link :to="{ path: '/' + gitID }">
+                        <button type="button">Blog Home</button>
+                    </router-link>
 
+                    <button type="button" @click="logout();">logout</button>
+                    
                 </div>
 
                 <div v-else>
@@ -41,17 +47,13 @@
                         <img src="../public/assets/image/IssueReport.png" alt="Issue report" width="40" class="img"><br>
                         <span class="span5">Issue Report</span>
                     </div>
+
+                    <router-link to="/">
+                        <button type="button">go to login page</button>
+                    </router-link>
                 </div>
 
-                <router-link :to="{ path: '/' + gitID }">
-                    <button type="button">Blog Home</button>
-                </router-link>
-                <router-link to="/">
-                    <button type="button">go to login page</button>
-                </router-link>
-
-                <button type="button" @click="logout();">logout</button>
-                <button type="button" @click="DeleteAccount();">Delete Account</button>
+                
             </div>
 
             <div id="close" class="close" @click="close()">
@@ -139,17 +141,7 @@ export default {
                 FloatAlert.innerHTML = ""
             }, 5000)   
         },
-        DeleteAccount() {
-            axios({
-                url: 'http://localhost:8080/deleteNCascade/' + this.gitID,
-                method: 'get',
-                headers: {
-                    'Authorization' : 'Bearer ' + this.AccessToken
-                }
-            }).then(()=> {
-                window.location.href = "http://localhost:3000/"
-            })
-        },
+        
     },
 }
 </script>

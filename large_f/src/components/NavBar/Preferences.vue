@@ -1,18 +1,23 @@
 <template>
     <div>
-        <div id="TemplateBody" v-if="IfTokenIsYours == true">
-            Preferences <br>
-            
-            <router-link :to="{ name: 'Template', params: { gitID: gitID }}">
-                Template
-            </router-link>
-
-            <br>
-            <router-link :to="{ name: 'Template', params: { gitID: gitID }}">
+        <div v-if="IfTokenIsYours == true">
+            <div id="PreferencesBody"> 
+                <span id="span1">Preferences</span> 
                 
-            </router-link>
+                <br><br>
+                
+                <router-link :to="{ name: 'Template', params: { gitID: gitID }}">
+                    Template
+                </router-link>
 
+                <br><br>
+                
+                <router-link :to="{ name: 'DeleteAccount', params: { gitID: gitID }}">
+                    Delete Account
+                </router-link>
 
+                <br><br>
+            </div>
         </div>
         
         <div v-else-if="IfTokenIsYours == false">
@@ -29,6 +34,27 @@ export default {
         const gitID = localStorage.gitID
         return { gitID }    
     },
+    // beforeMount() {
+    mounted() {
+        
+        console.log(document.getElementById('PreferencesBody'))
+        // document.getElementById('PreferencesBody').style.width = '10'
+        // console.log(document.getElementById('PreferencesBody').style.width)
+    },
+    methods: {
+    }
 
 }
 </script>
+
+<style scoped>
+    #PreferencesBody {
+        text-align: left;
+        width: fit-content;
+
+    }
+    #span1 {
+        font-weight: bold;
+        font-size: xx-large;
+    }
+</style>

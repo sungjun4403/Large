@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
+import DeleteAccount from "@/components/NavBar/Preferences/DeleteAccount.vue"
 
 import Home from "@/components/Home.vue";
 
@@ -43,6 +44,7 @@ const routes = [
   { path: "/:gitID/preferences", name: "Preferences", component: Preferences },
   { path: "/:gitID/preferences/edit_template", name: "EditTemplate", component: EditTemplate },
   { path: "/:gitID/preferences/template", name: "Template", component: Template },
+  { path: "/:gitID/preferences/delete_account", name: "DeleteAccount", component: DeleteAccount },
 
   { path: "/:gitID/edit_profile", name: "EditProfile", component: EditProfile },
   

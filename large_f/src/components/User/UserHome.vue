@@ -16,6 +16,10 @@
             </router-link>
             <br>
         </div>
+
+        <div v-if="posts.length == 0">
+            no posts yet
+        </div>
  
     </div>
 </template>
@@ -48,8 +52,8 @@ export default {
                 const LastModifiedFromNow = moment(element.lastModifiedDate).fromNow()
                 element.LastModifiedFromNow = LastModifiedFromNow
                 this.posts.push(element)    
-
             })
+            
         })
     },
     mounted() {
