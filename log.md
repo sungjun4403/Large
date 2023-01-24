@@ -561,7 +561,11 @@ a few seconds ago / a minute ago
 <h3>25. UserHome 구현 2</h3>
     
 2023/01/15<br/>
+
+- Post summary 구현. title, body, author, published time fromNow(), (StatusIcon 추가예정), (rep. Image 대표 사진), (authorProfileImg)
     
+<img width="700" src="https://user-images.githubusercontent.com/96364048/214347341-2f25ebe6-6a33-45cc-953d-5bf50f5988f2.png">
+
 
     
     
