@@ -516,9 +516,12 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
 - js moment.js 라이브러리 활용. 
 - 아래 아이콘은 post, template, profile, comment 등 여러 곳에서 재사용할 예정. 해당 component에 변수로는 IconHeight, time등이 있음 
 
-<img width="200" style="float:left" src="https://user-images.githubusercontent.com/96364048/214347341-2f25ebe6-6a33-45cc-953d-5bf50f5988f2.png">
-<img width="200" style="float:left" src="https://user-images.githubusercontent.com/96364048/214347350-71749522-9426-494a-b9cc-3f91b3f4dedd.png">
-<img width="400" style="float:right" src="https://user-images.githubusercontent.com/96364048/214347373-6959e851-d039-43e6-867a-66c504b2c51f.png">
+<img style="float:left" width="400" src="https://user-images.githubusercontent.com/96364048/214347350-71749522-9426-494a-b9cc-3f91b3f4dedd.png">&ensp;
+<img style="float:right" width="300" src="https://user-images.githubusercontent.com/96364048/214347373-6959e851-d039-43e6-867a-66c504b2c51f.png">
+
+a few seconds ago / a minute ago
+
+<br/>
     
 ~~~javascript
     setIconColorNTitle() {
@@ -555,9 +558,11 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
     
 * * * * 
     
-<h3>25. StatusIcon 구현 1</h3>
+<h3>25. UserHome 구현 2</h3>
     
-2023/01/10~13<br/>
+2023/01/15<br/>
+    
+
     
     
     
