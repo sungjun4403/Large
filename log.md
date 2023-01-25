@@ -580,6 +580,8 @@ a few seconds ago / a minute ago
     - Post
     - Comments
     
+- ifComment에 따라 Comment component 
+    
 <img width="700" src="https://user-images.githubusercontent.com/96364048/214481259-99728033-c884-4679-89bf-7d5bee94ece7.png">
     
 ~~~html
