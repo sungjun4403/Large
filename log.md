@@ -566,6 +566,54 @@ a few seconds ago / a minute ago
     
 <img width="700" src="https://user-images.githubusercontent.com/96364048/214347341-2f25ebe6-6a33-45cc-953d-5bf50f5988f2.png">
 
+<br/>
+    
+* * * * 
+    
+<h3>26. Post 구현 2</h3>
+    
+2023/01/18~19<br/>
+
+- Post.vue 내의 commponent 구성
+    - StatusIcon
+    - NameNProfileImg
+    - Post
+    - Comments
+    
+<img width="700" src="https://user-images.githubusercontent.com/96364048/214481259-99728033-c884-4679-89bf-7d5bee94ece7.png">
+    
+~~~html
+    <div id="PostStatusIcon">
+        <StatusIcon :IconHeight='IconHeight' :time='LastModifiedDate' />
+    </div>
+
+    <br><br>
+
+    <div id="PostNameNImg">
+        <NameNImg :profileImg='profileImg' :bio='bio' :authorGitID='authorGitID' />
+    </div>
+
+    <br>
+
+    <div id="PostPost">
+        {{post.title}} by {{post.gitID}} <br>
+        Created at {{post.createDate}} 
+        Last Modidied at {{post.lastModifiedDate}} <br>
+        {{post.body}}
+        {{post}}            
+    </div>
+
+    <br><br><br><br><br>
+
+    <div id="PostComments" v-if="post.ifComments == true">
+        <Comments />
+    </div>
+
+    <div id="PostCommentsNotAllowed" v-if="post.ifComments == false">
+        comments are not allowed in this post
+    </div> 
+~~~
+
 
     
     
