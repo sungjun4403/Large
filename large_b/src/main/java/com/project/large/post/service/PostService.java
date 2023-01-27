@@ -1,5 +1,6 @@
 package com.project.large.post.service;
 
+import com.project.large.member.repository.MemberRepository;
 import com.project.large.post.dto.*;
 import com.project.large.post.entity.Post;
 import com.project.large.post.repository.PostRepository;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
     //CREATE
     public void write (PostCreate postCreate) {
@@ -86,7 +88,11 @@ public class PostService {
         postRepository.delete(post);
     }
 
-    public List<PostResponseBrief> getAllPostBrieflyByGitID(String gitID) {
+    public List<PostResponseBrief> getAllPostBrieflyByGitID(String gitID) throws IllegalStateException {
+        if (memberRepository.findByGitID(gitID).isEmpty()) {
+            IllegalStateException IllegalStateException = new IllegalStateException("User not exist");
+            throw IllegalStateException;
+        }
 
         List<Post> postByGitID = postRepository.findByGitID(gitID);
         List<PostResponseBrief> postResponseBriefList = new ArrayList<>();

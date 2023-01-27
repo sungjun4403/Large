@@ -1,26 +1,29 @@
 <template>
     <div id="UserHomeBody">
-        
-        {{gitID}}'s dev-log ! 
-        <br>
-        WELCOME!
-        <br><br>
-        <div v-for="(post) in posts" :key="post.id">
-            <router-link :to="{ name: 'Post', params: { gitID: post.gitID, postId: post.id }}">
-                <div>
-                    {{post.title}}
-                    {{post.body}}
-                    {{post.gitID}}
-                    {{post.LastModifiedFromNow}}
-                </div>
-            </router-link>
+        <div v-if="UserExists == true">
+            {{gitID}}'s dev-log ! 
             <br>
-        </div>
+            WELCOME!
+            <br><br>
+            <div v-for="(post) in posts" :key="post.id">
+                <router-link :to="{ name: 'Post', params: { gitID: post.gitID, postId: post.id }}">
+                    <div>
+                        {{post.title}}
+                        {{post.body}}
+                        {{post.gitID}}
+                        {{post.LastModifiedFromNow}}
+                    </div>
+                </router-link>
+                <br>
+            </div>
 
-        <div v-if="posts.length == 0">
-            no posts yet
+            <div v-if="posts.length == 0">
+                no posts yet
+            </div>
         </div>
- 
+        <div v-if="UserExists == false">
+            Page does not exists 
+        </div>
     </div>
 </template>
 
@@ -31,13 +34,14 @@ const moment = require('moment')
 
 export default {
     setup() {
-        
         const gitID = ref("")
         const posts = ref([])
-        // const gitID = "suingujn4403"
+        const UserExists = ref("pending")
+        
         return {
             gitID,
             posts,
+            UserExists,
         }
     },
     beforeMount() {
@@ -48,12 +52,17 @@ export default {
             method: 'get',
             
         }).then((response) => {
+            this.UserExists = true;
             response.data.forEach(element => {
                 const LastModifiedFromNow = moment(element.lastModifiedDate).fromNow()
                 element.LastModifiedFromNow = LastModifiedFromNow
                 this.posts.push(element)    
             })
             
+        }).catch((ErrorResponse) => {
+            if (ErrorResponse.response.status == 500) {
+                this.UserExists = false;
+            }   
         })
     },
     mounted() {
