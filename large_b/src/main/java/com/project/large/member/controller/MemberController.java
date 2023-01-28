@@ -89,4 +89,10 @@ public class MemberController {
             return;
         }
     }
+
+    @GetMapping("/hi")
+    public String getTestText () {
+        System.out.println("HI");
+        return "HI";
+    }
 }
