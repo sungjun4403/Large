@@ -1,14 +1,14 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database1.csjvf23ojub6.ap-northeast-2.rds.amazonaws.com:3306/database1
-    username: root
-    password: S!j3033212
+    diver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://largedb.csjvf23ojub6.ap-northeast-2.rds.amazonaws.com:3306/largeDB?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: admin
+    password: s.j3033212
 
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL57Dialect
 
 jwt:
