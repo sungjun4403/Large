@@ -617,6 +617,20 @@ a few seconds ago / a minute ago
 ~~~
 
 
+<br/>
     
+* * * * 
     
+<h3>27. 백엔드 배포</h3>
+    
+2023/01/27~2023/02/07<br/>
+    
+- AWS로 백엔드 배포. 기존에 있던 OBS서버 위한 EC2, RDS 사용하려 했으나 이런저런 이유로 실패하고 싹 밀고 처음부터 만들어서 배포. 
+- 도메인까지 api.large-devlog.com으로 설정 완료
+- Nginx로 포트 생략, https 보안접속 설정하면 백 배포는 완료. 프론트 배포는 깃헙 사용할 예정
+- S3 버킷도 추가해야 될 듯
+    
+<img width="600" src="https://user-images.githubusercontent.com/96364048/217641532-fd6e3cd0-33c3-4653-8178-b7b17ba4bd28.png">
+
+<br/>
     
