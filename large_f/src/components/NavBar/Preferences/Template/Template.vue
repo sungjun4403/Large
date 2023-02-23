@@ -86,7 +86,7 @@ export default ({
     methods: {
         getAllTemplates() {
             axios({
-                url: 'http://localhost:8080/template/' + localStorage.getItem("gitID"),
+                url: 'https://api.large-devlog.com/template/' + localStorage.getItem("gitID"),
                 method: 'get',
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem("AccessToken")
@@ -147,7 +147,7 @@ export default ({
                 wholeTemplate.push(template)
             })
             axios({
-                url: 'http://localhost:8080/template/wholeModify/' + localStorage.getItem("gitID"),
+                url: 'https://api.large-devlog.com/template/wholeModify/' + localStorage.getItem("gitID"),
                 method: 'post',
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem("AccessToken")

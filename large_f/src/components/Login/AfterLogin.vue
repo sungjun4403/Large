@@ -18,7 +18,7 @@ export default {
         passCode() {
             const url = window.location.href
             const code = url.split("=")[1]
-            axios.get("https://large-devlog.com/auth/github/callback?code=" + code).then((response) => {
+            axios.get("https://api.large-devlog.com/auth/github/callback?code=" + code).then((response) => {
                 if (response.status == 200) { //로그인 성공시 홈으로 리다이렉트                    
                     localStorage.setItem("AccessToken", response.headers["accesstoken"])
                     localStorage.setItem("memberToken", response.headers["membertoken"])

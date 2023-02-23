@@ -432,7 +432,7 @@ command + F로 생짜 검색 때리면 안되나? 그게 더 유용할 듯 싶�
     
 - main.js에서 router 사용할 component에 <code>import router from './router'</code>, <code>createApp(NavBar).use(router).mount('#NavBar')</code>  
 
-- github application 설정에서 callback uri를 localhost:3000/afterlogin으로 수정. 로그인 후 아래 화면으로 이동하여 백에 인가 코드 (path varible : code) 전달 후 /:gitID (ex. localhost:3000/sungjun4403)으로 이동
+- github application 설정에서 callback uri를 large-devlog.com/afterlogin으로 수정. 로그인 후 아래 화면으로 이동하여 백에 인가 코드 (path varible : code) 전달 후 /:gitID (ex. large-devlog.com/sungjun4403)으로 이동
     
     - Git 유저 정보에 접근하는 code를 노출하는 것이 위험해 보일 수 있으나 어차피 일회성 코드라서 상관 X
     

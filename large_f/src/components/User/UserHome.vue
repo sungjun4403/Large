@@ -48,7 +48,7 @@ export default {
         this.gitID = this.$route.params.gitID
 
         axios({
-            url: 'http://localhost:8080/post/brief/' + this.gitID,
+            url: 'https://api.large-devlog.com/post/brief/' + this.gitID,
             method: 'get',
             
         }).then((response) => {

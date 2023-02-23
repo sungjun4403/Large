@@ -17,13 +17,13 @@ export default {
     methods: {
         DeleteAccount() {
             axios({
-                url: 'http://localhost:8080/deleteNCascade/' + this.gitID,
+                url: 'https://api.large-devlog.com/deleteNCascade/' + this.gitID,
                 method: 'get',
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem("AccessTokenㅣ,")
                 }
             }).then(()=> {
-                window.location.href = "http://localhost:3000/"
+                window.location.href = "https://large-devlog.com/"
             })
         },
     }

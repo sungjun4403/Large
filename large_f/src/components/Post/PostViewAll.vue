@@ -30,7 +30,7 @@ export default ({
 
     methods: {
         getAllPosts() {
-            axios.get("http://localhost:8080/post").then((response) => {
+            axios.get("https://api.large-devlog.com/post").then((response) => {
                 response.data.forEach(element => {
                     this.posts.push(element)
                 });

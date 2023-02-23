@@ -96,7 +96,7 @@ export default {
     methods: {
         getMemberInfo () {
             axios({
-                url: 'http://localhost:8080/getUserInfo/' + localStorage.gitID,
+                url: 'https://api.large-devlog.com/getUserInfo/' + localStorage.gitID,
                 method: 'get',
                 headers: {
                     'Authorization' : 'Bearer ' + this.AccessToken
@@ -129,7 +129,7 @@ export default {
         },
         memberEdit() {
             axios({
-                url: "http://localhost:8080/memberEdit/" + localStorage.gitID, 
+                url: "https://api.large-devlog.com/memberEdit/" + localStorage.gitID, 
                 method: 'patch',
                 headers: {
                     'Authorization' : 'Bearer ' + this.AccessToken

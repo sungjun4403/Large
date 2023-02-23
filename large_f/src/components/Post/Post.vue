@@ -73,7 +73,7 @@ export default {
         const postId = this.$route.params.postId
         
         axios({
-            url: 'http://localhost:8080/post/' + postId,
+            url: 'https://api.large-devlog.com/post/' + postId,
             method: 'get',
 
         }).then((response) => {

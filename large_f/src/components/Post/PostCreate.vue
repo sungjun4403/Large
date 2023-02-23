@@ -68,7 +68,7 @@ export default ({
 
     methods: {
         PostCreate() {
-            axios.post("http://localhost:8080/post", {
+            axios.post("https://api.large-devlog.com/post", {
                 title : this.title,
                 body : this.body,
                 ifAds : this.getCheckValueIfAds(),

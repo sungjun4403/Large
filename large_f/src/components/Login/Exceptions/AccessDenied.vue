@@ -3,7 +3,7 @@
         <div id="text">
             Access Denied <br><br>
             How the fuck did you get here? <br><br>
-            <a href="http://localhost:3000/">HOME</a>
+            <a href="https://large-devlog.com/">HOME</a>
         </div>
     </div>
 </template>

@@ -116,11 +116,11 @@ export default {
         }, 
         logout() {
             localStorage.clear()
-            window.location.href = "http://localhost:3000/"
+            window.location.href = "https://large-devlog.com/"
         },
         getIfTokenIsAuthentic() {
             axios({
-                url: 'http://localhost:8080/ifTokenIsAuthentic/' + this.gitID,
+                url: 'https://api.large-devlog.com/ifTokenIsAuthentic/' + this.gitID,
                 method: 'get',
                 headers: {
                     'Authorization' : 'Bearer ' + this.AccessToken
@@ -139,7 +139,7 @@ export default {
             setTimeout(function() {
                 FloatAlert.style.opacity = 0
                 FloatAlert.innerHTML = ""
-            }, 5000)   
+            }, 5000)    
         },
         
     },
