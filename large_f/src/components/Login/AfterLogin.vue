@@ -26,6 +26,7 @@ export default {
                     
                     window.location.href = "https://large-devlog.com/" + response.headers["gitid"]
                 }
+                
                 else { //로그인 실패시 LoginFailed로 리다이렉트 
                     window.location.href = "https://large-devlog.com/login_failed"
                 }
