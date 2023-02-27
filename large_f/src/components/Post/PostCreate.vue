@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <UserSideBar />
-        <div id="content">
+    <div id="PostCreateBody">
+        <!-- <UserSideBar /> -->
+        <div>
             
             <h2>CREATE POST</h2>
 
@@ -16,27 +16,6 @@
             <br><br>
 
             ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
-
-            <br><br>
-            NOOO
-            <br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO<br><br>
-            NOOO
 
             <button @click="PostCreate()">click</button> 
         </div>
@@ -88,8 +67,4 @@ export default ({
 </script>
 
 <style>
-    #content {
-        float: right;
-        width: 90vw;
-    }
 </style>

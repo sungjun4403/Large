@@ -5,6 +5,8 @@
             <br>
             WELCOME!
             <br><br>
+
+            <!-- if post exists -->
             <div v-for="(post) in posts" :key="post.id">
                 <router-link :to="{ name: 'Post', params: { gitID: post.gitID, postId: post.id }}">
                     <div>
@@ -17,8 +19,14 @@
                 <br>
             </div>
 
+            <!-- if post dosen't exists -->
             <div v-if="posts.length == 0">
                 no posts yet
+            </div>
+
+            <!-- create post button. appears whether post exists or not  -->
+            <div>
+                <button>Create Post</button>
             </div>
         </div>
         <div v-if="UserExists == false">
