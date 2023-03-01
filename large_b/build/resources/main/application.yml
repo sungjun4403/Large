@@ -26,3 +26,18 @@ server:
   error:
     include-exception: true
     include-message: always
+
+cloud:
+  aws:
+    s3:
+      bucket: large-devlog-image
+      folder:
+
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+    credentials:
+      access-key: AKIA6OQWFGSUHKNFTSFK
+      secret-key: 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
+      instance-profile: true

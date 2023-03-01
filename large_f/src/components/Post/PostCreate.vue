@@ -17,7 +17,7 @@
 
             ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
 
-            <button @click="PostCreate()">click</button> 
+            <router-link to="/post/create"><button @click="PostCreate()">click</button></router-link>
         </div>
     </div>
 </template>
@@ -32,25 +32,26 @@ export default ({
         const title = ref("")
         const body = ref("")
         const ifAds = ref(false)
+        const AccessToken = ref("")
 
-        return {title, body, ifAds}
-    },
-    created() {
-        console.log("CREATED")
+        return {title, body, ifAds, AccessToken}
     },
     beforeMount() {
-        console.log("BEFORE MOUNT")
+        this.AccessToken = localStorage.AccessToken
     },
-    mounted() {
-        console.log("MOUNTED")
-    },
-
     methods: {
         PostCreate() {
-            axios.post("https://api.large-devlog.com/post", {
-                title : this.title,
-                body : this.body,
-                ifAds : this.getCheckValueIfAds(),
+            axios({
+                url: 'https://api.large-devlog.com/post',
+                method: 'post',
+                headers: {
+                    'Authorization' : 'Bearer ' + this.AccessToken
+                },
+                data: {
+                    title : this.title,
+                    body : this.body,
+                    ifAds : this.getCheckValueIfAds(),   
+                }
             })
         },
         getCheckValueIfAds() {

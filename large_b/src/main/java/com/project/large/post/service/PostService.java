@@ -1,5 +1,7 @@
 package com.project.large.post.service;
 
+import com.project.large.global.utils.SecurityUtil;
+import com.project.large.member.entity.Member;
 import com.project.large.member.repository.MemberRepository;
 import com.project.large.post.dto.*;
 import com.project.large.post.entity.Post;
@@ -7,6 +9,7 @@ import com.project.large.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +22,14 @@ public class PostService {
     private final MemberRepository memberRepository;
 
     //CREATE
-    public void write (PostCreate postCreate) {
+    public void write (PostCreate postCreate, List<MultipartFile> multipartFiles) {
         Post post = Post.builder()
                 .title(postCreate.getTitle())
                 .body(postCreate.getBody())
                 .ifAds(postCreate.getIfAds())
                 .ifComments(postCreate.getIfComments())
                 .gitID(postCreate.getGitID())
+                .images(new ArrayList<>())
                 .profileImg(postCreate.getProfileImg())
                 .bio(postCreate.getBio())
                 .build();
@@ -52,6 +56,7 @@ public class PostService {
                 .ifAds(post.getIfAds())
                 .ifComments(post.getIfComments())
                 .gitID(post.getGitID())
+                .images(new ArrayList<>())
                 .profileImg(post.getProfileImg())
                 .bio(post.getBio())
                 .createDate(post.getCreateDate())
@@ -111,5 +116,21 @@ public class PostService {
 
         return postResponseBriefList;
 
+    }
+
+    public PostCreate createPostCreate(PostCreateRequest postCreateRequest) {
+        String gitID = SecurityUtil.getLoginedUserGitId();
+        Member member = memberRepository.findByGitID(gitID).orElseThrow();
+        PostCreate postCreate = PostCreate.builder()
+                .title(postCreateRequest.getTitle())
+                .body(postCreateRequest.getBody())
+                .ifAds(postCreateRequest.getIfAds())
+                .ifComments(postCreateRequest.getIfComments())
+                .images(new ArrayList<>())
+                .gitID(member.getGitID())
+                .profileImg(member.getProfileImg())
+                .bio(member.getBio())
+                .build();
+        return postCreate;
     }
 }

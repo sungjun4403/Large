@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class PostResponse {
@@ -14,6 +15,7 @@ public class PostResponse {
     private final String body;
     private final Boolean ifAds;
     private final Boolean ifComments;
+    private final List<String> images;
     private final LocalDateTime createDate;
     private final LocalDateTime lastModifiedDate;
 
@@ -28,6 +30,7 @@ public class PostResponse {
         this.body = post.getBody();
         this.ifAds = post.getIfAds();
         this.ifComments = post.getIfComments();
+        this.images = post.getImages();
 
         this.gitID = post.getGitID();
         this.profileImg = post.getProfileImg();
@@ -37,12 +40,13 @@ public class PostResponse {
     }
 
     @Builder
-    public PostResponse(Long id, String title, String body, Boolean ifAds, Boolean ifComments, LocalDateTime createDate, LocalDateTime lastModifiedDate, String gitID, String profileImg, String bio) {
+    public PostResponse(Long id, String title, String body, Boolean ifAds, Boolean ifComments, LocalDateTime createDate, LocalDateTime lastModifiedDate, String gitID, String profileImg, String bio, List<String> images) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.ifAds = ifAds;
         this.ifComments = ifComments;
+        this.images = images;
         this.createDate = createDate;
         this.lastModifiedDate = lastModifiedDate;
         this.gitID = gitID;

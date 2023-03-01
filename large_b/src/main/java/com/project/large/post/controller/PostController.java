@@ -1,12 +1,10 @@
 package com.project.large.post.controller;
 
-import com.project.large.post.dto.PostCreate;
-import com.project.large.post.dto.PostEdit;
-import com.project.large.post.dto.PostResponse;
-import com.project.large.post.dto.PostResponseBrief;
+import com.project.large.post.dto.*;
 import com.project.large.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,8 +15,9 @@ public class PostController {
 
     //CREATE
     @PostMapping("/post")
-    public void create (@RequestBody PostCreate postCreate) {
-        postService.write(postCreate);
+    public void create (@RequestBody PostCreateRequest postCreateRequest, List<MultipartFile> multipartFiles) {
+        PostCreate postCreate = postService.createPostCreate(postCreateRequest);
+        postService.write(postCreate, multipartFiles);
     }
 
     //VIEW ALL

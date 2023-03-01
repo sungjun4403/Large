@@ -30,6 +30,10 @@ public class Post extends BaseTimeEntity {
     private Boolean ifAds;
     private Boolean ifComments;
 
+    @Builder.Default
+    @ElementCollection(targetClass = String.class)
+    private List<String> images = new ArrayList<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -48,6 +52,7 @@ public class Post extends BaseTimeEntity {
                 .title(title)
                 .body(body)
                 .ifAds(ifAds)
+                .images(images)
                 .ifComments(ifComments)
                 .gitID(gitID)
                 .profileImg(profileImg)
@@ -59,9 +64,13 @@ public class Post extends BaseTimeEntity {
         body = postEditor.getBody();
         ifAds = postEditor.getIfAds();
         ifComments = postEditor.getIfComments();
-
+        images = postEditor.getImages();
         gitID = postEditor.getGitID();
         profileImg = postEditor.getProfileImg();
         bio = postEditor.getBio();
+    }
+
+    public void addImages (List<String> toAddImages) {
+        images.addAll(toAddImages);
     }
 }
