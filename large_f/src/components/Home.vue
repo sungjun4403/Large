@@ -8,7 +8,7 @@
         </div>
       </div>
       <button id="GetStartedBTN" type="button" onclick="location.href='https://github.com/login/oauth/authorize?client_id=010fc7e8d7cd79b2d8cb&redirect_uri=https://large-devlog.com/afterlogin'">
-        Get Started! !!
+        Get Started!
       </button>
       <div>
         <span id="span2">with git account</span>

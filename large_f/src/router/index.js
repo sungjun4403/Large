@@ -32,7 +32,7 @@ const routes = [
   { path: "/", name: "Home", component: Home },
   { path: "/issue_report", name: "IssueReport", component: IssueReport },
 
-  { path: "/post/create", name: "PostCreate", component: PostCreate },
+  { path: "/:gitID/post/create", name: "PostCreate", component: PostCreate },
   { path: "/post/viewall", name: "PostViewAll", component: PostViewAll },
 
   { path: "/afterlogin", name: "AfterLogin", component: AfterLogin },

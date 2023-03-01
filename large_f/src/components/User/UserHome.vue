@@ -25,8 +25,10 @@
             </div>
 
             <!-- create post button. appears whether post exists or not  -->
-            <div>
-                <button>Create Post</button>
+            <div v-if="IfBlogIsMine == true">
+                <router-link :to="{ name: 'PostCreate', params: { gitID: localStorage.gitID} }">
+                    <button>Create Post</button>
+                </router-link>
             </div>
         </div>
         <div v-if="UserExists == false">
@@ -45,16 +47,19 @@ export default {
         const gitID = ref("")
         const posts = ref([])
         const UserExists = ref("pending")
+        const IfBlogIsMine = ref("pending")
         
         return {
             gitID,
             posts,
             UserExists,
+            IfBlogIsMine
         }
     },
     beforeMount() {
         this.gitID = this.$route.params.gitID
 
+        //If User Exists
         axios({
             url: 'https://api.large-devlog.com/post/brief/' + this.gitID,
             method: 'get',
@@ -72,6 +77,22 @@ export default {
                 this.UserExists = false;
             }   
         })
+
+        //If Blog is Mine
+        axios({
+            url: 'https://api.large-devlog.com/ifTokenIsAuthentic/' + this.gitID,
+            headers: {
+                'Authorization' : 'Bearer ' + localStorage.AccessToken
+            },
+        }).then((response) => {
+            if (response.data == true) {
+                this.IfBlogIsMine = true
+                console.log('NO')
+            }
+            else {
+                this.IfBlogIsMine = false
+            }
+        }) 
     },
     mounted() {
         setInterval(()=> {

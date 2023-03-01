@@ -1,23 +1,32 @@
 <template>
     <div id="PostCreateBody">
         <!-- <UserSideBar /> -->
-        <div>
-            
-            <h2>CREATE POST</h2>
+        <div v-if="IfTokenIsYours == true">
+            <div>
+                
+                <h2>CREATE POST</h2>
 
-            <br>
+                <br>
 
-            <input type="text" id="title" name="title" v-model="title" placeholder="title">
+                <input type="text" id="title" name="title" v-model="title" placeholder="title">
 
-            <br><br>
+                <br><br>
 
-            <input type="text" name="body" v-model="body" placeholder="body">
+                <input type="text" name="body" v-model="body" placeholder="body">
 
-            <br><br>
+                <br><br>
 
-            ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
+                ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
 
-            <router-link to="/post/create"><button @click="PostCreate()">click</button></router-link>
+                <router-link to="/post/create"><button @click="PostCreate()">click</button></router-link>
+            </div>    
+        </div>
+
+        <div v-else-if="IfTokenIsYours == false">
+            <AccessDenied />
+        </div>
+        <div v-else>
+            <Pending />
         </div>
     </div>
 </template>
@@ -28,6 +37,7 @@ import { ref } from "@vue/reactivity";
 const axios = require('axios').default;
 
 export default ({
+    props: ["IfTokenIsYours"],
     setup() {
         const title = ref("")
         const body = ref("")
