@@ -24,9 +24,9 @@
                 no posts yet
             </div>
 
-            <!-- create post button. appears whether post exists or not  -->
+            <!-- create post button. appears when blog is user's regardless to post exists or not   -->
             <div v-if="IfBlogIsMine == true">
-                <router-link :to="{ name: 'PostCreate', params: { gitID: localStorage.gitID} }">
+                <router-link :to="{ name: 'PostCreate', params: { gitID: gitID}}">
                     <button>Create Post</button>
                 </router-link>
             </div>
