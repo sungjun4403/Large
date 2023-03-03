@@ -1,0 +1,3 @@
+<template>
+    ISSUE Report
+</template>

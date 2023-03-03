@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 @Transactional
 public class PostService {
     private final PostRepository postRepository;
@@ -126,15 +125,15 @@ public class PostService {
         String gitID = SecurityUtil.getLoginedUserGitId();
         Member member = memberRepository.findByGitID(gitID).orElseThrow();
 
-        log.info(String.valueOf(member));
+        System.out.println(member);
         PostCreate postCreate = PostCreate.builder()
                 .title(postCreateRequest.getTitle())
                 .body(postCreateRequest.getBody())
                 .ifAds(postCreateRequest.getIfAds())
                 .ifComments(postCreateRequest.getIfComments())
                 .images(null)
-//                .gitID(member.getGitID())
-                .gitID("sungjun4403")
+                .gitID(member.getGitID())
+//                .gitID("sungjun4403")
                 .profileImg(member.getProfileImg())
                 .bio(member.getBio())
                 .build();

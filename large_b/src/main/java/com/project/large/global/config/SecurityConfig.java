@@ -19,7 +19,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String WEB_URL = "https://large-devlog.com";
+    public static final String WEB_URL = "https://api.large-devlog.com";
 
     private final CorsFilter corsFilter;
     private final JwtService jwtService;

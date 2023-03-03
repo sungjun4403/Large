@@ -8,7 +8,7 @@ module.exports = {
     proxy: {
       
       // '/': {
-      //   target: 'https://api.large-devlog.com/',
+      //   target: 'https://large-devlog.com/',
       //   changeOrigin: true,
       //   // method: "GET"
       // },
