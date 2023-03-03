@@ -18,7 +18,7 @@
 
                 ifAds<input type="checkbox" id="ifAds" name="ifAds" v-model="ifAds">
 
-                <router-link to="/post/create"><button @click="PostCreate()">click</button></router-link>
+                <button @click="PostCreate()">click</button>
             </div>    
         </div>
 

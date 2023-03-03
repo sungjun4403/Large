@@ -7,6 +7,7 @@ import com.project.large.post.dto.*;
 import com.project.large.post.entity.Post;
 import com.project.large.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
+@Transactional
 public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
@@ -29,9 +32,10 @@ public class PostService {
                 .ifAds(postCreate.getIfAds())
                 .ifComments(postCreate.getIfComments())
                 .gitID(postCreate.getGitID())
-                .images(new ArrayList<>())
+                .images(null)
                 .profileImg(postCreate.getProfileImg())
                 .bio(postCreate.getBio())
+                .images(postCreate.getImages())
                 .build();
 
         postRepository.save(post);
@@ -121,13 +125,16 @@ public class PostService {
     public PostCreate createPostCreate(PostCreateRequest postCreateRequest) {
         String gitID = SecurityUtil.getLoginedUserGitId();
         Member member = memberRepository.findByGitID(gitID).orElseThrow();
+
+        log.info(String.valueOf(member));
         PostCreate postCreate = PostCreate.builder()
                 .title(postCreateRequest.getTitle())
                 .body(postCreateRequest.getBody())
                 .ifAds(postCreateRequest.getIfAds())
                 .ifComments(postCreateRequest.getIfComments())
-                .images(new ArrayList<>())
-                .gitID(member.getGitID())
+                .images(null)
+//                .gitID(member.getGitID())
+                .gitID("sungjun4403")
                 .profileImg(member.getProfileImg())
                 .bio(member.getBio())
                 .build();
