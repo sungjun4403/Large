@@ -1,5 +1,6 @@
 package com.project.large.post.service;
 
+import com.project.large.global.service.S3Uploader;
 import com.project.large.global.utils.SecurityUtil;
 import com.project.large.member.entity.Member;
 import com.project.large.member.repository.MemberRepository;
@@ -22,20 +23,31 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final S3Uploader s3Uploader;
 
     //CREATE
     public void write (PostCreate postCreate, List<MultipartFile> multipartFiles) {
+        List <String> thumbnails = new ArrayList<>();
+
         Post post = Post.builder()
                 .title(postCreate.getTitle())
                 .body(postCreate.getBody())
                 .ifAds(postCreate.getIfAds())
                 .ifComments(postCreate.getIfComments())
+                .images(thumbnails)
                 .gitID(postCreate.getGitID())
-                .images(null)
                 .profileImg(postCreate.getProfileImg())
                 .bio(postCreate.getBio())
                 .images(postCreate.getImages())
                 .build();
+
+        if (multipartFiles.size() != 0) {
+            List<String> fileNames = s3Uploader.uploadImages(multipartFiles);
+            fileNames.forEach(file -> {
+                thumbnails.add(s3Uploader.getThumbnailPath(file));
+            });
+            post.addImages(thumbnails);
+        }
 
         postRepository.save(post);
     }

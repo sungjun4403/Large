@@ -22,8 +22,9 @@ export default {
                 if (response.status == 200) { //로그인 성공시 홈으로 리다이렉트                    
                     localStorage.setItem("AccessToken", response.headers["accesstoken"])
                     localStorage.setItem("memberToken", response.headers["membertoken"])
+                    localStorage.setItem("RefreshToken", response.headers["refreshtoken"])
                     localStorage.setItem("gitID", response.headers["gitid"])
-                    
+
                     window.location.href = "https://large-devlog.com/" + response.headers["gitid"]
                 }
                 

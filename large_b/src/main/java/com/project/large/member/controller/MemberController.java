@@ -2,6 +2,8 @@ package com.project.large.member.controller;
 
 import com.project.large.global.utils.SecurityUtil;
 import com.project.large.jwt.JwtService;
+import com.project.large.jwt.dto.TokenRequestDto;
+import com.project.large.jwt.dto.TokenResponseDto;
 import com.project.large.member.dto.MemberResponse;
 import com.project.large.member.repository.MemberRepository;
 import com.project.large.member.service.MemberService;
@@ -94,5 +96,10 @@ public class MemberController {
     public String getTestText () {
         System.out.println("HI");
         return "Hello";
+    }
+
+    @PostMapping("/reissue")
+    public TokenResponseDto reissue(@RequestBody TokenRequestDto tokenRequestDto) {
+        return memberService.reissueAccessToken(tokenRequestDto);
     }
 }

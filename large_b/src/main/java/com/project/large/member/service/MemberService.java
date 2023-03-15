@@ -5,6 +5,8 @@ import com.project.large.comment.entity.Comment;
 import com.project.large.comment.repository.CommentRepository;
 import com.project.large.comment.service.CommentService;
 import com.project.large.jwt.JwtService;
+import com.project.large.jwt.dto.TokenRequestDto;
+import com.project.large.jwt.dto.TokenResponseDto;
 import com.project.large.member.dto.MemberCreate;
 import com.project.large.member.dto.MemberEdit;
 import com.project.large.member.dto.MemberEditor;
@@ -246,5 +248,16 @@ public class MemberService {
         Member toDeleteMember = memberRepository.findByGitID(gitID).orElseThrow();
 
         memberRepository.delete(toDeleteMember);
+    }
+
+    @Transactional
+    public TokenResponseDto reissueAccessToken (TokenRequestDto tokenRequestDto) {
+        Member member = memberRepository.findByRefreshToken(tokenRequestDto.getRefreshToken()).orElseThrow();
+        String newAccessToken = jwtService.createAccessToken(member);
+        String newRefreshToken = jwtService.createRefreshToken();
+
+        member.updateRefreshToken(newRefreshToken);
+
+        return new TokenResponseDto(newAccessToken,newRefreshToken);
     }
 }

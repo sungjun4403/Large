@@ -17,7 +17,7 @@ public class PostController {
 
     //CREATE
     @PostMapping("/post")
-    public void create (@RequestBody PostCreateRequest postCreateRequest, List<MultipartFile> multipartFiles) {
+    public void create (@ModelAttribute PostCreateRequest postCreateRequest, @RequestPart(required = false) List<MultipartFile> multipartFiles) {
         PostCreate postCreate = postService.createPostCreate(postCreateRequest);
         postService.write(postCreate, multipartFiles);
     }

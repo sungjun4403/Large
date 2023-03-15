@@ -71,6 +71,6 @@ public class Post extends BaseTimeEntity {
     }
 
     public void addImages (List<String> toAddImages) {
-        images.addAll(toAddImages);
+        images = (toAddImages);
     }
 }
