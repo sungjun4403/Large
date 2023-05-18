@@ -33,12 +33,7 @@ public class PostService {
                 .title(postCreate.getTitle())
                 .body(postCreate.getBody())
                 .ifAds(postCreate.getIfAds())
-                .ifComments(postCreate.getIfComments())
-                .images(thumbnails)
-                .gitID(postCreate.getGitID())
-                .profileImg(postCreate.getProfileImg())
-                .bio(postCreate.getBio())
-                .images(postCreate.getImages())
+
                 .build();
 
         if (multipartFiles.size() != 0) {
